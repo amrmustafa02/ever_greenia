@@ -47,8 +47,12 @@ dependencies:
   overlapped_carousel:
   flutter_custom_carousel:
   flutter_animate:
-  talker:
+  talker_flutter:
   animated_switcher_plus:
+  flutter_bounceable:
+  lottie:
+
+
   flutter:
     sdk: flutter
 
@@ -85,6 +89,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/translations/
+    - assets/lottie/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

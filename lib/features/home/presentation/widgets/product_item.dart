@@ -5,16 +5,17 @@ import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 
-class CartItem extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final String text;
+  final int index;
 
-  const CartItem({super.key, required this.text});
+  const ProductItem({super.key, required this.text, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.goToNamed(RoutesName.productDetails);
+        context.goToNamed(RoutesName.productDetails, arguments: index + 1);
       },
       child: SizedBox(
         height: context.height * 0.50,
@@ -39,9 +40,12 @@ class CartItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(32),
                       color: AppColors.tertiaryColor,
                     ),
-                    child: Image.asset(
-                      "assets/images/plant.png",
-                      fit: BoxFit.fill,
+                    child: Hero(
+                      tag: index + 1,
+                      child: Image.asset(
+                        "assets/images/plant.png",
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                   const Spacer(),

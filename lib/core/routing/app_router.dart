@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:plants_app/features/home/presentation/pages/home_page.dart';
 import 'package:plants_app/features/product_details/presentation/pages/product_details_page.dart';
 
@@ -12,7 +14,18 @@ class AppRouter {
       case RoutesName.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       case RoutesName.productDetails:
-        return MaterialPageRoute(builder: (_) => const ProductDetailsPage());
+        final args = settings.arguments as int;
+        return PageTransition(
+          child: ProductDetailsPage(index: args),
+          type: PageTransitionType.fade,
+          duration: const Duration(milliseconds: 750),
+        );
+      case RoutesName.cart:
+        return PageTransition(
+          child: const CartPage(),
+          type: PageTransitionType.bottomToTop,
+          duration: const Duration(milliseconds: 750),
+        );
       default:
         return MaterialPageRoute(builder: (_) => const Scaffold());
     }

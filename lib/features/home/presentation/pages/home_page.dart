@@ -4,7 +4,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
-import 'package:plants_app/features/home/presentation/widgets/cart_item.dart';
+import 'package:plants_app/features/home/presentation/widgets/product_item.dart';
 import 'package:plants_app/features/home/presentation/widgets/cart_section.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_header.dart';
 import 'package:plants_app/features/home/presentation/widgets/tab_bar_section.dart';
@@ -49,7 +49,9 @@ class _HomePageState extends State<HomePage> {
             rtlOpening: true,
             disabledGestures: true,
             drawer: Container(
-              color: AppColors.primaryColor,
+              decoration: BoxDecoration(
+                color: AppColors.primaryColor.withOpacity(0.5),
+              ),
               child: SafeArea(
                 child: Column(
                   children: [
@@ -96,6 +98,7 @@ class _HomePageState extends State<HomePage> {
 
 class _HomePageBody extends StatelessWidget {
   final Function() onTap;
+
   const _HomePageBody({required this.onTap});
 
   @override
@@ -145,24 +148,17 @@ class _HomePageBody extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const Expanded(
+                Expanded(
                   child: DraggableSlider(
                     onPressed: null,
                     loop: true,
-                    children: [
-                      CartItem(
-                        text: "The Potted Head 1",
+                    children: List.generate(
+                      4,
+                      (index) => ProductItem(
+                        text: "The Potted Head ${index + 1}",
+                        index: index,
                       ),
-                      CartItem(
-                        text: "The Potted Head 2",
-                      ),
-                      CartItem(
-                        text: "The Potted Head 3 ",
-                      ),
-                      CartItem(
-                        text: "The Potted Head 4",
-                      ),
-                    ],
+                    ),
                   ),
                 ),
                 const CartSection(),

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,32 +22,38 @@ class HomeHeader extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: "Let's, Make Our\nlives ",
-                    style: GoogleFonts.readexPro().copyWith(
-                      color: Colors.black,
-                      fontSize: 24,
+            FadeInLeft(
+              key: UniqueKey(),
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Let's, Make Our\nlives ",
+                      style: GoogleFonts.readexPro().copyWith(
+                        color: Colors.black,
+                        fontSize: 24,
+                      ),
                     ),
-                  ),
-                  TextSpan(
-                    text: "Greener",
-                    style: GoogleFonts.readexPro().copyWith(
-                      color: Colors.black,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
+                    TextSpan(
+                      text: "Greener",
+                      style: GoogleFonts.readexPro().copyWith(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const Spacer(),
-            IconButton(
-              onPressed: onTap,
-              icon: const Icon(
-                Icons.menu,
+            FadeInRight(
+              key: UniqueKey(),
+              child: IconButton(
+                onPressed: onTap,
+                icon: const Icon(
+                  Icons.menu,
+                ),
               ),
             )
           ],
