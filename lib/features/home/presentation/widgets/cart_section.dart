@@ -4,6 +4,7 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
+import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/widgets/header_bottom_sheet_line.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_cart_bubble.dart';
 
@@ -34,6 +35,11 @@ class CartSection extends StatelessWidget {
                 SvgPicture.asset(
                   "assets/images/base_item.svg",
                   fit: BoxFit.fill,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.secondaryColor,
+                    BlendMode.srcIn,
+                  ),
+               
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),

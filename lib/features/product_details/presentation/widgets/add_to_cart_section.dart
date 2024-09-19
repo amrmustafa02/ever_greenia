@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plants_app/core/extensions/context_extension.dart';
-import 'package:plants_app/core/routing/app_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
 

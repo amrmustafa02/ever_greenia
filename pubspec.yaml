@@ -44,6 +44,7 @@ dependencies:
   draggable_carousel_slider:
   flutter_advanced_drawer:
   blur:
+  flutter_native_splash:
   overlapped_carousel:
   flutter_custom_carousel:
   flutter_animate:
@@ -51,6 +52,7 @@ dependencies:
   animated_switcher_plus:
   flutter_bounceable:
   lottie:
+  rename:
 
 
   flutter:
@@ -64,6 +66,7 @@ dev_dependencies:
   build_runner:
   injectable_generator:
   flutter_gen_runner:
+  flutter_launcher_icons:
 
   flutter_test:
     sdk: flutter
