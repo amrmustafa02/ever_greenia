@@ -60,4 +60,10 @@ class _ArrowAnimationState extends State<ArrowAnimation>
     //   size: 20,
     // );
   }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }

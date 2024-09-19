@@ -30,15 +30,15 @@ class CartInfoSection extends StatelessWidget {
           ),
         ),
         Align(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.topCenter,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
+            padding:  EdgeInsets.only(top:context.height * 0.00),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ListTile(
                   title: Text(
-                    "Delivery Amount",
+                    "Delivery",
                     style: GoogleFonts.readexPro().copyWith(
                       color: Colors.black,
                       fontSize: 16,
@@ -63,7 +63,7 @@ class CartInfoSection extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(
-                    "Total Amount",
+                    "Total",
                     style: GoogleFonts.readexPro().copyWith(
                       color: Colors.black,
                       fontSize: 16,
@@ -80,9 +80,8 @@ class CartInfoSection extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  padding: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     border: Border.all(
@@ -131,9 +130,6 @@ class CartInfoSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
                 ),
               ],
             ),
