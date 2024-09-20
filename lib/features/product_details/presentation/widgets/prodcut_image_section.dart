@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -34,19 +35,33 @@ class ProductImageSection extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 0),
-          child: Hero(
-            tag: index,
-            child: Image.asset(
-              "assets/images/plant.png",
-              height: context.height * 0.35,
-              // width: context.width * 0.30,
-              fit: BoxFit.fill,
-            ),
+        const Padding(
+          padding: EdgeInsets.only(bottom: 0),
+          child: ModelViewer(
+            src: 'assets/lottie/p3.glb',
+            // iosSrc: "assets/lottie/preview.usdz",
+            // disableZoom: false,
+            autoRotate: true,
+            autoPlay: true,
+            loading: Loading.lazy,
+            autoRotateDelay: 1,
           ),
         ),
       ],
     );
+
+    // return SizedBox(
+    //   height: context.height * 0.35,
+    //   width: context.width,
+    //   child: const ModelViewer(
+    //     src: 'assets/lottie/preview.glb',
+    //     // iosSrc: "assets/lottie/preview.usdz",
+    //     disableZoom: true,
+    //     autoRotate: true,
+    //     autoPlay: true,
+    //     autoRotateDelay: 1,
+    //   ),
+
+    // );
   }
 }

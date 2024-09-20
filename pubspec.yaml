@@ -52,8 +52,9 @@ dependencies:
   animated_switcher_plus:
   flutter_bounceable:
   lottie:
+  model_viewer_plus:
   rename:
-
+  enefty_icons: 
 
   flutter:
     sdk: flutter
