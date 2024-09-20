@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.white,
-                    AppColors.primaryColor,
+                    AppColors.bgColor,
                   ],
                 ),
               ),
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
             disabledGestures: true,
             drawer: Container(
               decoration: BoxDecoration(
-                color: AppColors.primaryColor.withOpacity(0.5),
+                color: AppColors.bgColor.withOpacity(0.5),
               ),
               child: SafeArea(
                 child: Column(
@@ -108,7 +108,7 @@ class _HomePageBody extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             Colors.white,
-            AppColors.primaryColor,
+            AppColors.bgColor,
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

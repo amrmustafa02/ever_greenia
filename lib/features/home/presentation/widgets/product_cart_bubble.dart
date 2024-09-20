@@ -14,9 +14,9 @@ class ProductCartBubble extends StatelessWidget {
       margin: EdgeInsets.only(right: margin),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.primaryColor,
+        color: AppColors.bgColor,
         border: Border.all(
-          color: AppColors.secondaryColor,
+          color: AppColors.primColor,
         ),
       ),
       child: CircleAvatar(
@@ -32,4 +32,3 @@ class ProductCartBubble extends StatelessWidget {
     );
   }
 }
-

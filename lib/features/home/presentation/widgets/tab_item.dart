@@ -32,7 +32,7 @@ class TabItem extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              color: isActive ? AppColors.secondaryColor : Colors.white,
+              color: isActive ? AppColors.primColor : Colors.white,
             ),
             child: Text(
               text,

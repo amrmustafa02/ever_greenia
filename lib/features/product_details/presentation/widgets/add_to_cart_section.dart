@@ -29,7 +29,7 @@ class AddToCartSection extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: AppColors.secondaryColor,
+              backgroundColor: AppColors.primColor,
               radius: 25,
               child: SvgPicture.asset(
                 "assets/icons/bag.svg",

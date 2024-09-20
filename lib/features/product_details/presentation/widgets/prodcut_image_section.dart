@@ -28,7 +28,7 @@ class ProductImageSection extends StatelessWidget {
                 "Plants",
                 maxLines: 1,
                 style: GoogleFonts.readexPro().copyWith(
-                  color: AppColors.secondaryColor.withOpacity(0.2),
+                  color: AppColors.primColor.withOpacity(0.2),
                   height: 1,
                 ),
               ),

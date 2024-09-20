@@ -15,8 +15,8 @@ class ProductDetailsHeader extends StatelessWidget {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.primaryColor,
-            AppColors.primaryColor,
+            AppColors.bgColor,
+            AppColors.bgColor,
             Colors.white,
           ],
           begin: Alignment.topCenter,

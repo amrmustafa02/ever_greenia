@@ -24,19 +24,17 @@ class CartInfoSection extends StatelessWidget {
         SizedBox(
           width: context.width,
           height: context.height * 0.30,
-          child: SvgPicture.asset(
-            "assets/images/cart_rectancle.svg",
-            fit: BoxFit.fill,
-            colorFilter: const ColorFilter.mode(
-              AppColors.secondaryColor,
-              BlendMode.srcIn,
-            )
-          ),
+          child: SvgPicture.asset("assets/images/cart_rectancle.svg",
+              fit: BoxFit.fill,
+              colorFilter: const ColorFilter.mode(
+                AppColors.primColor,
+                BlendMode.srcIn,
+              )),
         ),
         Align(
           alignment: Alignment.topCenter,
           child: Padding(
-            padding:  EdgeInsets.only(top:context.height * 0.00),
+            padding: EdgeInsets.only(top: context.height * 0.00),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

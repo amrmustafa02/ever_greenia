@@ -34,8 +34,8 @@ class _CartPageBody extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             Colors.white,
-            AppColors.primaryColor,
-            AppColors.primaryColor,
+            AppColors.bgColor,
+            AppColors.bgColor,
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -84,8 +84,8 @@ class _CartPageBody extends StatelessWidget {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              AppColors.primaryColor,
-                              AppColors.primaryColor.withOpacity(0.5),
+                              AppColors.bgColor,
+                              AppColors.bgColor.withOpacity(0.5),
                               // Colors.white.withOpacity(0.3),
                             ],
                             begin: Alignment.topCenter,

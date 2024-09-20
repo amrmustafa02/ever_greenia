@@ -13,7 +13,7 @@ class HeaderBottomSheetLine extends StatelessWidget {
       height: 5,
       width: context.width * 0.2,
       decoration: const BoxDecoration(
-        color: AppColors.secondaryColor,
+        color: AppColors.primColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(32),
           topRight: Radius.circular(32),

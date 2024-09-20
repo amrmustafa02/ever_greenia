@@ -12,14 +12,14 @@ class PlantsApp extends StatelessWidget {
       title: 'Plants App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.primaryColor,
+        scaffoldBackgroundColor: AppColors.bgColor,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primaryColor,
+          seedColor: AppColors.primColor,
         ),
         useMaterial3: true,
       ),
       onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
-      initialRoute: RoutesName.home,
+      initialRoute: RoutesName.splash,
     );
   }
 }

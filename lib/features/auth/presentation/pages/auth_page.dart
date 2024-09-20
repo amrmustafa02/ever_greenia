@@ -17,7 +17,7 @@ class AuthPage extends StatelessWidget {
   }
 }
 class _AuthPageBody extends StatelessWidget {
-  const _AuthPageBody({super.key});
+  const _AuthPageBody();
 
   @override
   Widget build(BuildContext context) {
