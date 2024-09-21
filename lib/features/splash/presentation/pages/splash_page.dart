@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'dart:math' as math; // for rotation
-
+import 'dart:developer';
 import '../cubit/splash_cubit.dart';
 
 class SplashPage extends StatelessWidget {
@@ -75,18 +76,21 @@ class __SplashPageBodyState extends State<_SplashPageBody>
 
   @override
   Widget build(BuildContext context) {
+    var imageSize = 20.w;
+    log("imageSize: $imageSize");
     return Scaffold(
-      backgroundColor: AppColors.primColor,
+      backgroundColor: AppColors.darkGreen,
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             FadeInLeft(
+              duration: const Duration(milliseconds: 2500),
               child: Image.asset(
                 "assets/images/r_logo.png",
-                width: context.width * 0.20,
-                height: context.width * 0.20,
+                width: imageSize,
+                height: imageSize,
               ),
             ),
             AnimatedBuilder(
@@ -98,44 +102,19 @@ class __SplashPageBodyState extends State<_SplashPageBody>
                     scale: _scaleAnimation.value, // Zoom in animation
                     child: Image.asset(
                       "assets/images/and_logo.png",
-                      width: context.width * 0.20,
-                      height: context.width * 0.20,
+                      width: imageSize,
+                      height: imageSize,
                     ),
                   ),
                 );
               },
             ),
-
-            // Expanded(
-            //   child: FutureBuilder(
-            //     future: Future.delayed(const Duration(seconds: 3)),
-            //     builder: (context, snapshot) {
-            //       if (snapshot.connectionState == ConnectionState.waiting) {
-            //         return const SizedBox.shrink();
-            //       } else {
-            //         return const LogoAndS();
-            //       }
-            //     },
-            //   ),
-            // ),
-            // Expanded(
-            //   child: FutureBuilder(
-            //     future: Future.delayed(const Duration(seconds: 5)),
-            //     builder: (context, snapshot) {
-            //       if (snapshot.connectionState == ConnectionState.waiting) {
-            //         return const SizedBox.shrink();
-            //       } else {
-            //         return const LogoAndS();
-            //       }
-            //     },
-            //   ),
-            // )
-
             FadeInRight(
+              duration: const Duration(milliseconds: 2500),
               child: Image.asset(
                 "assets/images/s_logo.png",
-                width: context.width * 0.20,
-                height: context.width * 0.20,
+                width: imageSize,
+                height: imageSize,
               ),
             ),
           ],

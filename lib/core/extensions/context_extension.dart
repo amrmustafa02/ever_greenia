@@ -18,13 +18,13 @@ extension ContextExtension on BuildContext {
         route,
         arguments: arguments,
       );
-      
-void goToNamedReplace(String route, {Object? arguments}) =>
+
+  void goToNamedReplace(String route, {Object? arguments}) =>
       Navigator.of(this).pushReplacementNamed(
         route,
         arguments: arguments,
       );
-      
+
   void goBackUntil(String untilRoute) => Navigator.of(this).popUntil(
         (route) => route.settings.name == untilRoute,
       );

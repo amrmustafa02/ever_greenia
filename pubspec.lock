@@ -946,6 +946,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  regexpattern:
+    dependency: "direct main"
+    description:
+      name: regexpattern
+      sha256: "86b9c9c076cfbd2021c7a887a312a71d962c3a29906c911277da8343e4ac901b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.0"
   rename:
     dependency: "direct main"
     description:
@@ -954,6 +962,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  responsive_sizer:
+    dependency: "direct main"
+    description:
+      name: responsive_sizer
+      sha256: "6aefee6065c0883681bc7559147a24d8fa1846d296a216abcda25ff349340712"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.1"
   rxdart:
     dependency: transitive
     description:

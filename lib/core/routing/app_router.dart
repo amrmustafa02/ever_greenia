@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:plants_app/features/home/presentation/pages/home_page.dart';
 import 'package:plants_app/features/onboarding/presentation/pages/onboarding_page.dart';
@@ -12,6 +15,7 @@ class AppRouter {
   AppRouter._();
 
   static Route generateRoute(RouteSettings settings) {
+    log("generateRoute: ${settings.name}");
     switch (settings.name) {
       case RoutesName.home:
         return PageTransition(
@@ -41,11 +45,26 @@ class AppRouter {
       case RoutesName.onboarding:
         return PageTransition(
           child: const OnboardingPage(),
-          type: PageTransitionType.fade,
-          duration: const Duration(milliseconds: 1000),
+          type: PageTransitionType.scale,
+          alignment: Alignment.center,
+          curve: Curves.linear,
+          duration: const Duration(milliseconds: 500),
+        );
+      case RoutesName.login:
+        return PageTransition(
+          child: const LoginPage(),
+          type: PageTransitionType.bottomToTop,
+          curve: Curves.linear,
+          duration: const Duration(milliseconds: 1250),
         );
       default:
-        return MaterialPageRoute(builder: (_) => const Scaffold());
+        return MaterialPageRoute(
+          builder: (_) => const Scaffold(
+            body: Center(
+              child: Text("Page not found"),
+            ),
+          ),
+        );
     }
   }
 }

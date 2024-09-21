@@ -14,3 +14,5 @@ final class AuthLoadedFailure extends AuthState {
 
   AuthLoadedFailure(this.error);
 }
+
+final class LoginButtonChangeState extends AuthState {}

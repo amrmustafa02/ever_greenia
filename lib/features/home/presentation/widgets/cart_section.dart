@@ -36,7 +36,7 @@ class CartSection extends StatelessWidget {
                   "assets/images/base_item.svg",
                   fit: BoxFit.fill,
                   colorFilter: const ColorFilter.mode(
-                    AppColors.primColor,
+                    AppColors.lightGreen,
                     BlendMode.srcIn,
                   ),
                 ),

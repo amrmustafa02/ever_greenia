@@ -16,7 +16,7 @@ class ProductCartBubble extends StatelessWidget {
         shape: BoxShape.circle,
         color: AppColors.bgColor,
         border: Border.all(
-          color: AppColors.primColor,
+          color: AppColors.lightGreen,
         ),
       ),
       child: CircleAvatar(

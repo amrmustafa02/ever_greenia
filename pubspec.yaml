@@ -55,6 +55,8 @@ dependencies:
   model_viewer_plus:
   rename:
   enefty_icons:
+  responsive_sizer:
+  regexpattern:
 
   flutter:
     sdk: flutter

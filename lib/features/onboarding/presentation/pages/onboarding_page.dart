@@ -1,10 +1,10 @@
-import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
+import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import '../cubit/onboarding_cubit.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -38,15 +38,15 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
   }
 
   @override
-  void didChangeDependencies() {
+  Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
-    precacheImage(_image, context);
+    await precacheImage(_image, context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           image: _image,
           fit: BoxFit.fill,
@@ -63,23 +63,21 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
                 const Spacer(),
                 Text(
                   'R&S',
-                  style: GoogleFonts.aBeeZee().copyWith(
+                  style: AppFontStyles.readexPro600_12.copyWith(
                     color: Colors.white,
-                    fontSize: 72,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 32.sp,
                   ),
                 ),
                 Text(
                   'A simple way to plant your garden',
-                  style: GoogleFonts.readexPro().copyWith(
+                  textAlign: TextAlign.center,
+                  style: AppFontStyles.readexPro400_18.copyWith(
                     color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const Spacer(),
                 SizedBox(
-                  width: context.width * 0.40,
+                  width: 40.w,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
@@ -88,22 +86,21 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32),
                       ),
-                      backgroundColor: Colors.white.withOpacity(0.4),
+                      backgroundColor: Colors.white.withOpacity(0.6),
+                      foregroundColor: Colors.black,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.goToNamedReplace(RoutesName.login);
+                    },
                     child: Text(
                       'Login',
-                      style: GoogleFonts.readexPro().copyWith(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: AppFontStyles.nunito600_16,
                     ),
                   ),
                 ),
-                SizedBox(height: context.height * 0.02),
+                SizedBox(height: 2.h),
                 SizedBox(
-                  width: context.width * 0.40,
+                  width: 40.w,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
@@ -112,22 +109,19 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32),
                       ),
-                      backgroundColor: AppColors.primColor.withOpacity(0.4),
+                      backgroundColor: AppColors.darkGreen.withOpacity(0.6),
+                      foregroundColor: Colors.white,
                     ),
                     onPressed: () {
                       context.goToNamedReplace(RoutesName.home);
                     },
                     child: Text(
                       'Get Started',
-                      style: GoogleFonts.readexPro().copyWith(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: AppFontStyles.nunito600_16,
                     ),
                   ),
                 ),
-                SizedBox(height: context.height * 0.05),
+                SizedBox(height: 5.h),
               ],
             ),
           ),

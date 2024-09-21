@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:draggable_carousel_slider/draggable_carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
@@ -22,6 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    log("HomePage: build");
     return BlocProvider(
       create: (context) => HomeCubit(),
       child: BlocBuilder<HomeCubit, HomeState>(
@@ -103,6 +106,8 @@ class _HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("HomePage: build");
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(

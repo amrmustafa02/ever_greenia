@@ -18,13 +18,15 @@ class TabItem extends StatelessWidget {
       child: Tab(
         icon: Container(
           padding: const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 8,
+            vertical: 2,
+            horizontal: 2,
           ),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: Colors.white,
-          ),
+              borderRadius: BorderRadius.circular(25),
+              color: Colors.white,
+              border: Border.all(
+                color: AppColors.darkGreen,
+              )),
           child: Container(
             padding: const EdgeInsets.symmetric(
               vertical: 8,
@@ -32,12 +34,12 @@ class TabItem extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
-              color: isActive ? AppColors.primColor : Colors.white,
+              color: isActive ? AppColors.darkGreen : Colors.white,
             ),
             child: Text(
               text,
               style: GoogleFonts.readexPro().copyWith(
-                color: Colors.black,
+                color: isActive ? Colors.white : Colors.black,
               ),
             ),
           ),
