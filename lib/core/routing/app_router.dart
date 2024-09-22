@@ -53,7 +53,8 @@ class AppRouter {
       case RoutesName.login:
         return PageTransition(
           child: const LoginPage(),
-          type: PageTransitionType.bottomToTop,
+          type: PageTransitionType.scale,
+          alignment: Alignment.center,
           curve: Curves.linear,
           duration: const Duration(milliseconds: 1250),
         );

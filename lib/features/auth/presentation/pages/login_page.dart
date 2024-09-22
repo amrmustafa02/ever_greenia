@@ -3,11 +3,14 @@ import 'dart:developer';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
+import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:plants_app/features/auth/presentation/widgets/login_button.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_form_field.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_header.dart';
 import 'package:regexpattern/regexpattern.dart';
@@ -19,19 +22,51 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
+      create: (context) => getIt<AuthCubit>(),
       child: BlocListener<AuthCubit, AuthState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LoginSuccessState) {
+            Future.delayed(const Duration(seconds: 2), () {
+              context.goBack();
+            });
+            log("Login Success");
+          }
+          if (state is AuthLoadedFailure) {
+            log(state.error);
+          }
+          if (state is AuthLoading) {
+            log("Login loading");
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return SizedBox(
+                  width: 25.w,
+                  child: Lottie.asset("assets/lottie/plants_loading.json"),
+                );
+              },
+            );
+          }
+        },
         child: const LoginPageBody(),
       ),
     );
   }
 }
 
-class LoginPageBody extends StatelessWidget {
+class LoginPageBody extends StatefulWidget {
   const LoginPageBody({
     super.key,
   });
+
+  @override
+  State<LoginPageBody> createState() => _LoginPageBodyState();
+}
+
+class _LoginPageBodyState extends State<LoginPageBody> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +107,12 @@ class LoginPageBody extends StatelessWidget {
                   LoginFormField(
                     hintText: 'Password',
                     isPassword: true,
-                    prefixIcon: EneftyIcons.lock_circle_bold,
+                    prefixIcon: EneftyIcons.lock_2_bold,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'This Field is Required';
                       }
-                      if (!text.isPasswordHard()) {
-                        return 'Password is not valid';
-                      }
+
                       return null;
                     },
                     onChanged: (_) {
@@ -150,38 +183,6 @@ class LoginPageBody extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  const LoginButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      builder: (context, state) {
-        log("isLoginButtonEnabled: ${context.read<AuthCubit>().isLoginButtonEnabled}");
-        return ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.darkGreen,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-          ),
-          onPressed: context.read<AuthCubit>().isLoginButtonEnabled
-              ? () {
-                  context.goBack();
-                }
-              : null,
-          child: Text(
-            "Login",
-            style: AppFontStyles.readexProBold_16.copyWith(
-              color: Colors.white,
-            ),
-          ),
-        );
-      },
     );
   }
 }

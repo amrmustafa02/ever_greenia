@@ -57,6 +57,7 @@ dependencies:
   enefty_icons:
   responsive_sizer:
   regexpattern:
+  dio:
 
   flutter:
     sdk: flutter

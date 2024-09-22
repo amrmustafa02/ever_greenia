@@ -1,12 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:plants_app/core/api/api_result.dart';
+import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:regexpattern/regexpattern.dart';
 part 'auth_state.dart';
 
+@injectable
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+  late AuthRepo authRepo;
+  AuthCubit(this.authRepo) : super(AuthInitial());
 
   // TextEditingControllers
   final emailLoginController = TextEditingController();
@@ -16,15 +19,30 @@ class AuthCubit extends Cubit<AuthState> {
 
   void onLoginFormChanged() {
     var isVaildEmail = emailLoginController.text.isEmail();
-    var passwordVaild = passwordLoginController.text.isPasswordHard();
 
     var isEmptyField = emailLoginController.text.isEmpty ||
         passwordLoginController.text.isEmpty;
-    var newLoginButtonEnabled = isVaildEmail && passwordVaild && !isEmptyField;
+    var newLoginButtonEnabled = isVaildEmail && !isEmptyField;
 
     if (isLoginButtonEnabled != newLoginButtonEnabled) {
       isLoginButtonEnabled = newLoginButtonEnabled;
       emit(LoginButtonChangeState());
+    }
+  }
+
+  Future<void> login() async {
+    emit(AuthLoading());
+
+    var email = emailLoginController.text;
+    var password = passwordLoginController.text;
+
+    var result = await authRepo.login(email, password);
+    switch (result) {
+      case SuccessRequest():
+        emit(LoginSuccessState());
+        break;
+      case FailedRequest<String>():
+        emit(AuthLoadedFailure(result.exception.errorMessage));
     }
   }
 }

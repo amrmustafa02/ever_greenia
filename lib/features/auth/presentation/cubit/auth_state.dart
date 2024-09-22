@@ -16,3 +16,7 @@ final class AuthLoadedFailure extends AuthState {
 }
 
 final class LoginButtonChangeState extends AuthState {}
+
+final class LoginSuccessState extends AuthState {}
+
+final class RegisterSuccessState extends AuthState {}

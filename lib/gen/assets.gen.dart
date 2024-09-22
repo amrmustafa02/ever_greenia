@@ -7,6 +7,109 @@
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
+import 'package:flutter/widgets.dart';
+
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/bag.svg
+  String get bag => 'assets/icons/bag.svg';
+
+  /// File path: assets/icons/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/icons/logo.png');
+
+  /// List of all assets
+  List<dynamic> get values => [bag, logo];
+}
+
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/and_logo.png
+  AssetGenImage get andLogo =>
+      const AssetGenImage('assets/images/and_logo.png');
+
+  /// File path: assets/images/appName.png
+  AssetGenImage get appName => const AssetGenImage('assets/images/appName.png');
+
+  /// File path: assets/images/arrow.svg
+  String get arrow => 'assets/images/arrow.svg';
+
+  /// File path: assets/images/arrow_2.svg
+  String get arrow2 => 'assets/images/arrow_2.svg';
+
+  /// File path: assets/images/arrow_back.png
+  AssetGenImage get arrowBack =>
+      const AssetGenImage('assets/images/arrow_back.png');
+
+  /// File path: assets/images/base_item.svg
+  String get baseItem => 'assets/images/base_item.svg';
+
+  /// File path: assets/images/cart_rectancle.svg
+  String get cartRectancle => 'assets/images/cart_rectancle.svg';
+
+  /// File path: assets/images/login_bg_header.png
+  AssetGenImage get loginBgHeader =>
+      const AssetGenImage('assets/images/login_bg_header.png');
+
+  /// File path: assets/images/login_bg_plant.png
+  AssetGenImage get loginBgPlant =>
+      const AssetGenImage('assets/images/login_bg_plant.png');
+
+  /// File path: assets/images/logo_bg_header_two.png
+  AssetGenImage get logoBgHeaderTwo =>
+      const AssetGenImage('assets/images/logo_bg_header_two.png');
+
+  /// File path: assets/images/onbaording_image.png
+  AssetGenImage get onbaordingImage =>
+      const AssetGenImage('assets/images/onbaording_image.png');
+
+  /// File path: assets/images/plant.png
+  AssetGenImage get plant => const AssetGenImage('assets/images/plant.png');
+
+  /// File path: assets/images/r_logo.png
+  AssetGenImage get rLogo => const AssetGenImage('assets/images/r_logo.png');
+
+  /// File path: assets/images/rectancle.png
+  AssetGenImage get rectancle =>
+      const AssetGenImage('assets/images/rectancle.png');
+
+  /// File path: assets/images/s_logo.png
+  AssetGenImage get sLogo => const AssetGenImage('assets/images/s_logo.png');
+
+  /// List of all assets
+  List<dynamic> get values => [
+        andLogo,
+        appName,
+        arrow,
+        arrow2,
+        arrowBack,
+        baseItem,
+        cartRectancle,
+        loginBgHeader,
+        loginBgPlant,
+        logoBgHeaderTwo,
+        onbaordingImage,
+        plant,
+        rLogo,
+        rectancle,
+        sLogo
+      ];
+}
+
+class $AssetsLottieGen {
+  const $AssetsLottieGen();
+
+  /// File path: assets/lottie/arrow.json
+  String get arrow => 'assets/lottie/arrow.json';
+
+  /// File path: assets/lottie/p4.glb
+  String get p4 => 'assets/lottie/p4.glb';
+
+  /// List of all assets
+  List<String> get values => [arrow, p4];
+}
+
 class $AssetsTranslationsGen {
   const $AssetsTranslationsGen();
 
@@ -23,5 +126,89 @@ class $AssetsTranslationsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsLottieGen lottie = $AssetsLottieGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
+}
+
+class AssetGenImage {
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
+
+  final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
+
+  Image image({
+    Key? key,
+    AssetBundle? bundle,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
+    double? width,
+    double? height,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
+    AlignmentGeometry alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = false,
+    bool isAntiAlias = false,
+    String? package,
+    FilterQuality filterQuality = FilterQuality.low,
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    return Image.asset(
+      _assetName,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
+      width: width,
+      height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+    );
+  }
+
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }
