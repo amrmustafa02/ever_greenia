@@ -11,7 +11,6 @@ import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
-import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_item.dart';
 import 'package:plants_app/features/home/presentation/widgets/cart_section.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_header.dart';

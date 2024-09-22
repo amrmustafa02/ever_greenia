@@ -60,6 +60,7 @@ dependencies:
   regexpattern:
   dio:
   objectbox:
+  animated_text_kit:
 
   flutter:
     sdk: flutter

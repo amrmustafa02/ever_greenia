@@ -1,12 +1,14 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
+import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'dart:math' as math; // for rotation
+// for rotation
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -15,49 +17,16 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-  late Animation<double> _rotationAnimation;
-
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-
-    _controller = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    );
-
-    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.0, 0.3, curve: Curves.easeOut),
-      ),
-    );
-
-    _rotationAnimation = Tween<double>(begin: 0, end: 2 * math.pi).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.3, 0.6, curve: Curves.easeOut),
-      ),
-    );
-
-    _controller.forward();
-
     context.read<MainCubit>().checkUserLogged();
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var imageSize = 20.w;
+    var imageSize = 50.w;
     return BlocListener<MainCubit, MainState>(
       listener: (context, state) {
         if (state is ConfigLoaded) {
@@ -73,44 +42,55 @@ class _SplashPageState extends State<SplashPage>
         }
       },
       child: Scaffold(
-        backgroundColor: AppColors.darkGreen,
         body: Center(
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              FadeInLeft(
-                duration: const Duration(milliseconds: 2500),
+              ZoomIn(
+                animate: true,
+                key: UniqueKey(),
+                duration: const Duration(milliseconds: 3000),
                 child: Image.asset(
-                  "assets/images/r_logo.png",
+                  "assets/images/logo_tr.png",
                   width: imageSize,
                   height: imageSize,
                 ),
               ),
-              AnimatedBuilder(
-                animation: _controller,
-                builder: (context, child) {
-                  return Transform.rotate(
-                    angle: _rotationAnimation.value, // Rotate animation
-                    child: Transform.scale(
-                      scale: _scaleAnimation.value, // Zoom in animation
-                      child: Image.asset(
-                        "assets/images/and_logo.png",
-                        width: imageSize,
-                        height: imageSize,
-                      ),
+              SizedBox(height: 3.h),
+              ZoomIn(
+                duration: const Duration(milliseconds: 3000),
+                child: Text(
+                  'GrowGreen',
+                  style: AppFontStyles.readexPro500_20.copyWith(
+                    color: AppColors.darkGreen,
+                  ),
+                ),
+              ),
+              SizedBox(height: 2.h),
+              AnimatedTextKit(
+                key: UniqueKey(),
+                animatedTexts: [
+                  // RotateAnimatedText(
+                  //   'Quality Herbs',
+                  //   textStyle: AppFontStyles.readexPro400_16.copyWith(
+                  //     color: AppColors.darkGreen,
+                  //   ),
+                  // ),
+                  ColorizeAnimatedText(
+                    'Grow Your World with Our Plants!',
+                    textStyle: AppFontStyles.readexPro400_16.copyWith(
+                      color: AppColors.darkGreen,
                     ),
-                  );
-                },
-              ),
-              FadeInRight(
-                duration: const Duration(milliseconds: 2500),
-                child: Image.asset(
-                  "assets/images/s_logo.png",
-                  width: imageSize,
-                  height: imageSize,
-                ),
-              ),
+                    colors: [
+                      AppColors.darkGreen,
+                      AppColors.lightGreen,
+                    ],
+                    speed: const Duration(milliseconds: 60),
+                  ),
+                ],
+                totalRepeatCount: 1,
+              )
             ],
           ),
         ),

@@ -10,12 +10,10 @@ import 'package:plants_app/core/extensions/widget_ext.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
-import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_button.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_form_field.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_header.dart';
-import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -24,7 +22,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var s = getIt<AuthRepo>();
     return BlocProvider(
       create: (context) => getIt<AuthCubit>(),
       child: BlocListener<AuthCubit, AuthState>(
