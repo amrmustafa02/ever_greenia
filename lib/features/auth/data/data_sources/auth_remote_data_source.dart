@@ -9,13 +9,13 @@ import 'package:plants_app/core/errors/rest_api_error_handler.dart';
 class AuthRemoteDataSource {
   final MyDio _dio;
   AuthRemoteDataSource(this._dio);
-  Future<bool> login(String email, String password) async {
+  Future<Map> login(String email, String password) async {
     try {
-      await _dio.post(
+      var response = await _dio.post(
         Endpoints.login,
         data: {"email": email, "password": password},
       );
-      return true;
+      return response.data;
     } on DioException catch (e) {
       throw FailedRequest(
         exception: RestApiErrorHandler.handleError(e),

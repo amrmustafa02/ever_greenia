@@ -1,4 +1,3 @@
-
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:plants_app/core/theme/app_colors.dart';

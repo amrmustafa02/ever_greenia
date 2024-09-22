@@ -106,8 +106,11 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/p4.glb
   String get p4 => 'assets/lottie/p4.glb';
 
+  /// File path: assets/lottie/plants_loading.json
+  String get plantsLoading => 'assets/lottie/plants_loading.json';
+
   /// List of all assets
-  List<String> get values => [arrow, p4];
+  List<String> get values => [arrow, p4, plantsLoading];
 }
 
 class $AssetsTranslationsGen {

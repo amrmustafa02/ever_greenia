@@ -3,4 +3,3 @@ class ApiConstants {
 
   static const String baseUrl = "https://roots-shoots.vercel.app/";
 }
-

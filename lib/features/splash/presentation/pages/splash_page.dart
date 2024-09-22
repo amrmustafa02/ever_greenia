@@ -1,37 +1,21 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'dart:math' as math; // for rotation
-import 'dart:developer';
-import '../cubit/splash_cubit.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SplashCubit(),
-      child: BlocBuilder<SplashCubit, SplashState>(
-        builder: (context, state) {
-          return const _SplashPageBody();
-        },
-      ),
-    );
-  }
-}
-
-class _SplashPageBody extends StatefulWidget {
-  const _SplashPageBody();
 
   @override
-  State<_SplashPageBody> createState() => __SplashPageBodyState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class __SplashPageBodyState extends State<_SplashPageBody>
+class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
@@ -62,10 +46,7 @@ class __SplashPageBodyState extends State<_SplashPageBody>
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      // ignore: use_build_context_synchronously
-      context.goToNamedReplace(RoutesName.onboarding);
-    });
+    context.read<MainCubit>().checkUserLogged();
   }
 
   @override
@@ -77,47 +58,61 @@ class __SplashPageBodyState extends State<_SplashPageBody>
   @override
   Widget build(BuildContext context) {
     var imageSize = 20.w;
-    log("imageSize: $imageSize");
-    return Scaffold(
-      backgroundColor: AppColors.darkGreen,
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            FadeInLeft(
-              duration: const Duration(milliseconds: 2500),
-              child: Image.asset(
-                "assets/images/r_logo.png",
-                width: imageSize,
-                height: imageSize,
+    return BlocListener<MainCubit, MainState>(
+      listener: (context, state) {
+        if (state is ConfigLoaded) {
+          Future.delayed(
+            const Duration(seconds: 3),
+            () {
+              // ignore: use_build_context_synchronously
+              context.goToNamedReplace(
+                state.isUserLogged ? RoutesName.home : RoutesName.onboarding,
+              );
+            },
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.darkGreen,
+        body: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              FadeInLeft(
+                duration: const Duration(milliseconds: 2500),
+                child: Image.asset(
+                  "assets/images/r_logo.png",
+                  width: imageSize,
+                  height: imageSize,
+                ),
               ),
-            ),
-            AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-                return Transform.rotate(
-                  angle: _rotationAnimation.value, // Rotate animation
-                  child: Transform.scale(
-                    scale: _scaleAnimation.value, // Zoom in animation
-                    child: Image.asset(
-                      "assets/images/and_logo.png",
-                      width: imageSize,
-                      height: imageSize,
+              AnimatedBuilder(
+                animation: _controller,
+                builder: (context, child) {
+                  return Transform.rotate(
+                    angle: _rotationAnimation.value, // Rotate animation
+                    child: Transform.scale(
+                      scale: _scaleAnimation.value, // Zoom in animation
+                      child: Image.asset(
+                        "assets/images/and_logo.png",
+                        width: imageSize,
+                        height: imageSize,
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-            FadeInRight(
-              duration: const Duration(milliseconds: 2500),
-              child: Image.asset(
-                "assets/images/s_logo.png",
-                width: imageSize,
-                height: imageSize,
+                  );
+                },
               ),
-            ),
-          ],
+              FadeInRight(
+                duration: const Duration(milliseconds: 2500),
+                child: Image.asset(
+                  "assets/images/s_logo.png",
+                  width: imageSize,
+                  height: imageSize,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

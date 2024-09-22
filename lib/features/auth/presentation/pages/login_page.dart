@@ -7,12 +7,15 @@ import 'package:lottie/lottie.dart';
 import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
+import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_button.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_form_field.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_header.dart';
+import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -21,18 +24,18 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var s = getIt<AuthRepo>();
     return BlocProvider(
       create: (context) => getIt<AuthCubit>(),
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            Future.delayed(const Duration(seconds: 2), () {
-              context.goBack();
-            });
-            log("Login Success");
+            Navigator.pop(context);
+            context.goToNamedReplace(RoutesName.splash);
           }
           if (state is AuthLoadedFailure) {
             log(state.error);
+            // context.showErrorSnackBar(state.error);
           }
           if (state is AuthLoading) {
             log("Login loading");

@@ -1,6 +1,3 @@
-
 class TranslationKeys {
   TranslationKeys._();
-
-  
 }

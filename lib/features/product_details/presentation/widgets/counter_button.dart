@@ -18,7 +18,7 @@ class _CounterButtonState extends State<CounterButton> {
   late double _width; // Initial width of the widget
   late double _minWidth; // Initial width of the widget
   late double _maxWidth; // Initial width of the widget
-  
+
   @override
   void initState() {
     super.initState();

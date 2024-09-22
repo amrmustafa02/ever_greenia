@@ -1,11 +1,17 @@
 import 'dart:developer';
 
 import 'package:draggable_carousel_slider/draggable_carousel_slider.dart';
+import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
+import 'package:plants_app/core/extensions/context_extension.dart';
+import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
+import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_item.dart';
 import 'package:plants_app/features/home/presentation/widgets/cart_section.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_header.dart';
@@ -83,6 +89,23 @@ class _HomePageState extends State<HomePage> {
                         _advancedDrawerController.hideDrawer();
                       },
                     ),
+                    if (context.read<MainCubit>().isUserLogged) ...[
+                      const SizedBox(height: 16),
+                      ListTile(
+                        leading: const Icon(
+                          EneftyIcons.logout_bold,
+                          color: Colors.red,
+                        ),
+                        title: Text(
+                          'Logout',
+                          style: AppFontStyles.readexPro400_16,
+                        ),
+                        onTap: () {
+                          context.read<MainCubit>().logout();
+                          context.removeAllAndPush(RoutesName.splash);
+                        },
+                      ),
+                    ]
                   ],
                 ),
               ),

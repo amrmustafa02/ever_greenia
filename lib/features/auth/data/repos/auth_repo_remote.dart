@@ -1,6 +1,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
+import 'package:plants_app/core/models/user_data.dart';
 import 'package:plants_app/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:plants_app/features/auth/data/models/login_response_model/login_response_model.dart';
 import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 
 @LazySingleton(as: AuthRepo)
@@ -16,10 +18,12 @@ class AuthRepoRemote extends AuthRepo {
   }
 
   @override
-  Future<ApiResult<String>> login(String email, String password) async {
+  Future<ApiResult<LoginResponseModel>> login(
+      String email, String password) async {
     try {
-      await _authRemoteDataSource.login(email, password);
-      return const SuccessRequest<String>(data: "Success Login");
+      var result = await _authRemoteDataSource.login(email, password);
+      return SuccessRequest<LoginResponseModel>(
+          data: LoginResponseModel.fromJson(result));
     } on FailedRequest catch (e) {
       return FailedRequest(exception: e.exception);
     }

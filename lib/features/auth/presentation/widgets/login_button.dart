@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
@@ -16,7 +15,6 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        log("isLoginButtonEnabled: ${context.read<AuthCubit>().isLoginButtonEnabled}");
         return ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.darkGreen,

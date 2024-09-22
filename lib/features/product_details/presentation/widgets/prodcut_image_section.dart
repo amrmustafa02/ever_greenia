@@ -38,7 +38,7 @@ class ProductImageSection extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.only(bottom: 0),
           child: ModelViewer(
-            src: 'assets/lottie/p3.glb',
+            src: 'assets/lottie/p4.glb',
             // iosSrc: "assets/lottie/preview.usdz",
             // disableZoom: false,
             autoRotate: true,

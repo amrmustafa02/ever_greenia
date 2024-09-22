@@ -74,6 +74,5 @@ class _StretchableWidgetState extends State<StretchableWidget> {
         ),
       ),
     );
-  
   }
 }

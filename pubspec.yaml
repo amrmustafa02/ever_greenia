@@ -56,8 +56,10 @@ dependencies:
   rename:
   enefty_icons:
   responsive_sizer:
+  flutter_secure_storage: 
   regexpattern:
   dio:
+  objectbox:
 
   flutter:
     sdk: flutter
