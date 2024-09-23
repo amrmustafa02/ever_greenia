@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -16,29 +18,47 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this.authRepo, this.secureStorage) : super(AuthInitial());
 
   // TextEditingControllers
-  final emailLoginController = TextEditingController();
-  final passwordLoginController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final fullNameController = TextEditingController();
 
-  bool isLoginButtonEnabled = false;
+  bool isAuthButtonEnabled = false;
 
   void onLoginFormChanged() {
-    var isVaildEmail = emailLoginController.text.isEmail();
+    var isVaildEmail = emailController.text.isEmail();
 
-    var isEmptyField = emailLoginController.text.isEmpty ||
-        passwordLoginController.text.isEmpty;
+    var isEmptyField =
+        emailController.text.isEmpty || passwordController.text.isEmpty;
     var newLoginButtonEnabled = isVaildEmail && !isEmptyField;
 
-    if (isLoginButtonEnabled != newLoginButtonEnabled) {
-      isLoginButtonEnabled = newLoginButtonEnabled;
+    if (isAuthButtonEnabled != newLoginButtonEnabled) {
+      isAuthButtonEnabled = newLoginButtonEnabled;
       emit(LoginButtonChangeState());
+    }
+  }
+
+  void onRegisterFormChanged() {
+    var isVaildEmail = emailController.text.isEmail();
+    var isVaildPassword = passwordController.text.isPasswordHardWithspace();
+
+    var isEmptyField =
+        emailController.text.isEmpty || passwordController.text.isEmpty;
+
+    var newRegisterButtonEnabled =
+        isVaildEmail && isVaildPassword && !isEmptyField;
+
+    if (isAuthButtonEnabled != newRegisterButtonEnabled) {
+      isAuthButtonEnabled = newRegisterButtonEnabled;
+      log(" isRegisterButtonEnabled: $isAuthButtonEnabled");
+      emit(RegisterButtonChangeState());
     }
   }
 
   Future<void> login() async {
     emit(AuthLoading());
 
-    var email = emailLoginController.text;
-    var password = passwordLoginController.text;
+    var email = emailController.text;
+    var password = passwordController.text;
 
     var result = await authRepo.login(email, password);
 
@@ -63,5 +83,9 @@ class AuthCubit extends Cubit<AuthState> {
       case FailedRequest():
         emit(AuthLoadedFailure(result.exception.errorMessage));
     }
+  }
+
+  Future<void> register() async {
+    // TODO: register
   }
 }

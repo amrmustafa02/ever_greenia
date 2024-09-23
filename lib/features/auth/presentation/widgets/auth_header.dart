@@ -2,16 +2,16 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class LoginHeader extends StatefulWidget {
-  const LoginHeader({
+class AuthHeader extends StatefulWidget {
+  const AuthHeader({
     super.key,
   });
 
   @override
-  State<LoginHeader> createState() => _LoginHeaderState();
+  State<AuthHeader> createState() => _AuthHeaderState();
 }
 
-class _LoginHeaderState extends State<LoginHeader> {
+class _AuthHeaderState extends State<AuthHeader> {
   late Image headerImage;
   @override
   void initState() {

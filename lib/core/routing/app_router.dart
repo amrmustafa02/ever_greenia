@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
+import 'package:plants_app/features/auth/presentation/pages/register_page.dart';
 import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:plants_app/features/home/presentation/pages/home_page.dart';
 import 'package:plants_app/features/onboarding/presentation/pages/onboarding_page.dart';
@@ -53,7 +54,15 @@ class AppRouter {
       case RoutesName.login:
         return PageTransition(
           child: const LoginPage(),
-          type: PageTransitionType.scale,
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          curve: Curves.linear,
+          duration: const Duration(milliseconds: 1250),
+        );
+      case RoutesName.register:
+        return PageTransition(
+          child: const RegisterPage(),
+          type: PageTransitionType.fade,
           alignment: Alignment.center,
           curve: Curves.linear,
           duration: const Duration(milliseconds: 1250),

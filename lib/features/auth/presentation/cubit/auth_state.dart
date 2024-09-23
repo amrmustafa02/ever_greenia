@@ -15,7 +15,20 @@ final class AuthLoadedFailure extends AuthState {
   AuthLoadedFailure(this.error);
 }
 
-final class LoginButtonChangeState extends AuthState {}
+final class LoginButtonChangeState extends AuthState {
+  
+}
+
+final class RegisterButtonChangeState extends AuthState {
+  @override
+  bool operator ==(Object other) {
+    if (other.runtimeType != runtimeType) return false;
+    return super == other;
+  }
+
+  @override
+  int get hashCode => super.hashCode;
+}
 
 final class LoginSuccessState extends AuthState {}
 

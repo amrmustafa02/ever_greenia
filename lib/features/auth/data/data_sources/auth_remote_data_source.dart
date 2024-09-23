@@ -9,6 +9,8 @@ import 'package:plants_app/core/errors/rest_api_error_handler.dart';
 class AuthRemoteDataSource {
   final MyDio _dio;
   AuthRemoteDataSource(this._dio);
+
+  
   Future<Map> login(String email, String password) async {
     try {
       var response = await _dio.post(

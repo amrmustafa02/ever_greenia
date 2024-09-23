@@ -13,7 +13,7 @@ import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_button.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_form_field.dart';
-import 'package:plants_app/features/auth/presentation/widgets/login_header.dart';
+import 'package:plants_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:regexpattern/regexpattern.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -32,10 +32,11 @@ class LoginPage extends StatelessWidget {
           }
           if (state is AuthLoadedFailure) {
             log(state.error);
-            // context.showErrorSnackBar(state.error);
+            // Todo: show error
           }
           if (state is AuthLoading) {
             log("Login loading");
+            // Todo: refactor loading
             showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -101,7 +102,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     onChanged: (_) {
                       context.read<AuthCubit>().onLoginFormChanged();
                     },
-                    controller: context.read<AuthCubit>().emailLoginController,
+                    controller: context.read<AuthCubit>().emailController,
                   ).setHorizontalPadding(),
                   SizedBox(height: 3.h),
                   LoginFormField(
@@ -118,8 +119,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     onChanged: (_) {
                       context.read<AuthCubit>().onLoginFormChanged();
                     },
-                    controller:
-                        context.read<AuthCubit>().passwordLoginController,
+                    controller: context.read<AuthCubit>().passwordController,
                   ).setHorizontalPadding(),
                   SizedBox(height: 3.h),
                   Row(
@@ -151,7 +151,10 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                   SizedBox(height: 5.h),
                   SizedBox(
                     width: 50.w,
-                    child: const LoginButton(),
+                    child: AuthButton(
+                      buttonText: 'Login',
+                      onTap: context.read<AuthCubit>().login,
+                    ),
                   ).setHorizontalPadding(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +166,9 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.goToNamedReplace(RoutesName.register);
+                        },
                         child: Text(
                           "Sign Up",
                           style: AppFontStyles.readexProBold_16.copyWith(
@@ -178,7 +183,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
             ),
             const Align(
               alignment: Alignment.topCenter,
-              child: LoginHeader(),
+              child: AuthHeader(),
             ),
           ],
         ),

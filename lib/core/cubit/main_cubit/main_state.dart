@@ -6,7 +6,7 @@ sealed class MainState {}
 final class MainInitial extends MainState {}
 
 final class ConfigLoaded extends MainState {
-  bool isUserLogged;
+  final bool isUserLogged;
 
   ConfigLoaded(this.isUserLogged);
 }
