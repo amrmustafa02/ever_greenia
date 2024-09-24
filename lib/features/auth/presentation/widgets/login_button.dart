@@ -9,35 +9,29 @@ import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 class AuthButton extends StatelessWidget {
   final String buttonText;
   final Function() onTap;
+  final bool enabled;
   const AuthButton({
     super.key,
     required this.buttonText,
     required this.onTap,
+    required this.enabled,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      buildWhen: (previous, c) =>
-          c is LoginButtonChangeState || c is RegisterButtonChangeState,
-      builder: (context, state) {
-        log("AuthState: $state");
-        return ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.darkGreen,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            disabledBackgroundColor: AppColors.darkGreen.withOpacity(0.2),
-          ),
-          onPressed:
-              context.read<AuthCubit>().isAuthButtonEnabled ? onTap : null,
-          child: Text(
-            buttonText,
-            style: AppFontStyles.readexProBold_16.copyWith(
-              color: Colors.white,
-            ),
-          ),
-        );
-      },
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.darkGreen,
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        disabledBackgroundColor: AppColors.darkGreen.withOpacity(0.2),
+      ),
+      onPressed: enabled ? onTap : null,
+      child: Text(
+        buttonText,
+        style: AppFontStyles.readexProBold_16.copyWith(
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

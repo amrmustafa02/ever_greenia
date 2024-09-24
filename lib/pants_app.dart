@@ -7,6 +7,7 @@ import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:toastification/toastification.dart';
 
 class PlantsApp extends StatelessWidget {
   const PlantsApp({super.key});
@@ -21,19 +22,21 @@ class PlantsApp extends StatelessWidget {
           log("MainCubit state: $state");
           return ResponsiveSizer(
             builder: (context, o, s) {
-              return MaterialApp(
-                title: 'Plants App',
-                debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  scaffoldBackgroundColor: Colors.white,
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: AppColors.lightGreen,
+              return ToastificationWrapper(
+                child: MaterialApp(
+                  title: 'Plants App',
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeData(
+                    scaffoldBackgroundColor: Colors.white,
+                    colorScheme: ColorScheme.fromSeed(
+                      seedColor: AppColors.lightGreen,
+                    ),
+                    useMaterial3: true,
                   ),
-                  useMaterial3: true,
+                  onGenerateRoute: (settings) =>
+                      AppRouter.generateRoute(settings),
+                  // initialRoute: RoutesName.onboarding,
                 ),
-                onGenerateRoute: (settings) =>
-                    AppRouter.generateRoute(settings),
-                // initialRoute: RoutesName.onboarding,
               );
             },
           );

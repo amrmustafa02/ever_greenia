@@ -11,9 +11,13 @@ class AuthRepoRemote extends AuthRepo {
   AuthRepoRemote(this._authRemoteDataSource);
 
   @override
-  Future<ApiResult<bool>> confirmEmail(String email, String code) {
-    // TODO: implement confirmEmail
-    throw UnimplementedError();
+  Future<ApiResult<bool>> confirmEmail(String email, String code) async {
+    try {
+      await _authRemoteDataSource.confirmEmail(email, code);
+      return const SuccessRequest<bool>(data: true);
+    } on FailedRequest catch (e) {
+      return FailedRequest(exception: e.exception);
+    }
   }
 
   @override
@@ -29,9 +33,14 @@ class AuthRepoRemote extends AuthRepo {
   }
 
   @override
-  Future<ApiResult<bool>> register(String email, String password) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future<ApiResult<bool>> register(
+      String name, String email, String password) async {
+    try {
+      await _authRemoteDataSource.register(name, email, password);
+      return const SuccessRequest<bool>(data: true);
+    } on FailedRequest catch (e) {
+      return FailedRequest(exception: e.exception);
+    }
   }
 
   @override

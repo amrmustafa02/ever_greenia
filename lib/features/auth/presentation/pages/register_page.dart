@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +9,7 @@ import 'package:plants_app/core/extensions/widget_ext.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:plants_app/features/auth/presentation/widgets/auth_header.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_button.dart';
@@ -22,7 +25,23 @@ class RegisterPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<AuthCubit>(),
       child: BlocListener<AuthCubit, AuthState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is RegisterSuccessState) {
+            Navigator.pop(context);
+            context.goToNamed(
+              RoutesName.confirmEmail,
+              arguments: context.read<AuthCubit>().emailController.text,
+            );
+          }
+          if (state is AuthLoadedFailure) {
+            log(state.error);
+            Navigator.pop(context);
+            HerlperMethods.showErrorNotificationToast(state.error);
+          }
+          if (state is AuthLoading) {
+            HerlperMethods.showLoadingDilaog(context);
+          }
+        },
         child: const Scaffold(
           body: _RegisterPageBody(),
         ),
@@ -49,13 +68,6 @@ class _RegisterPageBody extends StatelessWidget {
                   "Register",
                   style: AppFontStyles.readexProBold_22.copyWith(
                     color: AppColors.darkGreen,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  "Create your new account",
-                  style: AppFontStyles.nunito400_16.copyWith(
-                    color: Colors.grey.withOpacity(0.4),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -137,12 +149,17 @@ class _RegisterPageBody extends StatelessWidget {
                   ),
                 ).setHorizontalPadding(),
                 SizedBox(height: 3.h),
-                SizedBox(
-                  width: 50.w,
-                  child: AuthButton(
-                    buttonText: "Register",
-                    onTap: context.read<AuthCubit>().register,
-                  ),
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    return SizedBox(
+                      width: 50.w,
+                      child: AuthButton(
+                        buttonText: "Register",
+                        onTap: context.read<AuthCubit>().register,
+                        enabled: context.read<AuthCubit>().isAuthButtonEnabled,
+                      ),
+                    );
+                  },
                 ).setHorizontalPadding(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

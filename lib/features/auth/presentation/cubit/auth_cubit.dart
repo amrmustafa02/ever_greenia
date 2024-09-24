@@ -21,8 +21,10 @@ class AuthCubit extends Cubit<AuthState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final fullNameController = TextEditingController();
+  String confirmCode = "";
 
   bool isAuthButtonEnabled = false;
+  bool isConfirmButtonEnabled = false;
 
   void onLoginFormChanged() {
     var isVaildEmail = emailController.text.isEmail();
@@ -33,7 +35,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     if (isAuthButtonEnabled != newLoginButtonEnabled) {
       isAuthButtonEnabled = newLoginButtonEnabled;
-      emit(LoginButtonChangeState());
+      emit(AuthButtonChangeState());
     }
   }
 
@@ -50,8 +52,26 @@ class AuthCubit extends Cubit<AuthState> {
     if (isAuthButtonEnabled != newRegisterButtonEnabled) {
       isAuthButtonEnabled = newRegisterButtonEnabled;
       log(" isRegisterButtonEnabled: $isAuthButtonEnabled");
-      emit(RegisterButtonChangeState());
+      emit(AuthButtonChangeState());
     }
+  }
+
+  void onConfirmFormChanged(String code) {
+    confirmCode = code;
+    var isVaildCode = code.isNumeric();
+    var isEmptyField = code.isEmpty;
+
+    var newConfirmButtonEnabled =
+        isVaildCode && !isEmptyField && confirmCode.length == 4;
+
+    if (isConfirmButtonEnabled != newConfirmButtonEnabled) {
+      isConfirmButtonEnabled = newConfirmButtonEnabled;
+      emit(AuthButtonChangeState());
+    }
+  }
+
+  void initEmail(String email) {
+    emailController.text = email;
   }
 
   Future<void> login() async {
@@ -86,6 +106,34 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> register() async {
-    // TODO: register
+    emit(AuthLoading());
+
+    var name = fullNameController.text;
+    var email = emailController.text;
+    var password = passwordController.text;
+
+    var result = await authRepo.register(name, email, password);
+
+    switch (result) {
+      case SuccessRequest():
+        emit(RegisterSuccessState());
+        break;
+      case FailedRequest():
+        emit(AuthLoadedFailure(result.exception.errorMessage));
+    }
+  }
+
+  Future<void> confirmEmail() async {
+    emit(AuthLoading());
+
+    var result = await authRepo.confirmEmail(emailController.text, confirmCode);
+
+    switch (result) {
+      case SuccessRequest():
+        emit(ConfirmButtonChangeState());
+        break;
+      case FailedRequest():
+        emit(ConfirmFailedState(result.exception.errorMessage));
+    }
   }
 }

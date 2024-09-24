@@ -4,7 +4,7 @@ import 'package:plants_app/features/auth/data/models/login_response_model/login_
 abstract class AuthRepo {
   Future<ApiResult<LoginResponseModel>> login(String email, String password);
 
-  Future<ApiResult<bool>> register(String email, String password);
+  Future<ApiResult<bool>> register(String name, String email, String password);
 
   Future<ApiResult<bool>> confirmEmail(String email, String code);
 

@@ -10,4 +10,5 @@ class RoutesName {
   static const String splash = '/';
   static const String onboarding = "/onboarding";
   static const String register = "/register";
+  static const String confirmEmail = "/confirm_email";
 }

@@ -10,6 +10,7 @@ import 'package:plants_app/core/extensions/widget_ext.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_button.dart';
 import 'package:plants_app/features/auth/presentation/widgets/login_form_field.dart';
@@ -32,20 +33,11 @@ class LoginPage extends StatelessWidget {
           }
           if (state is AuthLoadedFailure) {
             log(state.error);
-            // Todo: show error
+            Navigator.pop(context);
+            HerlperMethods.showErrorNotificationToast(state.error);
           }
           if (state is AuthLoading) {
-            log("Login loading");
-            // Todo: refactor loading
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return SizedBox(
-                  width: 25.w,
-                  child: Lottie.asset("assets/lottie/plants_loading.json"),
-                );
-              },
-            );
+            HerlperMethods.showLoadingDilaog(context);
           }
         },
         child: const LoginPageBody(),
@@ -149,12 +141,18 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     ],
                   ).setHorizontalPadding(),
                   SizedBox(height: 5.h),
-                  SizedBox(
-                    width: 50.w,
-                    child: AuthButton(
-                      buttonText: 'Login',
-                      onTap: context.read<AuthCubit>().login,
-                    ),
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: 50.w,
+                        child: AuthButton(
+                          buttonText: 'Login',
+                          onTap: context.read<AuthCubit>().login,
+                          enabled:
+                              context.read<AuthCubit>().isAuthButtonEnabled,
+                        ),
+                      );
+                    },
                   ).setHorizontalPadding(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

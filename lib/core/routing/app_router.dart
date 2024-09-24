@@ -1,7 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:plants_app/core/di/di.dart';
+import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:plants_app/features/auth/presentation/pages/confirm_email_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/register_page.dart';
 import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
@@ -57,7 +61,7 @@ class AppRouter {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           curve: Curves.linear,
-          duration: const Duration(milliseconds: 1250),
+          duration: const Duration(milliseconds: 750),
         );
       case RoutesName.register:
         return PageTransition(
@@ -65,7 +69,19 @@ class AppRouter {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           curve: Curves.linear,
-          duration: const Duration(milliseconds: 1250),
+          duration: const Duration(milliseconds: 750),
+        );
+      case RoutesName.confirmEmail:
+        var email = settings.arguments as String;
+        return PageTransition(
+          child: BlocProvider(
+            create: (BuildContext context) =>
+                getIt<AuthCubit>()..initEmail(email),
+            child: const ConfirmEmailPage(),
+          ),
+          type: PageTransitionType.rightToLeft,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 500),
         );
       default:
         return MaterialPageRoute(
