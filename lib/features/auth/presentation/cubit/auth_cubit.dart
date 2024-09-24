@@ -102,6 +102,8 @@ class AuthCubit extends Cubit<AuthState> {
         break;
       case FailedRequest():
         emit(AuthLoadedFailure(result.exception.errorMessage));
+        var statusCode = result.exception.statusCode;
+        if (statusCode == 409) emit(EmailNorConfirmedState());
     }
   }
 

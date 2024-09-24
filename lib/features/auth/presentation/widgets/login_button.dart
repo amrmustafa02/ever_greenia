@@ -1,10 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
-import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 
 class AuthButton extends StatelessWidget {
   final String buttonText;

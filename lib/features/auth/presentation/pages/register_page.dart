@@ -140,7 +140,7 @@ class _RegisterPageBody extends StatelessWidget {
                       ),
                       const SizedBox(width: 16),
                       Text(
-                        "Use 8 characters or more & the first char Upper,\nuse lower case letters, numbers, & symbols",
+                        "Use at least 1 uppercase, 1 lowecase, 1 number,\n1 special character and minimum 8 characters",
                         style: AppFontStyles.nunito400_14.copyWith(
                           color: AppColors.darkGreen,
                         ),

@@ -62,7 +62,7 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
               children: [
                 const Spacer(),
                 Text(
-                  'R&S',
+                  'GrowGreen',
                   style: AppFontStyles.readexPro600_12.copyWith(
                     color: Colors.white,
                     fontSize: 32.sp,

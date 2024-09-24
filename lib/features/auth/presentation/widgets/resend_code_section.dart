@@ -53,7 +53,7 @@ class _ResendCodeSectionState extends State<ResendCodeSection> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "00:${curTime.toString()}",
+          "00:${curTime < 10 ? "0$curTime" : "$curTime"}",
           style: AppFontStyles.readexPro400_14.copyWith(color: Colors.grey),
         ),
         const SizedBox(height: 8),

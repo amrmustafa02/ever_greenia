@@ -30,3 +30,5 @@ final class ConfirmFailedState extends AuthState {
 }
 
 final class AuthButtonChangeState extends AuthState {}
+
+final class EmailNorConfirmedState extends AuthState {}

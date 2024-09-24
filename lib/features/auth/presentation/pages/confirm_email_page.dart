@@ -95,8 +95,12 @@ class ConfirmEmailPage extends StatelessWidget {
                       Text(
                         "Please enter the code sent to your email",
                         style: AppFontStyles.nunito400_16.copyWith(
-                          color: const Color(0XFFDDDDDD),
+                          color: Colors.grey,
                         ),
+                      ),
+                      Text(
+                        context.read<AuthCubit>().emailController.text,
+                        style: AppFontStyles.nunitoBold_16,
                       ),
                       SizedBox(height: 2.h),
                       OtpTextField(

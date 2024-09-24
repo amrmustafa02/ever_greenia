@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
@@ -36,8 +35,16 @@ class LoginPage extends StatelessWidget {
             Navigator.pop(context);
             HerlperMethods.showErrorNotificationToast(state.error);
           }
+
           if (state is AuthLoading) {
             HerlperMethods.showLoadingDilaog(context);
+          }
+
+          if (state is EmailNorConfirmedState) {
+            context.goToNamed(
+              RoutesName.confirmEmail,
+              arguments: context.read<AuthCubit>().emailController.text,
+            );
           }
         },
         child: const LoginPageBody(),
@@ -46,20 +53,10 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class LoginPageBody extends StatefulWidget {
+class LoginPageBody extends StatelessWidget {
   const LoginPageBody({
     super.key,
   });
-
-  @override
-  State<LoginPageBody> createState() => _LoginPageBodyState();
-}
-
-class _LoginPageBodyState extends State<LoginPageBody> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +75,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       color: AppColors.darkGreen,
                     ),
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: 3.h),
                   LoginFormField(
                     hintText: 'Email',
                     prefixIcon: Icons.alternate_email_rounded,
@@ -114,33 +111,6 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                     controller: context.read<AuthCubit>().passwordController,
                   ).setHorizontalPadding(),
                   SizedBox(height: 3.h),
-                  Row(
-                    children: [
-                      Checkbox.adaptive(
-                        value: true,
-                        activeColor: AppColors.darkGreen,
-                        onChanged: (value) {},
-                        shape: const CircleBorder(),
-                      ),
-                      Text(
-                        "Remember me",
-                        style: AppFontStyles.readexPro400_16.copyWith(
-                          color: AppColors.darkGreen,
-                        ),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Forgot Password?",
-                          style: AppFontStyles.readexPro600_16.copyWith(
-                            color: AppColors.darkGreen,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ).setHorizontalPadding(),
-                  SizedBox(height: 5.h),
                   BlocBuilder<AuthCubit, AuthState>(
                     builder: (context, state) {
                       return SizedBox(
@@ -154,6 +124,7 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                       );
                     },
                   ).setHorizontalPadding(),
+                  SizedBox(height: 2.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -175,6 +146,15 @@ class _LoginPageBodyState extends State<LoginPageBody> {
                         ),
                       ),
                     ],
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Forgot Password?",
+                      style: AppFontStyles.readexPro600_16.copyWith(
+                        color: AppColors.darkGreen,
+                      ),
+                    ),
                   ),
                 ],
               ),
