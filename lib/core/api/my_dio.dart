@@ -24,13 +24,14 @@ class MyDio {
           log('Query parameters: ${options.queryParameters}');
           log('data: ${options.data}');
           log("------------------ Api request -----------------------");
+          options.headers['get_key'] = 'AARS';
           return handler.next(options);
         },
         onResponse: (response, handler) {
           log("------------------ Api response  -----------------------");
           log("response from: ${response.realUri.host}${response.realUri.path}");
           log("status code: ${response.statusCode}");
-          log("data: ${response.data.toString()}");
+          // log("data: ${response.data.toString()}");
           log("------------------ Api response  -----------------------");
 
           return handler.next(response); // continue

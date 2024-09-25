@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plants_app/core/cubit/app_bloc_observer.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
+import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
@@ -38,7 +41,7 @@ class ProductDetailsHeader extends StatelessWidget {
               ),
             ),
             Text(
-              "The Potted Head",
+              context.read<ProductDetailsCubit>().product.name,
               style: GoogleFonts.readexPro().copyWith(
                 color: Colors.black,
                 fontSize: 24,

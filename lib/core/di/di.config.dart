@@ -22,6 +22,13 @@ import 'package:plants_app/features/auth/data/repos/auth_repo_remote.dart'
 import 'package:plants_app/features/auth/domain/repos/auth_repo.dart' as _i652;
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart'
     as _i378;
+import 'package:plants_app/features/home/data/data_sources/home_remote_data_source.dart'
+    as _i94;
+import 'package:plants_app/features/home/data/repos/home_repo_impl.dart'
+    as _i1010;
+import 'package:plants_app/features/home/domain/repos/home_repo.dart' as _i140;
+import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart'
+    as _i1062;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -41,6 +48,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => registerModule.secureStorage);
     gh.lazySingleton<_i385.AuthRemoteDataSource>(
         () => _i385.AuthRemoteDataSource(gh<_i682.MyDio>()));
+    gh.singleton<_i94.HomeRemoteDataSource>(
+        () => _i94.HomeRemoteDataSource(gh<_i682.MyDio>()));
     gh.singleton<_i634.MainCubit>(
         () => _i634.MainCubit(gh<_i558.FlutterSecureStorage>()));
     gh.lazySingleton<_i652.AuthRepo>(
@@ -49,6 +58,9 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i652.AuthRepo>(),
           gh<_i558.FlutterSecureStorage>(),
         ));
+    gh.singleton<_i140.HomeRepo>(
+        () => _i1010.HomeRepoImpl(gh<_i94.HomeRemoteDataSource>()));
+    gh.factory<_i1062.HomeCubit>(() => _i1062.HomeCubit(gh<_i140.HomeRepo>()));
     return this;
   }
 }

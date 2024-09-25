@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
+import 'package:plants_app/core/extensions/string_ext.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
+import 'package:plants_app/core/widgets/my_default_image.dart';
+import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:plants_app/features/home/presentation/widgets/tab_item.dart';
 
 class ProductItem extends StatelessWidget {
-  final String text;
-  final int index;
+  final ProductData product;
 
-  const ProductItem({super.key, required this.text, required this.index});
+  const ProductItem({
+    super.key,
+    required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.goToNamed(RoutesName.productDetails, arguments: index + 1);
+        context.goToProductDetails(
+          product: product,
+          categoryName: context.read<HomeCubit>().curCategotName,
+        );
       },
       child: SizedBox(
         height: context.height * 0.50,
@@ -41,16 +52,15 @@ class ProductItem extends StatelessWidget {
                       color: AppColors.tertiaryColor,
                     ),
                     child: Hero(
-                      tag: index + 1,
-                      child: Image.asset(
-                        "assets/images/plant.png",
-                        fit: BoxFit.fill,
+                      tag: product.id,
+                      child: MyDefaultImage(
+                        url: product.image,
                       ),
                     ),
                   ),
                   const Spacer(),
                   Text(
-                    text,
+                    product.name.toTitleCase(),
                     style: GoogleFonts.readexPro().copyWith(
                       color: Colors.black,
                       fontSize: 24,
@@ -59,7 +69,7 @@ class ProductItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Perfect for beginners or anyone looking for an easy-to-care-for plant",
+                    product.description,
                     style: GoogleFonts.readexPro().copyWith(
                       color: Colors.grey,
                       fontSize: 16,

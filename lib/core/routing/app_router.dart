@@ -9,6 +9,7 @@ import 'package:plants_app/features/auth/presentation/pages/confirm_email_page.d
 import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/register_page.dart';
 import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
+import 'package:plants_app/features/home/domain/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/pages/home_page.dart';
 import 'package:plants_app/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:plants_app/features/product_details/presentation/pages/product_details_page.dart';
@@ -29,9 +30,14 @@ class AppRouter {
           duration: const Duration(milliseconds: 1250),
         );
       case RoutesName.productDetails:
-        final args = settings.arguments as int;
+        var args = settings.arguments as Map;
+        var product = args["product"] as ProductData;
+        var categoryName = args["categoryName"] as String;
         return PageTransition(
-          child: ProductDetailsPage(index: args),
+          child: ProductDetailsPage(
+            product: product,
+            categoryName: categoryName,
+          ),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 750),
         );

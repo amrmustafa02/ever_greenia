@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
+import 'package:plants_app/core/cubit/app_bloc_observer.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
+import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
@@ -11,7 +14,7 @@ class ProductImageSection extends StatelessWidget {
     required this.index,
   });
 
-  final int index;
+  final String index;
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +38,14 @@ class ProductImageSection extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 0),
-          child: ModelViewer(
-            src: 'assets/lottie/p4.glb',
-            // iosSrc: "assets/lottie/preview.usdz",
-            // disableZoom: false,
-            autoRotate: true,
-            autoPlay: true,
-            loading: Loading.lazy,
-            autoRotateDelay: 1,
-          ),
+        ModelViewer(
+          src: context.read<ProductDetailsCubit>().product.image3D,
+          // iosSrc: "assets/lottie/preview.usdz",
+          // disableZoom: false,
+          autoRotate: true,
+          autoPlay: true,
+          loading: Loading.lazy,
+          autoRotateDelay: 1,
         ),
       ],
     );

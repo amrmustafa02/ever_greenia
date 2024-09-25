@@ -23,7 +23,6 @@ class HomeHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             FadeInLeft(
-              key: UniqueKey(),
               child: Text.rich(
                 TextSpan(
                   children: [
@@ -48,7 +47,6 @@ class HomeHeader extends StatelessWidget {
             ),
             const Spacer(),
             FadeInRight(
-              key: UniqueKey(),
               child: IconButton(
                 onPressed: onTap,
                 icon: const Icon(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plants_app/core/routing/app_router.dart';
+import 'package:plants_app/features/home/domain/entities/product_data.dart';
 
 extension ContextExtension on BuildContext {
   // theme
@@ -10,7 +12,6 @@ extension ContextExtension on BuildContext {
 
   TextTheme get textTheme => Theme.of(this).textTheme;
 
-  // routes
   void goBack() => Navigator.of(this).pop();
 
   void goToNamed(String route, {Object? arguments}) =>
@@ -18,6 +19,19 @@ extension ContextExtension on BuildContext {
         route,
         arguments: arguments,
       );
+
+  void goToProductDetails({
+    required ProductData product,
+    required String categoryName,
+  }) {
+    goToNamed(
+      RoutesName.productDetails,
+      arguments: {
+        "product": product,
+        "categoryName": categoryName,
+      },
+    );
+  }
 
   void goToNamedReplace(String route, {Object? arguments}) =>
       Navigator.of(this).pushReplacementNamed(

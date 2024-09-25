@@ -48,6 +48,22 @@ class $AssetsImagesGen {
   /// File path: assets/images/cart_rectancle.svg
   String get cartRectancle => 'assets/images/cart_rectancle.svg';
 
+  /// File path: assets/images/circle_1.png
+  AssetGenImage get circle1 =>
+      const AssetGenImage('assets/images/circle_1.png');
+
+  /// File path: assets/images/circle_2.png
+  AssetGenImage get circle2 =>
+      const AssetGenImage('assets/images/circle_2.png');
+
+  /// File path: assets/images/confirm_email_image.png
+  AssetGenImage get confirmEmailImage =>
+      const AssetGenImage('assets/images/confirm_email_image.png');
+
+  /// File path: assets/images/confirm_page_image.png
+  AssetGenImage get confirmPageImage =>
+      const AssetGenImage('assets/images/confirm_page_image.png');
+
   /// File path: assets/images/login_bg_header.png
   AssetGenImage get loginBgHeader =>
       const AssetGenImage('assets/images/login_bg_header.png');
@@ -56,9 +72,15 @@ class $AssetsImagesGen {
   AssetGenImage get loginBgPlant =>
       const AssetGenImage('assets/images/login_bg_plant.png');
 
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
   /// File path: assets/images/logo_bg_header_two.png
   AssetGenImage get logoBgHeaderTwo =>
       const AssetGenImage('assets/images/logo_bg_header_two.png');
+
+  /// File path: assets/images/logo_tr.png
+  AssetGenImage get logoTr => const AssetGenImage('assets/images/logo_tr.png');
 
   /// File path: assets/images/onbaording_image.png
   AssetGenImage get onbaordingImage =>
@@ -86,9 +108,15 @@ class $AssetsImagesGen {
         arrowBack,
         baseItem,
         cartRectancle,
+        circle1,
+        circle2,
+        confirmEmailImage,
+        confirmPageImage,
         loginBgHeader,
         loginBgPlant,
+        logo,
         logoBgHeaderTwo,
+        logoTr,
         onbaordingImage,
         plant,
         rLogo,
