@@ -4,12 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/string_ext.dart';
-import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/widgets/my_default_image.dart';
 import 'package:plants_app/features/home/domain/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
-import 'package:plants_app/features/home/presentation/widgets/tab_item.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductData product;
