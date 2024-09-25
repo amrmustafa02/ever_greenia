@@ -132,7 +132,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     switch (result) {
       case SuccessRequest():
-        emit(ConfirmButtonChangeState());
+        emit(ConfirmEmailSuccessState());
         break;
       case FailedRequest():
         emit(ConfirmFailedState(result.exception.errorMessage));

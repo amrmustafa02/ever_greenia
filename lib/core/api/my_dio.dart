@@ -28,9 +28,9 @@ class MyDio {
         },
         onResponse: (response, handler) {
           log("------------------ Api response  -----------------------");
-          log("response from: ${response.realUri.host}/${response.realUri.path}");
+          log("response from: ${response.realUri.host}${response.realUri.path}");
           log("status code: ${response.statusCode}");
-          log("data: ${response.data.toString().substring(0, 100)}");
+          log("data: ${response.data.toString()}");
           log("------------------ Api response  -----------------------");
 
           return handler.next(response); // continue

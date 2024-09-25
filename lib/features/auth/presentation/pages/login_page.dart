@@ -102,7 +102,6 @@ class LoginPageBody extends StatelessWidget {
                       if (text == null || text.isEmpty) {
                         return 'This Field is Required';
                       }
-
                       return null;
                     },
                     onChanged: (_) {

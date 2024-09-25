@@ -44,9 +44,9 @@ class AuthRemoteDataSource {
 
   Future<dynamic> confirmEmail(String email, String code) async {
     try {
-      var response = await _dio.post(
+      var response = await _dio.put(
         Endpoints.confirmEmail,
-        data: {
+        {
           "email": email,
           "code": code,
         },
