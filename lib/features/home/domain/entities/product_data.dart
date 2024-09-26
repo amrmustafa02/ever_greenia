@@ -1,6 +1,8 @@
+import 'package:plants_app/core/extensions/string_ext.dart';
+
 class ProductData {
   final String id;
-  final String name;
+  final String orginalName;
   final String slug;
   final String description;
   final num price;
@@ -15,7 +17,7 @@ class ProductData {
 
   ProductData({
     required this.id,
-    required this.name,
+    required this.orginalName,
     required this.slug,
     required this.description,
     required this.price,
@@ -28,11 +30,11 @@ class ProductData {
     this.updatedAt,
     this.heroId = "",
   });
-
+  String get name => orginalName.toTitleCase();
   factory ProductData.fakeDate(String id) {
     return ProductData(
       id: id,
-      name: "Product",
+      orginalName: "Product",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
       description: "No Description",

@@ -7,6 +7,7 @@ import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/widgets/header_bottom_sheet_line.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_cart_bubble.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/routing/app_router.dart';
 
@@ -46,16 +47,17 @@ class CartSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      FadeInLeft(
-                        key: UniqueKey(),
-                        child: const CircleAvatar(
-                          radius: 25,
-                          backgroundColor: Colors.black,
-                          child: Text(
-                            "4",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
+                      Skeleton.shade(
+                        child: FadeInLeft(
+                          child: const CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Colors.black,
+                            child: Text(
+                              "4",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                              ),
                             ),
                           ),
                         ),
@@ -68,7 +70,7 @@ class CartSection extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FadeInUp(
-                            key: UniqueKey(),
+                            key: const ValueKey("CartUp"),
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeInOut,
                             child: Text(
@@ -81,7 +83,7 @@ class CartSection extends StatelessWidget {
                             ),
                           ),
                           FadeInUp(
-                            key: UniqueKey(),
+                            key: const ValueKey("numItemsCart"),
                             duration: const Duration(milliseconds: 750),
                             curve: Curves.easeInOut,
                             child: Text(
@@ -104,7 +106,7 @@ class CartSection extends StatelessWidget {
                             (index) {
                               return FadeInRight(
                                 curve: Curves.easeInOut,
-                                key: UniqueKey(),
+                                key: ValueKey("itemsCart $index"),
                                 duration:
                                     Duration(milliseconds: 750 + index * 100),
                                 child: ProductCartBubble(

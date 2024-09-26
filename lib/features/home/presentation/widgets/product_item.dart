@@ -10,6 +10,7 @@ import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/widgets/my_default_image.dart';
 import 'package:plants_app/features/home/domain/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductData product;
@@ -61,7 +62,7 @@ class ProductItem extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    product.name.toTitleCase(),
+                    product.orginalName.toTitleCase(),
                     style: GoogleFonts.readexPro().copyWith(
                       color: Colors.black,
                       fontSize: 24,
@@ -71,6 +72,8 @@ class ProductItem extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     product.description,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.readexPro().copyWith(
                       color: Colors.grey,
                       fontSize: 16,
@@ -78,34 +81,36 @@ class ProductItem extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      color: Colors.black,
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset("assets/icons/bag.svg"),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Text(
-                          "Add to cart",
-                          style: GoogleFonts.readexPro().copyWith(
-                            color: Colors.white,
-                            fontSize: 16,
+                  Skeleton.shade(
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(32),
+                        color: Colors.black,
+                      ),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset("assets/icons/bag.svg"),
+                          const SizedBox(
+                            width: 16,
                           ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          "500 EGP",
-                          style: GoogleFonts.readexPro().copyWith(
-                            color: Colors.white,
-                            fontSize: 16,
+                          Text(
+                            "Add to cart",
+                            style: GoogleFonts.readexPro().copyWith(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                      ],
+                          const Spacer(),
+                          Text(
+                            "\$${product.price}",
+                            style: GoogleFonts.readexPro().copyWith(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

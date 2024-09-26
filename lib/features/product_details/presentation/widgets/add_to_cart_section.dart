@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
@@ -13,9 +15,7 @@ class AddToCartSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Bounceable(
-      onTap: () {
-        // context.goToNamed(RoutesName.cart);
-      },
+      onTap: () {},
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 32),
         padding: const EdgeInsets.symmetric(
@@ -50,7 +50,7 @@ class AddToCartSection extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              "500 EGP",
+              "\$${context.read<ProductDetailsCubit>().product.price}",
               style: GoogleFonts.readexPro().copyWith(
                 color: Colors.white,
                 fontSize: 16,

@@ -21,6 +21,7 @@ class HomePage extends StatelessWidget {
             return Skeletonizer(
               ignorePointers: true,
               child: HomePageBody(
+                key: const ValueKey("HomePageBody"),
                 categories: context.read<HomeCubit>().categories,
                 curProducts: context.read<HomeCubit>().curProducts,
               ),
@@ -28,6 +29,7 @@ class HomePage extends StatelessWidget {
           }
           if (state is HomeLoadedSuccess) {
             return HomePageBody(
+              key: const ValueKey("HomePageBody"),
               categories: context.read<HomeCubit>().categories,
               curProducts: context.read<HomeCubit>().curProducts,
             );

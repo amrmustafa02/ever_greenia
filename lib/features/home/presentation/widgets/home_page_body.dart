@@ -17,6 +17,7 @@ import 'package:plants_app/features/home/presentation/widgets/cart_section.dart'
 import 'package:plants_app/features/home/presentation/widgets/home_header.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_item.dart';
 import 'package:plants_app/features/home/presentation/widgets/tab_bar_section.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class HomePageBody extends StatefulWidget {
   final List<CategoryData> categories;
@@ -66,11 +67,15 @@ class _HomePageBodyState extends State<HomePageBody> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  HomeHeader(onTap: () {
-                    _advancedDrawerController.showDrawer();
-                  }),
-                  TabBarSection(
-                    categories: widget.categories,
+                  Skeleton.keep(
+                    child: HomeHeader(onTap: () {
+                      _advancedDrawerController.showDrawer();
+                    }),
+                  ),
+                  Skeleton.shade(
+                    child: TabBarSection(
+                      categories: widget.categories,
+                    ),
                   ),
                   const SizedBox(height: 32),
                   // Padding(
@@ -131,8 +136,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                       backgroundCardOffset: const Offset(00, -40),
                       cardBuilder: (BuildContext context, int index) {
                         log("index: $index");
-                        return FadeInDown(
-                          duration: const Duration(milliseconds: 1000),
+                        return ZoomIn(
+                          duration: Duration(milliseconds: 500 * index),
                           child: ProductItem(
                             product: widget.curProducts[index],
                           ),
