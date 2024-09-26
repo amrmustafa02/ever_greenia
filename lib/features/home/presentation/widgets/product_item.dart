@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,6 +23,8 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        log("hero tag clicked :${product.id}");
+
         context.goToProductDetails(
           product: product,
           categoryName: context.read<HomeCubit>().curCategotName,
@@ -28,7 +32,6 @@ class ProductItem extends StatelessWidget {
       },
       child: SizedBox(
         height: context.height * 0.50,
-        width: context.width * 0.80,
         child: Center(
           child: Card(
             shape: RoundedRectangleBorder(

@@ -9,6 +9,7 @@ class ProductData {
   final String image3D;
   final num quantity;
   final bool is3D;
+  String heroId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -25,6 +26,7 @@ class ProductData {
     required this.is3D,
     this.createdAt,
     this.updatedAt,
+    this.heroId = "",
   });
 
   factory ProductData.fakeDate(String id) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,10 +25,11 @@ class ProductDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductDetailsCubit()..initProduct(product),
+      create: (context) =>
+          ProductDetailsCubit()..initProduct(product, categoryName),
       child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
         builder: (context, state) {
-          return _ProductDetailsPageBody();
+          return const _ProductDetailsPageBody();
         },
       ),
     );
@@ -39,6 +42,7 @@ class _ProductDetailsPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<ProductDetailsCubit>();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -52,7 +56,7 @@ class _ProductDetailsPageBody extends StatelessWidget {
             SizedBox(
               height: context.height * 0.35,
               width: context.width,
-              child: ProductImageSection(index: cubit.product.id),
+              child: ProductImageSection(tagId: cubit.product.id),
             ),
             const SizedBox(height: 16),
             Text(

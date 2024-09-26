@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plants_app/core/extensions/string_ext.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 
 class TabItem extends StatelessWidget {
@@ -38,7 +37,7 @@ class TabItem extends StatelessWidget {
               color: isActive ? AppColors.darkGreen : Colors.white,
             ),
             child: Text(
-              text.toTitleCase(),
+              text,
               style: GoogleFonts.readexPro().copyWith(
                 color: isActive ? Colors.white : Colors.black,
               ),

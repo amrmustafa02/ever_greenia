@@ -1,4 +1,7 @@
-import 'package:draggable_carousel_slider/draggable_carousel_slider.dart';
+import 'dart:developer';
+
+import 'package:animate_do/animate_do.dart';
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
@@ -30,6 +33,7 @@ class HomePageBody extends StatefulWidget {
 
 class _HomePageBodyState extends State<HomePageBody> {
   final _advancedDrawerController = AdvancedDrawerController();
+  int curIndex = 0;
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
@@ -92,20 +96,53 @@ class _HomePageBodyState extends State<HomePageBody> {
                   // ),
                   // const SizedBox(height: 16),
 
-                  Expanded(
-                    child: DraggableSlider(
-                      onPressed: null,
+                  // Expanded(
+                  //   child: DraggableSlider(
+                  //     onPressed: null,
+                  //     key: UniqueKey(),
+                  //     loop: true,
+                  //     children: widget.curProducts.map((e) {
+                  //       e.heroId = e.categoryId + curIndex.toString();
+                  //       curIndex++;
+                  //       return ProductItem(
+                  //         product: e,
+                  //       );
+                  //     }).toList(),
+                  //   ),
+                  // ),
+                  const Spacer(),
+
+                  SizedBox(
+                    height: context.height * 0.50,
+                    width: context.width * 0.85,
+                    child: AppinioSwiper(
+                      initialIndex: 0,
+                      loop: false,
+                      onEnd: () {
+                        // log("onEnd");
+                        setState(() {});
+                      },
                       key: UniqueKey(),
-                      loop: true,
-                      children: widget.curProducts
-                          .map(
-                            (e) => ProductItem(
-                              product: e,
-                            ),
-                          )
-                          .toList(),
+                      allowUnlimitedUnSwipe: true,
+                      backgroundCardScale: 0.95,
+                      backgroundCardCount: 2,
+                      duration: const Duration(milliseconds: 500),
+                      // invertAngleOnBottomDrag: true,
+                      backgroundCardOffset: const Offset(00, -40),
+                      cardBuilder: (BuildContext context, int index) {
+                        log("index: $index");
+                        return FadeInDown(
+                          duration: const Duration(milliseconds: 1000),
+                          child: ProductItem(
+                            product: widget.curProducts[index],
+                          ),
+                        );
+                      },
+                      cardCount: widget.curProducts.length,
                     ),
                   ),
+                  const Spacer(),
+
                   const CartSection(),
                 ],
               ),

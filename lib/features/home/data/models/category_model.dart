@@ -27,7 +27,7 @@ class CategoryModel {
   CategoryData toEntity() {
     return CategoryData(
       id: id ?? "",
-      name: name ?? "No Name",
+      originalName: name ?? "No Name",
       createdAt: createdAt ?? DateTime.now(),
       updatedAt: updatedAt ?? DateTime.now(),
     );

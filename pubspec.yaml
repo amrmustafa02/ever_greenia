@@ -61,6 +61,9 @@ dependencies:
   dio:
   animated_text_kit:
   flutter_otp_text_field:
+  toggle_switch:
+  appinio_swiper:
+  
 
   flutter:
     sdk: flutter

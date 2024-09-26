@@ -5,9 +5,14 @@ part 'product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
   late ProductData product;
+  late String categoryName;
   ProductDetailsCubit() : super(ProductDetailsInitial());
 
-  initProduct(ProductData product) {
+  initProduct(
+    ProductData product,
+    String categoryName,
+  ) {
     this.product = product;
+    this.categoryName = categoryName;
   }
 }
