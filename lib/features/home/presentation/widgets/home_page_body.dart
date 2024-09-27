@@ -11,6 +11,7 @@ import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:plants_app/features/home/domain/entities/category_data.dart';
 import 'package:plants_app/features/home/domain/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/widgets/cart_section.dart';
@@ -47,110 +48,97 @@ class _HomePageBodyState extends State<HomePageBody> {
       rtlOpening: true,
       disabledGestures: true,
       drawer: _drawerBody(),
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.white,
-              AppColors.bgColor,
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Center(
-            child: DefaultTabController(
-              length: widget.categories.length,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Skeleton.keep(
-                    child: HomeHeader(onTap: () {
-                      _advancedDrawerController.showDrawer();
-                    }),
+      child: MyScaffold(
+        child: Center(
+          child: DefaultTabController(
+            length: widget.categories.length,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Skeleton.keep(
+                  child: HomeHeader(onTap: () {
+                    _advancedDrawerController.showDrawer();
+                  }),
+                ),
+                Skeleton.shade(
+                  child: TabBarSection(
+                    categories: widget.categories,
                   ),
-                  Skeleton.shade(
-                    child: TabBarSection(
-                      categories: widget.categories,
-                    ),
+                ),
+                const SizedBox(height: 32),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                //   child: Row(
+                //     children: [
+                //       Text(
+                //         "Plants Collections",
+                //         style: GoogleFonts.abel().copyWith(
+                //           color: Colors.black,
+                //           fontSize: 24,
+                //         ),
+                //       ),
+                //       const Spacer(),
+                //       IconButton(
+                //         onPressed: () {},
+                //         icon: const Icon(
+                //           Icons.arrow_forward_ios,
+                //         ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // const SizedBox(height: 16),
+
+                // Expanded(
+                //   child: DraggableSlider(
+                //     onPressed: null,
+                //     key: UniqueKey(),
+                //     loop: true,
+                //     children: widget.curProducts.map((e) {
+                //       e.heroId = e.categoryId + curIndex.toString();
+                //       curIndex++;
+                //       return ProductItem(
+                //         product: e,
+                //       );
+                //     }).toList(),
+                //   ),
+                // ),
+                const Spacer(),
+
+                SizedBox(
+                  height: context.height * 0.50,
+                  width: context.width * 0.85,
+                  child: AppinioSwiper(
+                    initialIndex: 0,
+                    loop: false,
+                    onEnd: () {
+                      // log("onEnd");
+                      setState(() {});
+                    },
+                    key: UniqueKey(),
+                    allowUnlimitedUnSwipe: true,
+                    backgroundCardScale: 0.95,
+                    backgroundCardCount: 2,
+                    duration: const Duration(milliseconds: 500),
+                    // invertAngleOnBottomDrag: true,
+                    backgroundCardOffset: const Offset(00, -40),
+                    cardBuilder: (BuildContext context, int index) {
+                      log("index: $index");
+                      return ZoomIn(
+                        duration: Duration(milliseconds: 500 * index),
+                        child: ProductItem(
+                          product: widget.curProducts[index],
+                        ),
+                      );
+                    },
+                    cardCount: widget.curProducts.length,
                   ),
-                  const SizedBox(height: 32),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  //   child: Row(
-                  //     children: [
-                  //       Text(
-                  //         "Plants Collections",
-                  //         style: GoogleFonts.abel().copyWith(
-                  //           color: Colors.black,
-                  //           fontSize: 24,
-                  //         ),
-                  //       ),
-                  //       const Spacer(),
-                  //       IconButton(
-                  //         onPressed: () {},
-                  //         icon: const Icon(
-                  //           Icons.arrow_forward_ios,
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 16),
+                ),
+                const Spacer(),
 
-                  // Expanded(
-                  //   child: DraggableSlider(
-                  //     onPressed: null,
-                  //     key: UniqueKey(),
-                  //     loop: true,
-                  //     children: widget.curProducts.map((e) {
-                  //       e.heroId = e.categoryId + curIndex.toString();
-                  //       curIndex++;
-                  //       return ProductItem(
-                  //         product: e,
-                  //       );
-                  //     }).toList(),
-                  //   ),
-                  // ),
-                  const Spacer(),
-
-                  SizedBox(
-                    height: context.height * 0.50,
-                    width: context.width * 0.85,
-                    child: AppinioSwiper(
-                      initialIndex: 0,
-                      loop: false,
-                      onEnd: () {
-                        // log("onEnd");
-                        setState(() {});
-                      },
-                      key: UniqueKey(),
-                      allowUnlimitedUnSwipe: true,
-                      backgroundCardScale: 0.95,
-                      backgroundCardCount: 2,
-                      duration: const Duration(milliseconds: 500),
-                      // invertAngleOnBottomDrag: true,
-                      backgroundCardOffset: const Offset(00, -40),
-                      cardBuilder: (BuildContext context, int index) {
-                        log("index: $index");
-                        return ZoomIn(
-                          duration: Duration(milliseconds: 500 * index),
-                          child: ProductItem(
-                            product: widget.curProducts[index],
-                          ),
-                        );
-                      },
-                      cardCount: widget.curProducts.length,
-                    ),
-                  ),
-                  const Spacer(),
-
-                  const CartSection(),
-                ],
-              ),
+                const CartSection(),
+              ],
             ),
           ),
         ),

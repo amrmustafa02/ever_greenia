@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -68,7 +67,7 @@ class HomeCubit extends Cubit<HomeState> {
       curCategotName = categories[curTabIndex].name;
 
       emit(HomeLoadedSuccess());
-    } on Exception catch (e) {
+    } catch (e) {
       emit(HomeLoadedFailure(e.toString()));
     }
   }
@@ -79,5 +78,10 @@ class HomeCubit extends Cubit<HomeState> {
     curCategotName = categories[curTabIndex].name;
 
     emit(HomeLoadedSuccess());
+  }
+
+  refresh() {
+    emit(HomeInitial());
+    loadProductsAndCategories();
   }
 }

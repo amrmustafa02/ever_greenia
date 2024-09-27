@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_page_body.dart';
+import 'package:plants_app/features/home/presentation/widgets/home_page_error.dart';
 import '../cubit/home_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -32,6 +33,14 @@ class HomePage extends StatelessWidget {
               key: const ValueKey("HomePageBody"),
               categories: context.read<HomeCubit>().categories,
               curProducts: context.read<HomeCubit>().curProducts,
+            );
+          }
+          if (state is HomeLoadedFailure) {
+            return RefreshIndicator(
+              onRefresh: () async {
+                await context.read<HomeCubit>().refresh();
+              },
+              child: const HomePageError(),
             );
           }
           return SizedBox.fromSize();
