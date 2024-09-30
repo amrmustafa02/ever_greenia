@@ -1,4 +1,4 @@
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
 
 import 'image_model.dart';
 

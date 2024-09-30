@@ -46,7 +46,7 @@ class AuthRemoteDataSource {
     try {
       var response = await _dio.put(
         Endpoints.confirmEmail,
-        {
+        data: {
           "email": email,
           "code": code,
         },

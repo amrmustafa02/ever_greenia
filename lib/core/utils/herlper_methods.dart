@@ -4,8 +4,8 @@ import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:toastification/toastification.dart';
 
-class HerlperMethods {
-  static void showLoadingDilaog(BuildContext context) {
+class HelperMethods {
+  static void showLoadingDliaog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

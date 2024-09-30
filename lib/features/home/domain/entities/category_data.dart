@@ -1,5 +1,5 @@
 import 'package:plants_app/core/extensions/string_ext.dart';
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
 
 class CategoryData {
   final String id;

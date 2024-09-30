@@ -3,9 +3,11 @@ import 'package:plants_app/core/theme/app_colors.dart';
 
 class ProductCartBubble extends StatelessWidget {
   final double margin;
+  final Widget child;
   const ProductCartBubble({
     super.key,
     required this.margin,
+    required this.child,
   });
 
   @override
@@ -19,14 +21,12 @@ class ProductCartBubble extends StatelessWidget {
           color: AppColors.lightGreen,
         ),
       ),
-      child: CircleAvatar(
+      child: CircleAvatar( 
         radius: 25,
         backgroundColor: AppColors.tertiaryColor,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            "assets/images/plant.png",
-          ),
+          child: child,
         ),
       ),
     );

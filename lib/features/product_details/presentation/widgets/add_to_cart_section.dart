@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -15,7 +16,11 @@ class AddToCartSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Bounceable(
-      onTap: () {},
+      onTap: () {
+        context
+            .read<ProductDetailsCubit>()
+            .addProductToCart(context.read<CartCubit>());
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 32),
         padding: const EdgeInsets.symmetric(

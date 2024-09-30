@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_info_section.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_header.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../cubit/cart_cubit.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CartCubit(),
-      child: BlocBuilder<CartCubit, CartState>(
-        builder: (context, state) {
-          return const _CartPageBody();
-        },
-      ),
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        return const _CartPageBody();
+      },
     );
   }
 }

@@ -1,14 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/string_ext.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/widgets/my_default_image.dart';
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -22,30 +21,28 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        log("hero tag clicked :${product.id}");
-
-        context.goToProductDetails(
-          product: product,
-          categoryName: context.read<HomeCubit>().curCategotName,
-        );
-      },
-      child: SizedBox(
-        height: context.height * 0.50,
-        child: Center(
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
-            ),
-            elevation: 0,
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
+    return SizedBox(
+      height: context.height * 0.50,
+      child: Center(
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32),
+          ),
+          elevation: 0,
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    context.goToProductDetails(
+                      product: product,
+                      categoryName: context.read<HomeCubit>().curCategotName,
+                    );
+                  },
+                  child: Container(
                     alignment: Alignment.center,
                     height: context.height * 0.20,
                     width: context.width * 0.80,
@@ -60,28 +57,31 @@ class ProductItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Spacer(),
-                  Text(
-                    product.orginalName.toTitleCase(),
-                    style: GoogleFonts.readexPro().copyWith(
-                      color: Colors.black,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                const Spacer(),
+                Text(
+                  product.orginalName.toTitleCase(),
+                  style: GoogleFonts.readexPro().copyWith(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    product.description,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.readexPro().copyWith(
-                      color: Colors.grey,
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  product.description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.readexPro().copyWith(
+                    color: Colors.grey,
+                    fontSize: 16,
                   ),
-                  const Spacer(),
-                  Skeleton.shade(
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(),
+                Skeleton.shade(
+                  child: Bounceable(
+                    onTap: () {},
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -113,8 +113,8 @@ class ProductItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

@@ -36,10 +36,10 @@ class RegisterPage extends StatelessWidget {
           if (state is AuthLoadedFailure) {
             log(state.error);
             Navigator.pop(context);
-            HerlperMethods.showErrorNotificationToast(state.error);
+            HelperMethods.showErrorNotificationToast(state.error);
           }
           if (state is AuthLoading) {
-            HerlperMethods.showLoadingDilaog(context);
+            HelperMethods.showLoadingDliaog(context);
           }
         },
         child: const Scaffold(

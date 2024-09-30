@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plants_app/core/routing/app_router.dart';
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
 
 extension ContextExtension on BuildContext {
   // theme

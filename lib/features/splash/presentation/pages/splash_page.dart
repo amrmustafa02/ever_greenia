@@ -23,7 +23,6 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     context.read<MainCubit>().checkUserLogged();
   }
-
   @override
   Widget build(BuildContext context) {
     var imageSize = 50.w;

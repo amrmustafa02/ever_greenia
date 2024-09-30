@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/features/home/domain/entities/category_data.dart';
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/domain/repos/home_repo.dart';
+
 part 'home_state.dart';
 
 @injectable
@@ -73,6 +74,8 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   changeTab(int index) {
+    if (index == curTabIndex) return;
+
     curTabIndex = index;
     curProducts = categories[curTabIndex].products;
     curCategotName = categories[curTabIndex].name;

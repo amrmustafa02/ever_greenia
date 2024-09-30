@@ -9,7 +9,7 @@ import 'package:plants_app/features/auth/presentation/pages/confirm_email_page.d
 import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/register_page.dart';
 import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/pages/home_page.dart';
 import 'package:plants_app/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:plants_app/features/product_details/presentation/pages/product_details_page.dart';

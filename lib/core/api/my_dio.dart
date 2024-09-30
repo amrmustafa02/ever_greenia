@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:plants_app/core/api/api_constants.dart';
+import 'package:plants_app/core/di/di.dart';
+import 'package:plants_app/core/entities/user_data.dart';
 
 class MyDio {
   static MyDio? _myDio;
@@ -24,7 +26,13 @@ class MyDio {
           log('Query parameters: ${options.queryParameters}');
           log('data: ${options.data}');
           log("------------------ Api request -----------------------");
-          options.headers['get_key'] = 'AARS';
+          if (options.path.contains("cart")) {
+            options.headers['auth'] = getIt<UserData>().token;
+          } else {
+            // convert it to api constants
+            options.headers['get_key'] = 'AARS';
+          }
+
           return handler.next(options);
         },
         onResponse: (response, handler) {
@@ -70,15 +78,20 @@ class MyDio {
     String path, {
     Map<String, dynamic>? queryParameters,
     required Map data,
+    Options? options,
   }) async {
     return await _dio.post(
       path,
       data: data,
       queryParameters: queryParameters,
+      options: options,
     );
   }
 
-  Future<Response> put(String path, dynamic data) async {
+  Future<Response> put(
+    String path, {
+    required dynamic data,
+  }) async {
     return await _dio.put(path, data: data);
   }
 

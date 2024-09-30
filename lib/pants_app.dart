@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
 import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/routing/app_router.dart';
@@ -14,12 +13,18 @@ class PlantsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<MainCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<MainCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<CartCubit>()..getCart(),
+        ),
+      ],
       child: BlocBuilder<MainCubit, MainState>(
         buildWhen: (context, state) => state is MainInitial,
         builder: (context, state) {
-          log("MainCubit state: $state");
           return ResponsiveSizer(
             builder: (context, o, s) {
               return ToastificationWrapper(
@@ -35,7 +40,6 @@ class PlantsApp extends StatelessWidget {
                   ),
                   onGenerateRoute: (settings) =>
                       AppRouter.generateRoute(settings),
-                  // initialRoute: RoutesName.onboarding,
                 ),
               );
             },

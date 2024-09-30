@@ -1,15 +1,16 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
+import 'package:plants_app/core/extensions/widget_ext.dart';
+import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/prodcut_image_section.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/add_to_cart_section.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/counter_section.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/product_details_header.dart';
 
+import '../../../../core/di/di.dart';
 import '../cubit/product_details_cubit.dart';
 
 class ProductDetailsPage extends StatelessWidget {
@@ -26,10 +27,22 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          ProductDetailsCubit()..initProduct(product, categoryName),
-      child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
-        builder: (context, state) {
-          return const _ProductDetailsPageBody();
+          getIt<ProductDetailsCubit>()..initProduct(product, categoryName),
+      child: BlocListener<ProductDetailsCubit, ProductDetailsState>(
+        child: const _ProductDetailsPageBody(),
+        listener: (BuildContext context, ProductDetailsState state) {
+          if (state is AddProductToCartLoading) {
+            HelperMethods.showLoadingDliaog(context);
+          }
+          if (state is AddProductToCartSuccess) {
+            Navigator.pop(context);
+            HelperMethods.showSuccessNotificationToast(
+                "Added to cart successfully");
+          }
+          if (state is AddProductToCartFailure) {
+            Navigator.pop(context);
+            HelperMethods.showErrorNotificationToast(state.error);
+          }
         },
       ),
     );
@@ -53,18 +66,26 @@ class _ProductDetailsPageBody extends StatelessWidget {
           children: [
             const ProductDetailsHeader(),
             const Spacer(),
-            SizedBox(
-              height: context.height * 0.35,
-              width: context.width,
-              child: ProductImageSection(tagId: cubit.product.id),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              cubit.product.description,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.readexPro().copyWith(
-                color: Colors.grey,
-                fontSize: 14,
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: context.height * 0.35,
+                    width: context.width,
+                    child: ProductImageSection(tagId: cubit.product.id),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    cubit.product.description,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.readexPro().copyWith(
+                      color: Colors.grey,
+                      fontSize: 14,
+                    ),
+                  ).setHorizontalPadding(),
+                ],
               ),
             ),
             const Spacer(),

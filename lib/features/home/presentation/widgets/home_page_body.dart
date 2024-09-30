@@ -13,16 +13,20 @@ import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:plants_app/features/home/domain/entities/category_data.dart';
-import 'package:plants_app/features/home/domain/entities/product_data.dart';
+import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/widgets/cart_section.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_header.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_item.dart';
 import 'package:plants_app/features/home/presentation/widgets/tab_bar_section.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../auth/presentation/pages/login_page.dart';
+import 'cart_empty.dart';
+
 class HomePageBody extends StatefulWidget {
   final List<CategoryData> categories;
   final List<ProductData> curProducts;
+
   const HomePageBody({
     super.key,
     required this.categories,
@@ -36,10 +40,12 @@ class HomePageBody extends StatefulWidget {
 class _HomePageBodyState extends State<HomePageBody> {
   final _advancedDrawerController = AdvancedDrawerController();
   int curIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    log("user data: ${context.read<MainCubit>().isUserLogged}");
     return AdvancedDrawer(
-      backdrop: _drawrBackgroundColor(),
+      backdrop: _drawerBackgroundColor(),
       controller: _advancedDrawerController,
       openRatio: 0.50,
       animationCurve: Curves.easeInOut,
@@ -67,45 +73,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                //   child: Row(
-                //     children: [
-                //       Text(
-                //         "Plants Collections",
-                //         style: GoogleFonts.abel().copyWith(
-                //           color: Colors.black,
-                //           fontSize: 24,
-                //         ),
-                //       ),
-                //       const Spacer(),
-                //       IconButton(
-                //         onPressed: () {},
-                //         icon: const Icon(
-                //           Icons.arrow_forward_ios,
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(height: 16),
-
-                // Expanded(
-                //   child: DraggableSlider(
-                //     onPressed: null,
-                //     key: UniqueKey(),
-                //     loop: true,
-                //     children: widget.curProducts.map((e) {
-                //       e.heroId = e.categoryId + curIndex.toString();
-                //       curIndex++;
-                //       return ProductItem(
-                //         product: e,
-                //       );
-                //     }).toList(),
-                //   ),
-                // ),
                 const Spacer(),
-
                 SizedBox(
                   height: context.height * 0.50,
                   width: context.width * 0.85,
@@ -136,8 +104,11 @@ class _HomePageBodyState extends State<HomePageBody> {
                   ),
                 ),
                 const Spacer(),
-
-                const CartSection(),
+                Visibility(
+                  visible: context.read<MainCubit>().isUserLogged,
+                  replacement: const CartEmpty(),
+                  child: const CartSection(),
+                ),
               ],
             ),
           ),
@@ -154,31 +125,6 @@ class _HomePageBodyState extends State<HomePageBody> {
       child: SafeArea(
         child: Column(
           children: [
-            ListTile(
-              leading: const Icon(Icons.favorite),
-              title: const Text(
-                'Love',
-              ),
-              onTap: () {},
-            ),
-            const SizedBox(height: 16),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text(
-                'Settings',
-              ),
-              onTap: () {},
-            ),
-            const SizedBox(height: 16),
-            ListTile(
-              leading: const Icon(Icons.close),
-              title: const Text(
-                'Close',
-              ),
-              onTap: () {
-                _advancedDrawerController.hideDrawer();
-              },
-            ),
             if (context.read<MainCubit>().isUserLogged) ...[
               const SizedBox(height: 16),
               ListTile(
@@ -190,19 +136,50 @@ class _HomePageBodyState extends State<HomePageBody> {
                   'Logout',
                   style: AppFontStyles.readexPro400_16,
                 ),
-                onTap: () {
-                  context.read<MainCubit>().logout();
+                onTap: () async {
+                  await context.read<MainCubit>().logout();
                   context.removeAllAndPush(RoutesName.splash);
                 },
               ),
-            ]
+            ],
+            if (!context.read<MainCubit>().isUserLogged) ...[
+              const SizedBox(height: 16),
+              ListTile(
+                leading: const Icon(EneftyIcons.login_bold),
+                title: const Text(
+                  'Login',
+                ),
+                onTap: () {
+                  _advancedDrawerController.hideDrawer();
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) {
+                      return const FractionallySizedBox(
+                        heightFactor: 0.9,
+                        child: LoginPage(),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+            ListTile(
+              leading: const Icon(Icons.close),
+              title: const Text(
+                'Close',
+              ),
+              onTap: () {
+                _advancedDrawerController.hideDrawer();
+              },
+            ),
           ],
         ),
       ),
     );
   }
 
-  Container _drawrBackgroundColor() {
+  Container _drawerBackgroundColor() {
     return Container(
       width: double.infinity,
       height: double.infinity,

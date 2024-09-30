@@ -6,7 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/core/di/di.dart';
-import 'package:plants_app/core/models/user_data.dart';
+import 'package:plants_app/core/entities/user_data.dart';
 import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:regexpattern/regexpattern.dart';
 part 'auth_state.dart';
@@ -86,7 +86,7 @@ class AuthCubit extends Cubit<AuthState> {
       case SuccessRequest():
         await Future.wait(
           [
-            secureStorage.write(key: 'token', value: result.data.token),
+            secureStorage.write(key: 'token', value: "E_${result.data.token}"),
             secureStorage.write(key: 'name', value: result.data.user?.name),
             secureStorage.write(key: 'email', value: result.data.user?.email),
           ],

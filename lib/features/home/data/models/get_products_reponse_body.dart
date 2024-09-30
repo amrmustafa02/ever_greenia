@@ -1,4 +1,4 @@
-import 'package:plants_app/features/home/data/models/product_model.dart';
+import 'package:plants_app/core/models/product_model.dart';
 
 class GetProductsResponseBody {
   GetProductsResponseBody({

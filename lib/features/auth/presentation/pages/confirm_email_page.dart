@@ -25,12 +25,12 @@ class ConfirmEmailPage extends StatelessWidget {
             if (state is ConfirmFailedState) {
               log(state.error);
               Navigator.pop(context);
-              HerlperMethods.showErrorNotificationToast(state.error);
+              HelperMethods.showErrorNotificationToast(state.error);
             } else if (state is AuthLoading) {
-              HerlperMethods.showLoadingDilaog(context);
+              HelperMethods.showLoadingDliaog(context);
             } else if (state is ConfirmEmailSuccessState) {
               Navigator.pop(context);
-              HerlperMethods.showSuccessNotificationToast(
+              HelperMethods.showSuccessNotificationToast(
                 "Confirm Email Success",
               );
               context.removeAllAndPush(RoutesName.login);
