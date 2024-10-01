@@ -12,6 +12,7 @@ import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/pages/home_page.dart';
 import 'package:plants_app/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:plants_app/features/place_order/presentation/pages/place_order_page.dart';
 import 'package:plants_app/features/product_details/presentation/pages/product_details_page.dart';
 import 'package:plants_app/features/splash/presentation/pages/splash_page.dart';
 
@@ -86,6 +87,13 @@ class AppRouter {
             child: const ConfirmEmailPage(),
           ),
           type: PageTransitionType.rightToLeft,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 500),
+        );
+      case RoutesName.placeOrder:
+        return PageTransition(
+          child: const PlaceOrderPage(),
+          type: PageTransitionType.leftToRight,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
         );

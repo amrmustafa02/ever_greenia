@@ -46,7 +46,7 @@ class CartPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
+                  Container( 
                     alignment: Alignment.topCenter,
                     padding: EdgeInsets.only(
                       top: context.height * 0.11,

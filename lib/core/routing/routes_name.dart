@@ -11,4 +11,5 @@ class RoutesName {
   static const String onboarding = "/onboarding";
   static const String register = "/register";
   static const String confirmEmail = "/confirm_email";
+  static const String placeOrder = "/place_order";
 }

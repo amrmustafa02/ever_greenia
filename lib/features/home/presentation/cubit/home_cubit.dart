@@ -6,7 +6,6 @@ import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/features/home/domain/entities/category_data.dart';
 import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/domain/repos/home_repo.dart';
-import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 part 'home_state.dart';
 
