@@ -22,24 +22,11 @@ class HomePage extends StatelessWidget {
             current is HomeInitial ||
             current is HomeLoadedSuccess ||
             current is HomeLoadedFailure,
+        listenWhen: (previous, current) =>
+            current is AddToCartLoadingState ||
+            current is AddToCartSuccessState ||
+            current is AddToCartFailureState,
         builder: (context, state) {
-          if (state is HomeInitial) {
-            return Skeletonizer(
-              ignorePointers: true,
-              child: HomePageBody(
-                key: const ValueKey("HomePageBody"),
-                categories: context.read<HomeCubit>().categories,
-                curProducts: context.read<HomeCubit>().curProducts,
-              ),
-            );
-          }
-          if (state is HomeLoadedSuccess) {
-            return HomePageBody(
-              key: const ValueKey("HomePageBody"),
-              categories: context.read<HomeCubit>().categories,
-              curProducts: context.read<HomeCubit>().curProducts,
-            );
-          }
           if (state is HomeLoadedFailure) {
             return RefreshIndicator(
               onRefresh: () async {
@@ -48,7 +35,21 @@ class HomePage extends StatelessWidget {
               child: const HomePageError(),
             );
           }
-          return SizedBox.fromSize();
+
+          var cub = context.read<HomeCubit>();
+
+          return Skeletonizer(
+            // shade: cub.isLoading,
+            enabled: cub.isLoading,
+            key: const ValueKey("HomePageSkeleton"),
+            // ignorePointers: cub.isLoading,
+            // enabled: cub.isLoading,
+            child: HomePageBody(
+              key: const ValueKey("HomePageBody"),
+              categories: context.read<HomeCubit>().categories,
+              curProducts: context.read<HomeCubit>().curProducts,
+            ),
+          );
         },
         listener: (BuildContext context, HomeState state) {
           log("HomePage: listener");

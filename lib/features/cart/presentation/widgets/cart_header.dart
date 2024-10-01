@@ -17,7 +17,7 @@ class CartHeader extends StatelessWidget {
         BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
             return Visibility(
-              visible: context.read<CartCubit>().isLoadig,
+              visible: context.read<CartCubit>().isLoading,
               child: const Align(
                 alignment: Alignment.bottomCenter,
                 child: LinearProgressIndicator(),

@@ -17,7 +17,7 @@ class CartPage extends StatelessWidget {
       builder: (context, state) {
         var cubit = context.read<CartCubit>();
         return IgnorePointer(
-          ignoring: cubit.isLoadig,
+          ignoring: cubit.isLoading,
           child: Container(
             alignment: Alignment.bottomCenter,
             decoration: const BoxDecoration(
@@ -46,7 +46,7 @@ class CartPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container( 
+                  Container(
                     alignment: Alignment.topCenter,
                     padding: EdgeInsets.only(
                       top: context.height * 0.11,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +14,7 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("HomeHeader: build: " + key.toString());
     return SafeArea(
       bottom: false,
       child: Padding(
@@ -23,6 +26,7 @@ class HomeHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             FadeInLeft(
+              key: const ValueKey("HomeHeader"),
               child: Text.rich(
                 TextSpan(
                   children: [

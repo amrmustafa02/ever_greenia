@@ -11,6 +11,8 @@ part 'home_state.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
+  HomeCubit(this.homeRepo) : super(HomeInitial());
+
   HomeRepo homeRepo;
 
   List<CategoryData> categories = List.generate(
@@ -23,13 +25,16 @@ class HomeCubit extends Cubit<HomeState> {
     (e) => ProductData.fakeDate(e.toString()),
   );
 
-  int curTabIndex = 0;
-  String curCategoryName = "";
   var listKey = UniqueKey();
 
-  HomeCubit(this.homeRepo) : super(HomeInitial());
+  int curTabIndex = 0;
+
+  String curCategoryName = "";
+
+  bool isLoading = true;
 
   void loadProductsAndCategories() async {
+    await Future.delayed(const Duration(seconds: 2));
     List<ProductData> products = [];
 
     try {
@@ -46,16 +51,22 @@ class HomeCubit extends Cubit<HomeState> {
       switch (categoriesResponse) {
         case SuccessRequest():
           categories = categoriesResponse.data as List<CategoryData>;
+          isLoading = false;
           break;
         case FailedRequest():
           emit(HomeLoadedFailure(categoriesResponse.exception.errorMessage));
+          isLoading = false;
           return;
       }
       switch (productsResponse) {
         case SuccessRequest():
           products = productsResponse.data as List<ProductData>;
+          isLoading = false;
+
           break;
         case FailedRequest():
+          isLoading = false;
+
           emit(HomeLoadedFailure(productsResponse.exception.errorMessage));
           return;
       }
@@ -69,7 +80,9 @@ class HomeCubit extends Cubit<HomeState> {
       curProducts = categories[curTabIndex].products;
       curCategoryName = categories[curTabIndex].name;
 
-      emit(HomeLoadedSuccess());
+      isLoading = false;
+
+      emit(HomeInitial());
     } catch (e) {
       emit(HomeLoadedFailure(e.toString()));
     }

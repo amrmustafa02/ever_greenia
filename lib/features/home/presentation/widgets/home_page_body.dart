@@ -44,7 +44,6 @@ class _HomePageBodyState extends State<HomePageBody> {
   var listKey = UniqueKey();
   @override
   Widget build(BuildContext context) {
-    log("user data: ${context.read<MainCubit>().isUserLogged}");
     return AdvancedDrawer(
       backdrop: _drawerBackgroundColor(),
       controller: _advancedDrawerController,
@@ -64,9 +63,13 @@ class _HomePageBodyState extends State<HomePageBody> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Skeleton.keep(
-                  child: HomeHeader(onTap: () {
-                    _advancedDrawerController.showDrawer();
-                  }),
+                  key: const ValueKey("HomeHeaderSkeleton"),
+                  child: HomeHeader(
+                    key: const ValueKey("HomeHeader"),
+                    onTap: () {
+                      _advancedDrawerController.showDrawer();
+                    },
+                  ),
                 ),
                 Skeleton.shade(
                   child: TabBarSection(
@@ -105,7 +108,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                 Visibility(
                   visible: context.read<MainCubit>().isUserLogged,
                   replacement: const CartEmpty(),
-                  child: const CartSection(),
+                  child: const Skeleton.keep(child: CartSection()),
                 ),
               ],
             ),

@@ -100,7 +100,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
     curLocation = location;
 
-    await googleMapController.animateCamera(
+       googleMapController.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: curLocation,

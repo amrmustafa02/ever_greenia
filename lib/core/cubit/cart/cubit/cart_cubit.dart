@@ -12,23 +12,23 @@ part 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   final CartRepo _cartRepo;
   List<CartProductData> products = [];
-  bool isLoadig = false;
+  bool isLoading = false;
 
   CartCubit(this._cartRepo) : super(CartInitial());
 
   Future<void> getCart() async {
-    isLoadig = true;
+    isLoading = true;
 
     try {
       final result = await _cartRepo.getCart();
       switch (result) {
         case SuccessRequest<List<CartProductData>>():
           products = result.data;
-          isLoadig = false;
+          isLoading = false;
           emit(CartLoaded());
           break;
         case FailedRequest():
-          isLoadig = false;
+          isLoading = false;
           emit(CartError(result.exception.errorMessage));
       }
     } catch (e) {
@@ -54,7 +54,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<void> deleteProductFromCart(String productId) async {
-    isLoadig = true;
+    isLoading = true;
     emit(CartLoading());
     try {
       var result = await _cartRepo.deleteProduct(productId.toString());
@@ -71,7 +71,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<void> updateQuantity(String productId, int quantity) async {
-    isLoadig = true;
+    isLoading = true;
     emit(CartLoading());
     try {
       var result =

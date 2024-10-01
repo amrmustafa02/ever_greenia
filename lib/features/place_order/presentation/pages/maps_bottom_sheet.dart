@@ -65,7 +65,8 @@ class _MapsBottomSheetState extends State<MapsBottomSheet> {
               ),
             ),
           ),
-          SafeArea(
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.darkGreen,
@@ -75,7 +76,7 @@ class _MapsBottomSheetState extends State<MapsBottomSheet> {
                 ),
               ),
               onPressed: () async {
-                await cubit.changeLocation(curLocation);
+                cubit.changeLocation(curLocation);
                 Navigator.pop(context);
               },
               child: const Text(

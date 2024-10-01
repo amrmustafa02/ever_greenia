@@ -23,121 +23,144 @@ class CartSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
-      buildWhen: (previous, current) => current is CartLoaded,
+      buildWhen: (previous, current) =>
+          current is CartLoaded || current is CartInitial,
       builder: (context, state) {
         var cubit = context.read<CartCubit>();
-        return Bounceable(
-          onTap: () {
-            context.goToNamed(RoutesName.cart);
-          },
-          child: Stack(
-            children: [
-              const Align(
-                alignment: Alignment.topCenter,
-                child: HeaderBottomSheetLine(),
-              ),
-              SizedBox(
-                width: 100.w,
-                height: 12.h,
-                child: Stack(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/images/base_item.svg",
-                      fit: BoxFit.fill,
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.lightGreen,
-                        BlendMode.srcIn,
+        return Skeletonizer(
+          enabled: cubit.isLoading,
+          child: Bounceable(
+            onTap: () {
+              context.goToNamed(RoutesName.cart);
+            },
+            child: Stack(
+              children: [
+                const Align(
+                  alignment: Alignment.topCenter,
+                  child: HeaderBottomSheetLine(),
+                ),
+                SizedBox(
+                  width: 100.w,
+                  height: 12.h,
+                  child: Stack(
+                    children: [
+                      SvgPicture.asset(
+                        "assets/images/base_item.svg",
+                        fit: BoxFit.fill,
+                        colorFilter: const ColorFilter.mode(
+                          AppColors.lightGreen,
+                          BlendMode.srcIn,
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Skeleton.shade(
-                            child: FadeInLeft(
-                              child: CircleAvatar(
-                                radius: 25,
-                                backgroundColor: Colors.black,
-                                child: Text(
-                                  cubit.products.length.toString(),
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 22,
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Skeleton.shade(
+                              child: FadeInLeft(
+                                child: CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor: Colors.black,
+                                  child: Text(
+                                    cubit.products.length.toString(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 22,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 16,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FadeInUp(
-                                key: const ValueKey("CartUp"),
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeInOut,
-                                child: Text(
-                                  "Cart",
-                                  style: GoogleFonts.readexPro().copyWith(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                FadeInUp(
+                                  key: const ValueKey("CartUp"),
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut,
+                                  child: Text(
+                                    "Cart",
+                                    style: GoogleFonts.readexPro().copyWith(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              FadeInUp(
-                                key: const ValueKey("numItemsCart"),
-                                duration: const Duration(milliseconds: 750),
-                                curve: Curves.easeInOut,
-                                child: Text(
-                                  "${cubit.products.length.toString()} items",
-                                  style: GoogleFonts.inter().copyWith(
-                                    color: Colors.black,
-                                    fontSize: 16,
+                                FadeInUp(
+                                  key: const ValueKey("numItemsCart"),
+                                  duration: const Duration(milliseconds: 750),
+                                  curve: Curves.easeInOut,
+                                  child: Text(
+                                    "${cubit.products.length.toString()} items",
+                                    style: GoogleFonts.inter().copyWith(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          if (cubit.products.length <= 3)
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Stack(
-                                alignment: Alignment.centerRight,
-                                children: List.generate(
-                                  cubit.products.length,
-                                  (index) {
-                                    return FadeInRight(
-                                      curve: Curves.easeInOut,
-                                      key: ValueKey("itemsCart $index"),
-                                      duration: Duration(
-                                          milliseconds: 750 + index * 100),
-                                      child: ProductCartBubble(
-                                        margin: (27 * index).toDouble(),
-                                        child: MyDefaultImage(
-                                          url: cubit.products[index].image,
+                              ],
+                            ),
+                            const Spacer(),
+                            if (cubit.products.length <= 3)
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Stack(
+                                  alignment: Alignment.centerRight,
+                                  children: List.generate(
+                                    cubit.products.length,
+                                    (index) {
+                                      return FadeInRight(
+                                        curve: Curves.easeInOut,
+                                        key: ValueKey("itemsCart $index"),
+                                        duration: Duration(
+                                            milliseconds: 750 + index * 100),
+                                        child: ProductCartBubble(
+                                          margin: (27 * index).toDouble(),
+                                          child: MyDefaultImage(
+                                            url: cubit.products[index].image,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          if (cubit.products.length > 3) ...[
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Stack(
-                                alignment: Alignment.centerRight,
-                                children: List.generate(
-                                  4,
-                                  (index) {
-                                    if (index == 3) {
+                            if (cubit.products.length > 3) ...[
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Stack(
+                                  alignment: Alignment.centerRight,
+                                  children: List.generate(
+                                    4,
+                                    (index) {
+                                      if (index == 3) {
+                                        return FadeInRight(
+                                          curve: Curves.easeInOut,
+                                          key: ValueKey("itemsCart $index"),
+                                          duration: Duration(
+                                            milliseconds: 750 + index * 100,
+                                          ),
+                                          child: ProductCartBubble(
+                                            margin: (27 * index).toDouble(),
+                                            child: Text(
+                                              "+${cubit.products.length - 3} ",
+                                              style: GoogleFonts.readexPro()
+                                                  .copyWith(
+                                                color: Colors.black,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
                                       return FadeInRight(
                                         curve: Curves.easeInOut,
                                         key: ValueKey("itemsCart $index"),
@@ -146,42 +169,23 @@ class CartSection extends StatelessWidget {
                                         ),
                                         child: ProductCartBubble(
                                           margin: (27 * index).toDouble(),
-                                          child: Text(
-                                            "+${cubit.products.length - 3} ",
-                                            style: GoogleFonts.readexPro()
-                                                .copyWith(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
+                                          child: MyDefaultImage(
+                                              url: cubit.products[index].image),
                                         ),
                                       );
-                                    }
-                                    return FadeInRight(
-                                      curve: Curves.easeInOut,
-                                      key: ValueKey("itemsCart $index"),
-                                      duration: Duration(
-                                        milliseconds: 750 + index * 100,
-                                      ),
-                                      child: ProductCartBubble(
-                                        margin: (27 * index).toDouble(),
-                                        child: MyDefaultImage(
-                                            url: cubit.products[index].image),
-                                      ),
-                                    );
-                                  },
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          ]
-                        ],
+                            ]
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
