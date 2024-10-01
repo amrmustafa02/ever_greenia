@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 

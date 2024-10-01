@@ -65,7 +65,11 @@ dependencies:
   appinio_swiper:
   flutter_swipe_button:
   fluentui_system_icons:
-  
+  google_maps_flutter:
+  permission_handler:
+  sentry_flutter:
+  geolocator:
+  geocoding:
 
   flutter:
     sdk: flutter

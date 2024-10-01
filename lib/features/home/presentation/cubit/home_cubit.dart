@@ -25,6 +25,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   int curTabIndex = 0;
   String curCategoryName = "";
+  var listKey = UniqueKey();
 
   HomeCubit(this.homeRepo) : super(HomeInitial());
 
@@ -80,7 +81,13 @@ class HomeCubit extends Cubit<HomeState> {
     curTabIndex = index;
     curProducts = categories[curTabIndex].products;
     curCategoryName = categories[curTabIndex].name;
+    listKey = UniqueKey();
 
+    emit(HomeLoadedSuccess());
+  }
+
+  refreshItems() {
+    listKey = UniqueKey();
     emit(HomeLoadedSuccess());
   }
 

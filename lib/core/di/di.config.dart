@@ -34,6 +34,8 @@ import 'package:plants_app/features/home/data/repos/home_repo_impl.dart'
 import 'package:plants_app/features/home/domain/repos/home_repo.dart' as _i140;
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart'
     as _i1062;
+import 'package:plants_app/features/place_order/presentation/cubit/place_order_cubit.dart'
+    as _i302;
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart'
     as _i229;
 
@@ -49,6 +51,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
+    gh.factory<_i302.PlaceOrderCubit>(() => _i302.PlaceOrderCubit());
     gh.singleton<_i1068.UserData>(() => _i1068.UserData());
     gh.lazySingleton<_i682.MyDio>(() => registerModule.myDio);
     gh.lazySingleton<_i558.FlutterSecureStorage>(

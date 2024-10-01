@@ -14,6 +14,7 @@ import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:plants_app/features/home/domain/entities/category_data.dart';
 import 'package:plants_app/core/entities/product_data.dart';
+import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:plants_app/features/home/presentation/widgets/cart_section.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_header.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_item.dart';
@@ -80,12 +81,8 @@ class _HomePageBodyState extends State<HomePageBody> {
                   child: AppinioSwiper(
                     initialIndex: 0,
                     loop: false,
-                    onEnd: () {
-                      // log("onEnd");
-                      listKey = UniqueKey();
-                      setState(() {});
-                    },
-                    key: listKey,
+                    onEnd: context.read<HomeCubit>().refreshItems,
+                    key: context.read<HomeCubit>().listKey,
                     allowUnlimitedUnSwipe: true,
                     backgroundCardScale: 0.95,
                     backgroundCardCount: 2,
