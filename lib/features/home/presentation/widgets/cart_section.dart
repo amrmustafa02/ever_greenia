@@ -23,6 +23,7 @@ class CartSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
+      buildWhen: (previous, current) => current is CartLoaded,
       builder: (context, state) {
         var cubit = context.read<CartCubit>();
         return Bounceable(

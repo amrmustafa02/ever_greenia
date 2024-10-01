@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/string_ext.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
@@ -39,7 +40,7 @@ class ProductItem extends StatelessWidget {
                   onTap: () {
                     context.goToProductDetails(
                       product: product,
-                      categoryName: context.read<HomeCubit>().curCategotName,
+                      categoryName: context.read<HomeCubit>().curCategoryName,
                     );
                   },
                   child: Container(
@@ -60,7 +61,7 @@ class ProductItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  product.orginalName.toTitleCase(),
+                  product.originalName.toTitleCase(),
                   style: GoogleFonts.readexPro().copyWith(
                     color: Colors.black,
                     fontSize: 24,
@@ -81,7 +82,12 @@ class ProductItem extends StatelessWidget {
                 const Spacer(),
                 Skeleton.shade(
                   child: Bounceable(
-                    onTap: () {},
+                    onTap: () {
+                      context.read<HomeCubit>().addProductToCart(
+                            product.id,
+                            context.read<CartCubit>(),
+                          );
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(

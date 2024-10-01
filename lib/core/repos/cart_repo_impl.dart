@@ -1,13 +1,15 @@
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/core/data_sources/cart_remote_data_source.dart';
-import 'package:plants_app/core/entities/product_data.dart';
+import 'package:plants_app/core/entities/cart_product_data.dart';
 import 'package:plants_app/core/repos/cart_repo.dart';
 
 @LazySingleton(as: CartRepo)
 class CartRepoImpl extends CartRepo {
   final CartRemoteDataSource _cartRemoteDataSource;
+
   CartRepoImpl(this._cartRemoteDataSource);
+
   @override
   Future<ApiResult<bool>> addProduct(String productId, int quantity) async {
     try {
@@ -29,13 +31,14 @@ class CartRepoImpl extends CartRepo {
   }
 
   @override
-  Future<ApiResult<List<ProductData>>> getCart() async {
+  Future<ApiResult<List<CartProductData>>> getCart() async {
     try {
       var response = await _cartRemoteDataSource.getCart();
-      return SuccessRequest<List<ProductData>>(
+
+      return SuccessRequest<List<CartProductData>>(
         data: response.products
             .map(
-              (e) => e.productDetails!.toEntity(),
+              (e) => e.toEntity(),
             )
             .toList(),
       );

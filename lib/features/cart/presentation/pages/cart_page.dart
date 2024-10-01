@@ -4,6 +4,7 @@ import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_info_section.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_header.dart';
+import 'package:plants_app/features/cart/presentation/widgets/cart_product.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
@@ -12,127 +13,89 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartCubit, CartState>(
+    return BlocConsumer<CartCubit, CartState>(
       builder: (context, state) {
-        return const _CartPageBody();
-      },
-    );
-  }
-}
-
-class _CartPageBody extends StatelessWidget {
-  const _CartPageBody();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.topCenter,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.white,
-            AppColors.bgColor,
-            AppColors.bgColor,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          alignment: Alignment.topCenter,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: SizedBox(
-                height: context.height * 0.1,
-                child: const SafeArea(
-                  bottom: false,
-                  child: CartHeader(),
-                ),
+        var cubit = context.read<CartCubit>();
+        return IgnorePointer(
+          ignoring: cubit.isLoadig,
+          child: Container(
+            alignment: Alignment.bottomCenter,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.white,
+                  AppColors.bgColor,
+                  AppColors.bgColor,
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
             ),
-            Container(
-              alignment: Alignment.topCenter,
-              padding: EdgeInsets.only(
-                top: context.height * 0.11,
-                // bottom: context.height * 0.3,
-              ),
-              child: ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                itemBuilder: (context, index) {
-                  if (index == 10) {
-                    return SizedBox(
-                      height: context.height * 0.3,
-                    );
-                  }
-                  return ListTile(
-                    title: const Text("The Potted Head"),
-                    subtitle: Text("$index Piece"),
-                    leading: CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Colors.white,
-                      child: Container(
-                        height: 60,
-                        width: 60,
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              AppColors.bgColor,
-                              AppColors.bgColor.withOpacity(0.5),
-                              // Colors.white.withOpacity(0.3),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-
-                          shape: BoxShape.circle,
-                          // color: AppColors.primaryColor,
-                        ),
-                        child: Image.asset(
-                          "assets/images/plant.png",
-                        ),
-                      ),
-                    ),
-                  );
-                  // return Row(
-                  //   children: [
-                  //     Text(" $index "),
-                  //   ],
-                  // );
-                },
-                separatorBuilder: (context, index) {
-                  if (index == 9) {
-                    return const SizedBox.shrink();
-                  }
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
                     child: SizedBox(
-                      height: 16,
-                      child: Divider(
-                        color: AppColors.darkBlueColor,
-                        thickness: 0.3,
+                      height: context.height * 0.11,
+                      child: const SafeArea(
+                        bottom: false,
+                        child: CartHeader(),
                       ),
                     ),
-                  );
-                },
-                itemCount: 11,
+                  ),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    padding: EdgeInsets.only(
+                      top: context.height * 0.11,
+                    ),
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 0),
+                      itemBuilder: (context, index) {
+                        if (index == cubit.products.length) {
+                          return SizedBox(
+                            height: context.height * 0.28,
+                          );
+                        }
+                        return CartProductWidget(
+                          product: cubit.products[index],
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        if (index == cubit.products.length - 1) {
+                          return const SizedBox.shrink();
+                        }
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          child: SizedBox(
+                            height: 16,
+                            child: Divider(
+                              color: AppColors.darkBlueColor,
+                              thickness: 0.3,
+                            ),
+                          ),
+                        );
+                      },
+                      itemCount: cubit.products.length + 1,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: context.width,
+                      height: context.height * 0.27,
+                      child: const CartInfoSection(),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: context.width,
-                height: context.height * 0.30,
-                child: const CartInfoSection(),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
+      listener: (BuildContext context, CartState state) {},
     );
   }
 }

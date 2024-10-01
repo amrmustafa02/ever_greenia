@@ -17,7 +17,17 @@ class MainCubit extends Cubit<MainState> {
   bool isUserLogged = false;
 
   checkUserLogged() async {
+    var firstRun = await _secureStorage.read(key: 'firstRun');
+
+    var isFirstRun = (firstRun == null);
+
+    if (isFirstRun) {
+      await _secureStorage.deleteAll();
+      await _secureStorage.write(key: 'firstRun', value: 'true');
+    }
+
     var token = await _secureStorage.read(key: 'token');
+
     isUserLogged = token != null;
 
     getIt<UserData>().token = token ?? "";
@@ -27,8 +37,8 @@ class MainCubit extends Cubit<MainState> {
     emit(ConfigLoaded(isUserLogged));
   }
 
-  logout() {
-    _secureStorage.delete(key: 'token');
+  Future<void> logout() async {
+    await _secureStorage.delete(key: 'token');
     isUserLogged = false;
   }
 }

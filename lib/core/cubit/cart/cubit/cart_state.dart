@@ -7,11 +7,11 @@ final class CartInitial extends CartState {}
 
 final class CartLoading extends CartState {}
 
-final class CartLoaded extends CartState {
-  final List<ProductData> cartProducts;
-
-  CartLoaded(this.cartProducts);
+final class UpdateCartSucess extends CartState {
+ 
 }
+
+final class CartLoaded extends CartState {}
 
 final class CartError extends CartState {
   final String message;

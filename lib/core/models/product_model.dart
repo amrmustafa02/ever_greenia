@@ -53,7 +53,7 @@ class ProductModel {
   ProductData toEntity() {
     return ProductData(
       id: id ?? "",
-      orginalName: name ?? "No Name",
+      originalName: name ?? "No Name",
       createdAt: createdAt ?? DateTime.now(),
       updatedAt: updatedAt ?? DateTime.now(),
       description: description ?? "No Description",

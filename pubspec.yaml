@@ -63,6 +63,8 @@ dependencies:
   flutter_otp_text_field:
   toggle_switch:
   appinio_swiper:
+  flutter_swipe_button:
+  fluentui_system_icons:
   
 
   flutter:

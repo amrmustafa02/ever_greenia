@@ -18,6 +18,12 @@ class MyDio {
     _dio.interceptors.addAll([
       InterceptorsWrapper(
         onRequest: (options, handler) {
+          if (options.path.contains("cart")) {
+            log("in cart");
+            options.headers['auth'] = getIt<UserData>().token;
+          } else {
+            options.headers['get_key'] = 'AARS';
+          }
           log("------------------ Api request -----------------------");
           log(
             'send request to url: (${options.baseUrl}) and  path: (${options.path})',
@@ -26,13 +32,6 @@ class MyDio {
           log('Query parameters: ${options.queryParameters}');
           log('data: ${options.data}');
           log("------------------ Api request -----------------------");
-          if (options.path.contains("cart")) {
-            options.headers['auth'] = getIt<UserData>().token;
-          } else {
-            // convert it to api constants
-            options.headers['get_key'] = 'AARS';
-          }
-
           return handler.next(options);
         },
         onResponse: (response, handler) {

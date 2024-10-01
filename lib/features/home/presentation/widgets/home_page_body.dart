@@ -40,7 +40,7 @@ class HomePageBody extends StatefulWidget {
 class _HomePageBodyState extends State<HomePageBody> {
   final _advancedDrawerController = AdvancedDrawerController();
   int curIndex = 0;
-
+  var listKey = UniqueKey();
   @override
   Widget build(BuildContext context) {
     log("user data: ${context.read<MainCubit>().isUserLogged}");
@@ -82,9 +82,10 @@ class _HomePageBodyState extends State<HomePageBody> {
                     loop: false,
                     onEnd: () {
                       // log("onEnd");
+                      listKey = UniqueKey();
                       setState(() {});
                     },
-                    key: UniqueKey(),
+                    key: listKey,
                     allowUnlimitedUnSwipe: true,
                     backgroundCardScale: 0.95,
                     backgroundCardCount: 2,
@@ -137,15 +138,22 @@ class _HomePageBodyState extends State<HomePageBody> {
                   style: AppFontStyles.readexPro400_16,
                 ),
                 onTap: () async {
-                  await context.read<MainCubit>().logout();
-                  context.removeAllAndPush(RoutesName.splash);
+                  context.read<MainCubit>().logout().then(
+                    (value) {
+                      // ignore: use_build_context_synchronously
+                      context.removeAllAndPush(RoutesName.splash);
+                    },
+                  );
                 },
               ),
             ],
             if (!context.read<MainCubit>().isUserLogged) ...[
               const SizedBox(height: 16),
               ListTile(
-                leading: const Icon(EneftyIcons.login_bold),
+                leading: const Icon(
+                  EneftyIcons.login_bold,
+                  color: Colors.blue,
+                ),
                 title: const Text(
                   'Login',
                 ),
@@ -154,10 +162,20 @@ class _HomePageBodyState extends State<HomePageBody> {
                   showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
+                    showDragHandle: true,
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32),
+                    ),
                     builder: (context) {
-                      return const FractionallySizedBox(
-                        heightFactor: 0.9,
-                        child: LoginPage(),
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom,
+                        ),
+                        child: const LoginPage(
+                          showHeader: false,
+                          useScaffold: false,
+                        ),
                       );
                     },
                   );

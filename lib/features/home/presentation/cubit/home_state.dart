@@ -14,3 +14,13 @@ final class HomeLoadedFailure extends HomeState {
 
   HomeLoadedFailure(this.error);
 }
+
+final class AddToCartLoadingState extends HomeState {}
+
+final class AddToCartSuccessState extends HomeState {}
+
+final class AddToCartFailureState extends HomeState {
+  final String error;
+
+  AddToCartFailureState(this.error);
+}

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
+import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/features/home/domain/entities/category_data.dart';
 import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/domain/repos/home_repo.dart';
+import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 part 'home_state.dart';
 
@@ -23,7 +25,7 @@ class HomeCubit extends Cubit<HomeState> {
   );
 
   int curTabIndex = 0;
-  String curCategotName = "";
+  String curCategoryName = "";
 
   HomeCubit(this.homeRepo) : super(HomeInitial());
 
@@ -65,7 +67,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
 
       curProducts = categories[curTabIndex].products;
-      curCategotName = categories[curTabIndex].name;
+      curCategoryName = categories[curTabIndex].name;
 
       emit(HomeLoadedSuccess());
     } catch (e) {
@@ -78,7 +80,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     curTabIndex = index;
     curProducts = categories[curTabIndex].products;
-    curCategotName = categories[curTabIndex].name;
+    curCategoryName = categories[curTabIndex].name;
 
     emit(HomeLoadedSuccess());
   }
@@ -86,5 +88,16 @@ class HomeCubit extends Cubit<HomeState> {
   refresh() {
     emit(HomeInitial());
     loadProductsAndCategories();
+  }
+
+  Future<void> addProductToCart(String productId, CartCubit cartCubit) async {
+    emit(AddToCartLoadingState());
+    var result = await cartCubit.addProductToCart(productId, 1);
+
+    if (result) {
+      emit(AddToCartSuccessState());
+    } else {
+      emit(AddToCartFailureState("Failed to add product to cart"));
+    }
   }
 }
