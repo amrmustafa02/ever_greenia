@@ -23,7 +23,7 @@ class PaymentDetailsSection extends StatelessWidget {
           ),
         ),
         ListTile(
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: const EdgeInsets.all(0),
           leading: Text(
             "Total Amount",
             style: AppFontStyles.readexPro400_14,

@@ -14,7 +14,7 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("HomeHeader: build: " + key.toString());
+    log("HomeHeader: build: $key");
     return SafeArea(
       bottom: false,
       child: Padding(
