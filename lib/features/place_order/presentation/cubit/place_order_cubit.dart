@@ -23,6 +23,10 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
   String address = "";
 
+  bool isLocationLoaded = false;
+  bool isPlaceOrderEnabled = false;
+  bool isLinerProgressEnabled = false;
+
   Future<bool> checkLocationServiceEnabled() async {
     var serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -72,6 +76,10 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
     curLocation = LatLng(position.latitude, position.longitude);
 
+    isLocationLoaded = true;
+
+    isPlaceOrderEnabled = true;
+
     log("current location: $curLocation");
 
     await getAddressFromLocation(curLocation);
@@ -79,9 +87,11 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     await Future.delayed(const Duration(seconds: 1));
 
     emit(LocationLoadedSuccess());
+
+    emit(UpdatePlaceOrderState());
   }
 
-  getAddressFromLocation(LatLng location) async {
+  Future<void> getAddressFromLocation(LatLng location) async {
     List<Placemark> placeMarks = await placemarkFromCoordinates(
       location.latitude,
       location.longitude,
@@ -95,12 +105,12 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     }
   }
 
-  changeLocation(LatLng location) async {
+  Future<void> changeLocation(LatLng location) async {
     if (curLocation == location) return;
 
     curLocation = location;
 
-       googleMapController.animateCamera(
+    googleMapController.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: curLocation,
@@ -114,5 +124,20 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     log("new address: $address");
 
     emit(LocationLoadedSuccess());
+  }
+
+  Future<void> placeOrder() async {
+    isLinerProgressEnabled = true;
+    isPlaceOrderEnabled = false;
+
+    emit(UpdatePlaceOrderState());
+    emit(UpdateLinerProgressState());
+    await Future.delayed(const Duration(seconds: 2));
+
+    isLinerProgressEnabled = false;
+    isPlaceOrderEnabled = true;
+
+    emit(UpdatePlaceOrderState());
+    emit(UpdateLinerProgressState());
   }
 }

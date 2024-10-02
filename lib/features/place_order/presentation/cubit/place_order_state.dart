@@ -18,3 +18,7 @@ final class PlaceOrderLoadedFailure extends PlaceOrderState {
 
   PlaceOrderLoadedFailure(this.error);
 }
+
+final class UpdatePlaceOrderState extends PlaceOrderState {}
+
+final class UpdateLinerProgressState extends PlaceOrderState {}
