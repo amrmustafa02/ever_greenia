@@ -22,3 +22,5 @@ final class PlaceOrderLoadedFailure extends PlaceOrderState {
 final class UpdatePlaceOrderState extends PlaceOrderState {}
 
 final class UpdateLinerProgressState extends PlaceOrderState {}
+
+final class SuccessOrderState extends PlaceOrderState {}

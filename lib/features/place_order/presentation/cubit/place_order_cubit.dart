@@ -138,5 +138,6 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
     emit(UpdatePlaceOrderState());
     emit(UpdateLinerProgressState());
+    emit(SuccessOrderState());
   }
 }

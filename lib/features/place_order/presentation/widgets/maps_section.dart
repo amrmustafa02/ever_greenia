@@ -21,10 +21,33 @@ class MapsSection extends StatelessWidget {
         if (state is LocationLoading) {
           return Skeletonizer(
             ignoreContainers: false,
-            child: Container(
-              height: 25.h,
-              width: 100.w,
-              color: Colors.grey.shade300,
+            child: Column(
+              children: [
+                Container(
+                  height: 25.h,
+                  width: 100.w,
+                  color: Colors.grey.shade300,
+                ),
+                FadeInLeft(
+                  child: ListTile(
+                    title: Text(
+                      "Delivery Address",
+                      style: AppFontStyles.readexPro500_16,
+                    ),
+                    subtitle: Text(
+                      "Test\ntest",
+                      style: AppFontStyles.readexPro400_14,
+                    ),
+                    trailing: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.my_location_rounded,
+                        color: AppColors.darkGreen,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           );
         }

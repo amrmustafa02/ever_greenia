@@ -10,7 +10,8 @@ class PaymentDetailsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Payment Details", style: AppFontStyles.readexPro600_16),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
+        const Divider(),
         ListTile(
           contentPadding: const EdgeInsets.all(0),
           leading: Text(
@@ -25,6 +26,18 @@ class PaymentDetailsSection extends StatelessWidget {
         ListTile(
           contentPadding: const EdgeInsets.all(0),
           leading: Text(
+            "Items Total",
+            style: AppFontStyles.readexPro400_14,
+          ),
+          trailing: Text(
+            "\$12.00",
+            style: AppFontStyles.readexPro400_14,
+          ),
+        ),
+        const Divider(),
+        ListTile(
+          contentPadding: const EdgeInsets.all(0),
+          leading: Text(
             "Total Amount",
             style: AppFontStyles.readexPro400_14,
           ),
@@ -33,7 +46,6 @@ class PaymentDetailsSection extends StatelessWidget {
             style: AppFontStyles.readexPro400_14,
           ),
         ),
-        const SizedBox(height: 16),
       ],
     );
   }

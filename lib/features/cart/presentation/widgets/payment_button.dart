@@ -22,7 +22,7 @@ class _PaymentButtonState extends State<PaymentButton> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         border: Border.all(
@@ -41,7 +41,7 @@ class _PaymentButtonState extends State<PaymentButton> {
                   0.0,
                   MediaQuery.of(context).size.width * 0.62,
                 );
-                if (_dragPosition >= MediaQuery.of(context).size.width * 0.60) {
+                if (_dragPosition >= MediaQuery.of(context).size.width * 0.50) {
                   // _dragPosition = MediaQuery.of(context).size.width * 0.62;
                   _paymentCompleted = true;
                 } else {
@@ -84,7 +84,7 @@ class _PaymentButtonState extends State<PaymentButton> {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              _paymentCompleted ? "" : "Swipe to Pay",
+              _paymentCompleted ? "" : "Swipe to buy",
               style: GoogleFonts.readexPro().copyWith(
                 color: Colors.black,
                 fontSize: 16,

@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:plants_app/core/di/di.dart';
+import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
@@ -12,6 +12,7 @@ import 'package:plants_app/features/place_order/presentation/widgets/maps_sectio
 import 'package:plants_app/features/place_order/presentation/widgets/payment_details_section.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/payment_methods_section.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../../core/routing/app_router.dart';
 import '../cubit/place_order_cubit.dart';
 
 class PlaceOrderPage extends StatelessWidget {
@@ -41,12 +42,11 @@ class _PlaceOrderPageBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const MapsSection(),
-                  const SizedBox(height: 16),
                   Divider(color: Colors.grey.withOpacity(0.2), thickness: 7),
                   const SizedBox(height: 16),
                   Text("Payment Method", style: AppFontStyles.readexPro600_16)
                       .setHorizontalPadding(),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 16),
                   const PaymentMethodsSection().setHorizontalPadding(),
                   const SizedBox(height: 16),
                   Divider(color: Colors.grey.withOpacity(0.2), thickness: 7),
@@ -66,7 +66,7 @@ class _PlaceOrderPageBody extends StatelessWidget {
               );
             },
           ),
-          BlocBuilder<PlaceOrderCubit, PlaceOrderState>(
+          BlocConsumer<PlaceOrderCubit, PlaceOrderState>(
             buildWhen: (previous, current) =>
                 current is PlaceOrderInitial ||
                 current is UpdatePlaceOrderState,
@@ -99,6 +99,14 @@ class _PlaceOrderPageBody extends StatelessWidget {
                   ),
                 ),
               );
+            },
+            listener: (BuildContext context, PlaceOrderState state) {
+              if (state is SuccessOrderState) {
+                context.goBackUntilAndPush(
+                  RoutesName.successOrder,
+                  RoutesName.home,
+                );
+              }
             },
           )
         ],

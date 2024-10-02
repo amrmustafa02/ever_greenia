@@ -42,6 +42,7 @@ class _HomePageBodyState extends State<HomePageBody> {
   final _advancedDrawerController = AdvancedDrawerController();
   int curIndex = 0;
   var listKey = UniqueKey();
+
   @override
   Widget build(BuildContext context) {
     return AdvancedDrawer(
@@ -130,6 +131,31 @@ class _HomePageBodyState extends State<HomePageBody> {
               const SizedBox(height: 16),
               ListTile(
                 leading: const Icon(
+                  EneftyIcons.profile_2user_bold,
+                ),
+                title: Text(
+                  'My Profile',
+                  style: AppFontStyles.readexPro400_16,
+                ),
+                onTap: () async {},
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                leading: const Icon(
+                  EneftyIcons.shopping_cart_bold,
+                ),
+                title: Text(
+                  'My Orders',
+                  style: AppFontStyles.readexPro400_16,
+                ),
+                onTap: () async {
+                  context.goToNamed(RoutesName.orders);
+                  _advancedDrawerController.hideDrawer();
+                },
+              ),
+              const SizedBox(height: 16),
+              ListTile(
+                leading: const Icon(
                   EneftyIcons.logout_bold,
                   color: Colors.red,
                 ),
@@ -146,9 +172,11 @@ class _HomePageBodyState extends State<HomePageBody> {
                   );
                 },
               ),
+              const Spacer(),
             ],
             if (!context.read<MainCubit>().isUserLogged) ...[
-              const SizedBox(height: 16),
+              // const SizedBox(height: 16),
+              const Spacer(),
               ListTile(
                 leading: const Icon(
                   EneftyIcons.login_bold,
@@ -183,9 +211,12 @@ class _HomePageBodyState extends State<HomePageBody> {
               ),
             ],
             ListTile(
-              leading: const Icon(Icons.close),
+              leading: const Icon(
+                EneftyIcons.close_circle_outline,
+                color: Colors.red,
+              ),
               title: const Text(
-                'Close',
+                'Close Menu',
               ),
               onTap: () {
                 _advancedDrawerController.hideDrawer();
