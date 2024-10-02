@@ -7,7 +7,6 @@ import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_page_body.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_page_error.dart';
 import '../cubit/home_cubit.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -38,17 +37,10 @@ class HomePage extends StatelessWidget {
 
           var cub = context.read<HomeCubit>();
 
-          return Skeletonizer(
-            // shade: cub.isLoading,
-            enabled: cub.isLoading,
-            key: const ValueKey("HomePageSkeleton"),
-            // ignorePointers: cub.isLoading,
-            // enabled: cub.isLoading,
-            child: HomePageBody(
-              key: const ValueKey("HomePageBody"),
-              categories: context.read<HomeCubit>().categories,
-              curProducts: context.read<HomeCubit>().curProducts,
-            ),
+          return HomePageBody(
+            key: const ValueKey("HomePageBody"),
+            categories: cub.categories,
+            curProducts: cub.curProducts,
           );
         },
         listener: (BuildContext context, HomeState state) {

@@ -21,7 +21,7 @@ class OrdersPage extends StatelessWidget {
 }
 
 class _OrdersPageBody extends StatelessWidget {
-  const _OrdersPageBody({super.key});
+  const _OrdersPageBody();
 
   @override
   Widget build(BuildContext context) {

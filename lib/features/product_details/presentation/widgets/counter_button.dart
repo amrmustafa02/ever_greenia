@@ -37,12 +37,14 @@ class _CounterButtonState extends State<CounterButton> {
     return GestureDetector(
       dragStartBehavior: DragStartBehavior.down,
       onHorizontalDragUpdate: (details) {
+
         setState(() {
           if (widget.isRight) {
             _width -= details.delta.dx; // Reduce width on drag left
           } else {
             _width += details.delta.dx; // Increase width on drag right
           }
+
           if (_width > _maxWidth) {
             _width = _maxWidth; // Clamp to max width
           }

@@ -63,46 +63,50 @@ class _HomePageBodyState extends State<HomePageBody> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Skeleton.keep(
-                  key: const ValueKey("HomeHeaderSkeleton"),
-                  child: HomeHeader(
-                    key: const ValueKey("HomeHeader"),
-                    onTap: () {
-                      _advancedDrawerController.showDrawer();
-                    },
-                  ),
+                HomeHeader(
+                  key: const ValueKey("HomeHeader"),
+                  onTap: () {
+                    _advancedDrawerController.showDrawer();
+                  },
                 ),
-                Skeleton.shade(
-                  child: TabBarSection(
-                    categories: widget.categories,
+                Skeletonizer(
+                  enabled: context.read<HomeCubit>().isLoading,
+                  child: Skeleton.shade(
+                    // :context.read<HomeCubit>().isLoading,
+                    child: TabBarSection(
+                      categories: widget.categories,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 32),
                 const Spacer(),
-                SizedBox(
-                  height: context.height * 0.50,
-                  width: context.width * 0.85,
-                  child: AppinioSwiper(
-                    initialIndex: 0,
-                    loop: false,
-                    onEnd: context.read<HomeCubit>().refreshItems,
-                    key: context.read<HomeCubit>().listKey,
-                    allowUnlimitedUnSwipe: true,
-                    backgroundCardScale: 0.95,
-                    backgroundCardCount: 2,
-                    duration: const Duration(milliseconds: 500),
-                    // invertAngleOnBottomDrag: true,
-                    backgroundCardOffset: const Offset(00, -40),
-                    cardBuilder: (BuildContext context, int index) {
-                      log("index: $index");
-                      return ZoomIn(
-                        duration: Duration(milliseconds: 500 * index),
-                        child: ProductItem(
-                          product: widget.curProducts[index],
-                        ),
-                      );
-                    },
-                    cardCount: widget.curProducts.length,
+                Skeletonizer(
+                  enabled: context.read<HomeCubit>().isLoading,
+                  child: SizedBox(
+                    height: context.height * 0.50,
+                    width: context.width * 0.85,
+                    child: AppinioSwiper(
+                      initialIndex: 0,
+                      loop: false,
+                      onEnd: context.read<HomeCubit>().refreshItems,
+                      key: context.read<HomeCubit>().listKey,
+                      allowUnlimitedUnSwipe: true,
+                      backgroundCardScale: 0.95,
+                      backgroundCardCount: 2,
+                      duration: const Duration(milliseconds: 500),
+                      // invertAngleOnBottomDrag: true,
+                      backgroundCardOffset: const Offset(00, -40),
+                      cardBuilder: (BuildContext context, int index) {
+                        log("index: $index");
+                        return ZoomIn(
+                          duration: Duration(milliseconds: 500 * index),
+                          child: ProductItem(
+                            product: widget.curProducts[index],
+                          ),
+                        );
+                      },
+                      cardCount: widget.curProducts.length,
+                    ),
                   ),
                 ),
                 const Spacer(),
