@@ -4,7 +4,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
@@ -13,7 +12,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/theme/app_font_styles.dart';
 import '../cubit/bot_cubit.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class BotPage extends StatelessWidget {
   const BotPage({super.key});
@@ -90,6 +88,7 @@ class _BotPageBody extends StatelessWidget {
                       ),
                       inputTextStyle: AppFontStyles.readexProBold_16,
                       primaryColor: AppColors.darkGreen,
+                      inputTextCursorColor: AppColors.lightGreen,
                       highlightMessageColor: AppColors.lightGreen.withOpacity(0.9),
 
                     ),
@@ -113,7 +112,5 @@ class _BotPageBody extends StatelessWidget {
   }
 }
 
-void _handleImageSelection() async {
 
-}
 // AIzaSyCa4KIqdrbpw0tLMeIJLFsEc3m6Etp4LEM

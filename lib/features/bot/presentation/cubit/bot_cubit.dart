@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
@@ -25,7 +24,7 @@ class BotCubit extends Cubit<BotState> {
   );
 
   bool isPlaying = false;
-  List<types.Message> messages = [];
+  List<types.TextMessage> messages = [];
 
   void load() async {
     await Future.wait([
@@ -51,17 +50,18 @@ class BotCubit extends Cubit<BotState> {
       ),
     );
     emit(BotLoading());
+
     final model = GenerativeModel(
       model: 'gemini-1.5-flash-latest',
       apiKey: "AIzaSyCa4KIqdrbpw0tLMeIJLFsEc3m6Etp4LEM",
     );
 
-    // var prompt =
-    //     'Hi gemini i want to check this message { $message } is question about plants or not , if not reply me with this message{this question is not about plants} if yes reply me with your answer normally';
-    //
-    var prompt = "Hi gemini i want to check this message { $message }\n and act like your name is flora bot and your model is train to answer question about plants only";
-    final content = [Content.text(prompt)];
-    final response = await model.generateContent(content);
+    var prompt =
+        "Hi gemini i want to check this message { $message }\n and act like your name is flora bot and your model is train to answer question about plants only";
+    var chat = model.startChat(
+      history: messages.map((e) => Content.text(e.text)).toList(),
+    );
+    final response = await chat.sendMessage(Content.text(prompt));
 
     log(response.text ?? "");
 
