@@ -23,7 +23,7 @@ class _PaymentMethodsSectionState extends State<PaymentMethodsSection> {
             if (selectedIndex == 0) return;
 
             setState(() {
-              HapticFeedback.vibrate();
+              HapticFeedback.heavyImpact();
               selectedIndex = 0;
             });
           },
@@ -40,7 +40,7 @@ class _PaymentMethodsSectionState extends State<PaymentMethodsSection> {
           onTap: () {
             if (selectedIndex == 1) return;
             setState(() {
-              HapticFeedback.vibrate();
+              HapticFeedback.heavyImpact();
               selectedIndex = 1;
             });
           },

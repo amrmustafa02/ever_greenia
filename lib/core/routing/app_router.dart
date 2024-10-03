@@ -8,6 +8,7 @@ import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:plants_app/features/auth/presentation/pages/confirm_email_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/register_page.dart';
+import 'package:plants_app/features/bot/presentation/pages/bot_page.dart';
 import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/pages/home_page.dart';
@@ -31,7 +32,7 @@ class AppRouter {
           child: const HomePage(),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 1250),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.productDetails:
         var args = settings.arguments as Map;
@@ -44,21 +45,21 @@ class AppRouter {
           ),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 750),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.cart:
         return PageTransition(
           child: const CartPage(),
           type: PageTransitionType.bottomToTop,
           duration: const Duration(milliseconds: 750),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.splash:
         return PageTransition(
           child: const SplashPage(),
           type: PageTransitionType.fade,
           duration: const Duration(milliseconds: 1000),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.onboarding:
         return PageTransition(
@@ -67,7 +68,7 @@ class AppRouter {
           alignment: Alignment.center,
           curve: Curves.linear,
           duration: const Duration(milliseconds: 500),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.login:
         return PageTransition(
@@ -76,7 +77,7 @@ class AppRouter {
           alignment: Alignment.center,
           curve: Curves.linear,
           duration: const Duration(milliseconds: 750),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.register:
         return PageTransition(
@@ -85,20 +86,20 @@ class AppRouter {
           alignment: Alignment.center,
           curve: Curves.linear,
           duration: const Duration(milliseconds: 750),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.confirmEmail:
         var email = settings.arguments as String;
         return PageTransition(
           child: BlocProvider(
             create: (BuildContext context) =>
-            getIt<AuthCubit>()..initEmail(email),
+                getIt<AuthCubit>()..initEmail(email),
             child: const ConfirmEmailPage(),
           ),
           type: PageTransitionType.rightToLeft,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.placeOrder:
         return PageTransition(
@@ -106,7 +107,7 @@ class AppRouter {
           type: PageTransitionType.leftToRight,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.orders:
         return PageTransition(
@@ -114,7 +115,7 @@ class AppRouter {
           type: PageTransitionType.rightToLeft,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
         );
       case RoutesName.successOrder:
         return PageTransition(
@@ -123,7 +124,16 @@ class AppRouter {
           // alignment: Alignment.center,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
-          settings: settings,  // Add settings here
+          settings: settings, // Add settings here
+        );
+      case RoutesName.bot:
+        return PageTransition(
+          child: const BotPage(),
+          type: PageTransitionType.fade,
+          // alignment: Alignment.center,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 500),
+          settings: settings, // Add settings here
         );
       default:
         return MaterialPageRoute(
@@ -132,7 +142,7 @@ class AppRouter {
               child: Text("Page not found"),
             ),
           ),
-          settings: settings,  // Add settings here as well
+          settings: settings, // Add settings here as well
         );
     }
   }

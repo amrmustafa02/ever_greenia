@@ -14,4 +14,5 @@ class RoutesName {
   static const String placeOrder = "/place_order";
   static const String orders = "/orders";
   static const String successOrder = "/success_order";
+  static const String bot = "/bot";
 }

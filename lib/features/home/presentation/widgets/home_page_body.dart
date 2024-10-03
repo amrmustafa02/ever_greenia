@@ -1,11 +1,14 @@
 import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bounceable/flutter_bounceable.dart';
+import 'package:lottie/lottie.dart';
 import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
@@ -136,6 +139,7 @@ class _HomePageBodyState extends State<HomePageBody> {
               ListTile(
                 leading: const Icon(
                   EneftyIcons.profile_2user_bold,
+                  color: AppColors.darkGreen,
                 ),
                 title: Text(
                   'My Profile',
@@ -147,6 +151,7 @@ class _HomePageBodyState extends State<HomePageBody> {
               ListTile(
                 leading: const Icon(
                   EneftyIcons.shopping_cart_bold,
+                  color: AppColors.darkGreen,
                 ),
                 title: Text(
                   'My Orders',
@@ -158,6 +163,51 @@ class _HomePageBodyState extends State<HomePageBody> {
                 },
               ),
               const SizedBox(height: 16),
+              Expanded(
+                child: Bounceable(
+                  onTap: () {
+                    context.goToNamed(RoutesName.bot);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Hero(
+                        tag: "bot",
+                        child: Lottie.asset("assets/lottie/bot2.json"),
+                      ),
+                      const SizedBox(height: 16),
+                      AnimatedTextKit(
+                        // key: UniqueKey(),
+                        pause: const Duration(milliseconds: 200),
+                        repeatForever: true,
+                        animatedTexts: [
+                          ColorizeAnimatedText(
+                            "Try Flora Bot!",
+                            textStyle: AppFontStyles.readexPro400_16,
+                            colors: [
+                              AppColors.darkGreen,
+                              AppColors.bgColor,
+                              AppColors.darkGreen,
+                            ],
+                            speed: const Duration(milliseconds: 300),
+                          ),
+                          ColorizeAnimatedText(
+                            "Try Flora Bot!",
+                            textStyle: AppFontStyles.readexPro400_16,
+                            colors: [
+                              AppColors.darkGreen,
+                              AppColors.bgColor,
+                              AppColors.darkGreen,
+                            ],
+                            speed: const Duration(milliseconds: 300),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
               ListTile(
                 leading: const Icon(
                   EneftyIcons.logout_bold,
@@ -176,7 +226,6 @@ class _HomePageBodyState extends State<HomePageBody> {
                   );
                 },
               ),
-              const Spacer(),
             ],
             if (!context.read<MainCubit>().isUserLogged) ...[
               // const SizedBox(height: 16),
@@ -216,11 +265,12 @@ class _HomePageBodyState extends State<HomePageBody> {
             ],
             ListTile(
               leading: const Icon(
-                EneftyIcons.close_circle_outline,
+                EneftyIcons.close_circle_bold,
                 color: Colors.red,
               ),
-              title: const Text(
-                'Close Menu',
+              title: Text(
+                'Close',
+                style: AppFontStyles.readexPro400_16,
               ),
               onTap: () {
                 _advancedDrawerController.hideDrawer();

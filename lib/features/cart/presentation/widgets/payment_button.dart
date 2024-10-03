@@ -22,7 +22,7 @@ class _PaymentButtonState extends State<PaymentButton> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.only(right: 8, top: 8, bottom: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         border: Border.all(
@@ -35,49 +35,51 @@ class _PaymentButtonState extends State<PaymentButton> {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: GestureDetector(
-              onHorizontalDragUpdate: (details) {
-                _dragPosition = (_dragPosition + details.delta.dx).clamp(
-                  0.0,
-                  MediaQuery.of(context).size.width * 0.62,
-                );
-                if (_dragPosition >= MediaQuery.of(context).size.width * 0.50) {
-                  // _dragPosition = MediaQuery.of(context).size.width * 0.62;
-                  _paymentCompleted = true;
-                } else {
-                  // _dragPosition = 0.0;
-                  _paymentCompleted = false;
-                }
-                // _paymentCompleted = false;
-
-                setState(() {});
-              },
-              onHorizontalDragEnd: (details) {
-                if (_dragPosition >= MediaQuery.of(context).size.width * 0.60) {
-                  _dragPosition = MediaQuery.of(context).size.width * 0.62;
-                  _paymentCompleted = true;
-                } else {
-                  _dragPosition = 0.0;
-                  _paymentCompleted = false;
-                }
-                setState(() {});
-
-                if (_paymentCompleted) {
-                  Future.delayed(
-                    const Duration(milliseconds: 350),
-                    () {
-                      // ignore: use_build_context_synchronously
-                      context.goToNamed(RoutesName.placeOrder);
-                      _dragPosition = 0.0;
-                      _paymentCompleted = false;
-                      setState(() {});
-                    },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: GestureDetector(
+                onHorizontalDragUpdate: (details) {
+                  _dragPosition = (_dragPosition + details.delta.dx).clamp(
+                    0.0,
+                    MediaQuery.of(context).size.width * 0.62,
                   );
-                }
-              },
-              child: ArrowsButton(
-                dragPosition: _dragPosition,
-                isPaymentCompleted: _paymentCompleted,
+                  if (_dragPosition >=
+                      MediaQuery.of(context).size.width * 0.50) {
+                    _paymentCompleted = true;
+                  } else {
+                    _paymentCompleted = false;
+                  }
+
+                  setState(() {});
+                },
+                onHorizontalDragEnd: (details) {
+                  if (_dragPosition >=
+                      MediaQuery.of(context).size.width * 0.60) {
+                    _dragPosition = MediaQuery.of(context).size.width * 0.62;
+                    _paymentCompleted = true;
+                  } else {
+                    _dragPosition = 0.0;
+                    _paymentCompleted = false;
+                  }
+                  setState(() {});
+
+                  if (_paymentCompleted) {
+                    Future.delayed(
+                      const Duration(milliseconds: 350),
+                      () {
+                        // ignore: use_build_context_synchronously
+                        context.goToNamed(RoutesName.placeOrder);
+                        _dragPosition = 0.0;
+                        _paymentCompleted = false;
+                        setState(() {});
+                      },
+                    );
+                  }
+                },
+                child: ArrowsButton(
+                  dragPosition: _dragPosition,
+                  isPaymentCompleted: _paymentCompleted,
+                ),
               ),
             ),
           ),
@@ -101,6 +103,7 @@ class _PaymentButtonState extends State<PaymentButton> {
 class ArrowsButton extends StatelessWidget {
   final double dragPosition;
   final bool isPaymentCompleted;
+
   const ArrowsButton({
     super.key,
     required this.dragPosition,
@@ -113,7 +116,7 @@ class ArrowsButton extends StatelessWidget {
       width: 25.w,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
         transform: Matrix4.translationValues(dragPosition, 0, 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),

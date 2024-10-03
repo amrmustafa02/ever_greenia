@@ -28,7 +28,7 @@ class SuccessOrderPage extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.all(16.0),
-            height: 50.h,
+            height: 60.h,
             width: 90.w,
             child: Container(
               decoration: BoxDecoration(
@@ -36,7 +36,7 @@ class SuccessOrderPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Lottie.asset(
@@ -92,7 +92,6 @@ class SuccessOrderPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Spacer(),
                   ],
                 ),
               ),

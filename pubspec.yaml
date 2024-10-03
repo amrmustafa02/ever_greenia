@@ -70,6 +70,10 @@ dependencies:
   sentry_flutter:
   geolocator:
   geocoding:
+  audioplayers:
+  flutter_chat_ui:
+  image_picker:
+
 
   flutter:
     sdk: flutter
@@ -109,6 +113,7 @@ flutter:
     - assets/icons/
     - assets/translations/
     - assets/lottie/
+    - assets/audio/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
