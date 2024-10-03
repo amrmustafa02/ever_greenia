@@ -73,6 +73,7 @@ dependencies:
   audioplayers:
   flutter_chat_ui:
   image_picker:
+  google_generative_ai:
 
 
   flutter:

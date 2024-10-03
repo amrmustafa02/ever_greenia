@@ -81,23 +81,27 @@ class _BotPageBody extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       inputBackgroundColor: AppColors.darkGreen,
                       inputTextColor: Colors.white,
-                      secondaryColor: AppColors.darkGreen,
-                      seenIcon: const Icon(
-                        Icons.done_all,
+                      // secondaryColor: AppColors.li,
+                      messageBorderRadius: 25,
+                      attachmentButtonIcon: const Icon(
+                        Icons.attach_file,
                         color: Colors.white,
-                        size: 15,
+                        size: 20,
                       ),
-                      messageBorderRadius: 15,
                       inputTextStyle: AppFontStyles.readexProBold_16,
                       primaryColor: AppColors.darkGreen,
+                      highlightMessageColor: AppColors.lightGreen.withOpacity(0.9),
+
                     ),
-                    messages: [],
+
+                    messages: cubit.messages.reversed.toList(),
                     isAttachmentUploading: true,
                     onSendPressed: (text) {
-                      log("text: $text");
+                      log("text");
+                      cubit.sendMessage(text.text);
                     },
-                    user: const types.User(id: 'amr'),
-                    onAttachmentPressed: _handleImageSelection,
+                    user:cubit.user,
+                    // onAttachmentPressed: _handleImageSelection,
                   ),
                 ),
               ],
@@ -110,18 +114,6 @@ class _BotPageBody extends StatelessWidget {
 }
 
 void _handleImageSelection() async {
-  final result = await ImagePicker().pickImage(
-    imageQuality: 70,
-    maxWidth: 1440,
-    source: ImageSource.gallery,
-  );
 
-  if (result != null) {
-    final bytes = await result.readAsBytes();
-    final image = await decodeImageFromList(bytes);
-
-
-    // _addMessage(message);
-  }
 }
 // AIzaSyCa4KIqdrbpw0tLMeIJLFsEc3m6Etp4LEM
