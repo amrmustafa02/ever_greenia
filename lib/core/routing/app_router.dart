@@ -17,6 +17,7 @@ import 'package:plants_app/features/orders/presentation/pages/orders_page.dart';
 import 'package:plants_app/features/place_order/presentation/pages/place_order_page.dart';
 import 'package:plants_app/features/place_order/presentation/pages/success_order_page.dart';
 import 'package:plants_app/features/product_details/presentation/pages/product_details_page.dart';
+import 'package:plants_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:plants_app/features/splash/presentation/pages/splash_page.dart';
 
 part 'routes_name.dart';
@@ -121,7 +122,6 @@ class AppRouter {
         return PageTransition(
           child: const SuccessOrderPage(),
           type: PageTransitionType.bottomToTop,
-          // alignment: Alignment.center,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
           settings: settings, // Add settings here
@@ -130,7 +130,14 @@ class AppRouter {
         return PageTransition(
           child: const BotPage(),
           type: PageTransitionType.fade,
-          // alignment: Alignment.center,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 500),
+          settings: settings, // Add settings here
+        );
+      case RoutesName.profile:
+        return PageTransition(
+          child: const ProfilePage(),
+          type: PageTransitionType.rightToLeft,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
           settings: settings, // Add settings here

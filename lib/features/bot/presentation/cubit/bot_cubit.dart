@@ -62,12 +62,13 @@ class BotCubit extends Cubit<BotState> {
           "Hi gemini i want to check this message { $message }\n and act like your name is flora bot and your model is train to answer question about plants only and please use chat history i provide you";
     }
     else{
-      prompt = "check this message { $message }\n and answer about plants only and please use chat history i provide you";
+      prompt = "check this message { $message }\n and answer if question about plants only and please use chat history i provide you";
     }
 
     var chat = model.startChat(
       history: messages.map((e) => Content.text(e.text)).toList(),
     );
+
     final response = await chat.sendMessage(Content.text(prompt));
 
     log(response.text ?? "");

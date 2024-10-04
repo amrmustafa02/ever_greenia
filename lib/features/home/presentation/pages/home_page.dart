@@ -26,6 +26,8 @@ class HomePage extends StatelessWidget {
             current is AddToCartSuccessState ||
             current is AddToCartFailureState,
         builder: (context, state) {
+          var cub = context.read<HomeCubit>();
+
           if (state is HomeLoadedFailure) {
             return RefreshIndicator(
               onRefresh: () async {
@@ -35,8 +37,6 @@ class HomePage extends StatelessWidget {
             );
           }
 
-          var cub = context.read<HomeCubit>();
-
           return HomePageBody(
             key: const ValueKey("HomePageBody"),
             categories: cub.categories,
@@ -44,7 +44,6 @@ class HomePage extends StatelessWidget {
           );
         },
         listener: (BuildContext context, HomeState state) {
-          log("HomePage: listener");
           if (state is AddToCartLoadingState) {
             HelperMethods.showLoadingDliaog(context);
           }

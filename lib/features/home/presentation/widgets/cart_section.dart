@@ -114,108 +114,12 @@ class _CartSectionState extends State<CartSection> {
                               const SizedBox(
                                 width: 16,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FadeInUp(
-                                    key: const ValueKey("CartUp"),
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.easeInOut,
-                                    child: Text(
-                                      "Cart",
-                                      style: GoogleFonts.readexPro().copyWith(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  FadeInUp(
-                                    key: const ValueKey("numItemsCart"),
-                                    duration: const Duration(milliseconds: 750),
-                                    curve: Curves.easeInOut,
-                                    child: Text(
-                                      "${cubit.products.length.toString()} items",
-                                      style: GoogleFonts.inter().copyWith(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              buildCartTotalItems(cubit),
                               const Spacer(),
                               if (cubit.products.length <= 3)
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Stack(
-                                    alignment: Alignment.centerRight,
-                                    children: List.generate(
-                                      cubit.products.length,
-                                      (index) {
-                                        return FadeInRight(
-                                          curve: Curves.easeInOut,
-                                          key: ValueKey("itemsCart $index"),
-                                          duration: Duration(
-                                              milliseconds: 750 + index * 100),
-                                          child: ProductCartBubble(
-                                            margin: (27 * index).toDouble(),
-                                            child: MyDefaultImage(
-                                              url: cubit.products[index].image,
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
+                                _buildItemsLessThanThree(cubit),
                               if (cubit.products.length > 3) ...[
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Stack(
-                                    alignment: Alignment.centerRight,
-                                    children: List.generate(
-                                      4,
-                                      (index) {
-                                        if (index == 3) {
-                                          return FadeInRight(
-                                            curve: Curves.easeInOut,
-                                            key: ValueKey("itemsCart $index"),
-                                            duration: Duration(
-                                              milliseconds: 750 + index * 100,
-                                            ),
-                                            child: ProductCartBubble(
-                                              margin: (27 * index).toDouble(),
-                                              child: Text(
-                                                "+${cubit.products.length - 3} ",
-                                                style: GoogleFonts.readexPro()
-                                                    .copyWith(
-                                                  color: Colors.black,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        return FadeInRight(
-                                          curve: Curves.easeInOut,
-                                          key: ValueKey("itemsCart $index"),
-                                          duration: Duration(
-                                            milliseconds: 750 + index * 100,
-                                          ),
-                                          child: ProductCartBubble(
-                                            margin: (27 * index).toDouble(),
-                                            child: MyDefaultImage(
-                                                url: cubit
-                                                    .products[index].image),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ),
+                                buildItemsMoreThanThreeItems(cubit),
                               ]
                             ],
                           ),
@@ -233,6 +137,110 @@ class _CartSectionState extends State<CartSection> {
           ),
         );
       },
+    );
+  }
+
+  Column buildCartTotalItems(CartCubit cubit) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        FadeInUp(
+          key: const ValueKey("CartUp"),
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          child: Text(
+            "Cart",
+            style: GoogleFonts.readexPro().copyWith(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        FadeInUp(
+          key: const ValueKey("numItemsCart"),
+          duration: const Duration(milliseconds: 750),
+          curve: Curves.easeInOut,
+          child: Text(
+            "${cubit.products.length.toString()} items",
+            style: GoogleFonts.inter().copyWith(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  SingleChildScrollView buildItemsMoreThanThreeItems(CartCubit cubit) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Stack(
+        alignment: Alignment.centerRight,
+        children: List.generate(
+          4,
+          (index) {
+            if (index == 3) {
+              return FadeInRight(
+                curve: Curves.easeInOut,
+                key: ValueKey("itemsCart $index"),
+                duration: Duration(
+                  milliseconds: 750 + index * 100,
+                ),
+                child: ProductCartBubble(
+                  margin: (27 * index).toDouble(),
+                  child: Text(
+                    "+${cubit.products.length - 3} ",
+                    style: GoogleFonts.readexPro().copyWith(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              );
+            }
+            return FadeInRight(
+              curve: Curves.easeInOut,
+              key: ValueKey("itemsCart $index"),
+              duration: Duration(
+                milliseconds: 750 + index * 100,
+              ),
+              child: ProductCartBubble(
+                margin: (27 * index).toDouble(),
+                child: MyDefaultImage(url: cubit.products[index].image),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  SingleChildScrollView _buildItemsLessThanThree(CartCubit cubit) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Stack(
+        alignment: Alignment.centerRight,
+        children: List.generate(
+          cubit.products.length,
+          (index) {
+            return FadeInRight(
+              curve: Curves.easeInOut,
+              key: ValueKey("itemsCart $index"),
+              duration: Duration(milliseconds: 750 + index * 100),
+              child: ProductCartBubble(
+                margin: (27 * index).toDouble(),
+                child: MyDefaultImage(
+                  url: cubit.products[index].image,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

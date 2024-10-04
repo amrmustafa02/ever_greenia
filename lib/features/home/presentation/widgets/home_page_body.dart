@@ -145,7 +145,10 @@ class _HomePageBodyState extends State<HomePageBody> {
                   'My Profile',
                   style: AppFontStyles.readexPro400_16,
                 ),
-                onTap: () async {},
+                onTap: () async {
+                  context.goToNamed(RoutesName.profile);
+                  _advancedDrawerController.hideDrawer();
+                },
               ),
               const SizedBox(height: 16),
               ListTile(

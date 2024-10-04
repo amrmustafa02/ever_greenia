@@ -15,4 +15,5 @@ class RoutesName {
   static const String orders = "/orders";
   static const String successOrder = "/success_order";
   static const String bot = "/bot";
+  static const String profile = "/profile";
 }

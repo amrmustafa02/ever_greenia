@@ -8,21 +8,21 @@ import 'package:plants_app/features/home/domain/repos/home_repo.dart';
 @Singleton(as: HomeRepo)
 class HomeRepoImpl extends HomeRepo {
   final HomeRemoteDataSource homeRemoteDataSource;
+
   HomeRepoImpl(this.homeRemoteDataSource);
 
   @override
   Future<ApiResult<List<CategoryData>>> getCategories() async {
     try {
       var response = await homeRemoteDataSource.getCategories();
-      return SuccessRequest<List<CategoryData>>(
-        data: response.data!
-            .map(
-              (e) => e.toEntity(),
-            )
-            .toList(),
-      );
+      var data = response.data!
+          .map(
+            (e) => e.toEntity(),
+          )
+          .toList();
+      return ApiResult.success(data: data);
     } on FailedRequest catch (e) {
-      return FailedRequest(exception: e.exception);
+      return ApiResult.failure(error: e.exception);
     }
   }
 
