@@ -24,7 +24,7 @@ class BotCubit extends Cubit<BotState> {
   );
 
   bool isPlaying = false;
-  List<types.TextMessage> messages = [];
+ static List<types.TextMessage> messages = [];
 
   void load() async {
     await Future.wait([
@@ -55,9 +55,16 @@ class BotCubit extends Cubit<BotState> {
       model: 'gemini-1.5-flash-latest',
       apiKey: "AIzaSyCa4KIqdrbpw0tLMeIJLFsEc3m6Etp4LEM",
     );
+    String prompt = "";
+    if (messages.length == 1) {
+      log("first message");
+      prompt =
+          "Hi gemini i want to check this message { $message }\n and act like your name is flora bot and your model is train to answer question about plants only and please use chat history i provide you";
+    }
+    else{
+      prompt = "check this message { $message }\n and answer about plants only and please use chat history i provide you";
+    }
 
-    var prompt =
-        "Hi gemini i want to check this message { $message }\n and act like your name is flora bot and your model is train to answer question about plants only";
     var chat = model.startChat(
       history: messages.map((e) => Content.text(e.text)).toList(),
     );

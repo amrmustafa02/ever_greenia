@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +92,7 @@ class _BotPageBody extends StatelessWidget {
 
                     ),
 
-                    messages: cubit.messages.reversed.toList(),
+                    messages: BotCubit.messages.reversed.toList(),
                     isAttachmentUploading: true,
                     onSendPressed: (text) {
                       log("text");
