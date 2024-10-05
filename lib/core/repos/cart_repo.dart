@@ -1,7 +1,6 @@
 import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/core/entities/cart_data.dart';
 
-import '../entities/cart_product_data.dart';
 
 abstract class CartRepo {
   Future<ApiResult<CartData>> getCart();

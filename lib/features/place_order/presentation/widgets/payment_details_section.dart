@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plants_app/core/constants/app_constants.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
+
+import '../cubit/place_order_cubit.dart';
 
 class PaymentDetailsSection extends StatelessWidget {
   const PaymentDetailsSection({super.key});
@@ -19,18 +23,18 @@ class PaymentDetailsSection extends StatelessWidget {
             style: AppFontStyles.readexPro400_14,
           ),
           trailing: Text(
-            "\$4.00",
+            "\$${AppConstants.deliveryFee}",
             style: AppFontStyles.readexPro400_14,
           ),
         ),
         ListTile(
           contentPadding: const EdgeInsets.all(0),
           leading: Text(
-            "Items Total",
+            "Items Total Price",
             style: AppFontStyles.readexPro400_14,
           ),
           trailing: Text(
-            "\$12.00",
+            "\$${context.read<PlaceOrderCubit>().itemsPrice}",
             style: AppFontStyles.readexPro400_14,
           ),
         ),
@@ -42,7 +46,7 @@ class PaymentDetailsSection extends StatelessWidget {
             style: AppFontStyles.readexPro400_14,
           ),
           trailing: Text(
-            "\$18.00",
+            "\$${context.read<PlaceOrderCubit>().totalPrice}",
             style: AppFontStyles.readexPro400_14,
           ),
         ),

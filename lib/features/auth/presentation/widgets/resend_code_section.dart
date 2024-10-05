@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plants_app/core/cubit/app_bloc_observer.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 

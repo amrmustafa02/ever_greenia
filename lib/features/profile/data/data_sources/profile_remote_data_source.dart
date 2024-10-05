@@ -37,8 +37,8 @@ class ProfileRemoteDataSource {
         Endpoints.profile,
         data: {
           if (name != null) "name": name,
-          if (oldPassword != null) "old_password": oldPassword,
-          if (newPassword != null) "new_password": newPassword,
+          if (oldPassword != null) "oldPassword": oldPassword,
+          if (newPassword != null) "password": newPassword,
         },
       );
       return true;
@@ -51,7 +51,7 @@ class ProfileRemoteDataSource {
 
   Future<bool> deleteProfile(String token) async {
     try {
-      final response = await dio.delete(
+      await dio.delete(
         Endpoints.profile,
       );
       return true;

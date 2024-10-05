@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/core/data_sources/cart_remote_data_source.dart';
 import 'package:plants_app/core/entities/cart_data.dart';
-import 'package:plants_app/core/entities/cart_product_data.dart';
 import 'package:plants_app/core/repos/cart_repo.dart';
 
 @LazySingleton(as: CartRepo)

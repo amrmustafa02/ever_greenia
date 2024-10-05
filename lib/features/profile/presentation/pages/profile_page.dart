@@ -10,15 +10,12 @@ import 'package:plants_app/core/extensions/widget_ext.dart';
 import 'package:plants_app/core/widgets/default_button.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
-import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:regexpattern/regexpattern.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/routing/app_router.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_font_styles.dart';
 import '../../../../core/utils/herlper_methods.dart';
 import '../cubit/profile_cubit.dart';
-import '../widgets/profile_form_field.dart';
+import '../../../../core/widgets/default_form_field.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -65,7 +62,7 @@ class ProfilePageBody extends StatelessWidget {
               FadeInLeft(
                 curve: Curves.easeInOut,
                 duration: const Duration(milliseconds: 500),
-                child: ProfileFormField(
+                child: DefaultFormField(
                   enabled: false,
                   controller: cubit.emailController,
                   validator: (text) {
@@ -84,7 +81,7 @@ class ProfilePageBody extends StatelessWidget {
               FadeInLeft(
                 curve: Curves.easeInOut,
                 duration: const Duration(milliseconds: 750),
-                child: ProfileFormField(
+                child: DefaultFormField(
                   controller: cubit.nameController,
                   validator: (text) {
                     if (text == null || text.isEmpty) {
@@ -100,7 +97,7 @@ class ProfilePageBody extends StatelessWidget {
               FadeInLeft(
                 curve: Curves.easeInOut,
                 duration: const Duration(milliseconds: 1000),
-                child: ProfileFormField(
+                child: DefaultFormField(
                   obscureText: true,
                   controller: cubit.oldPasswordController,
                   validator: (text) {
@@ -118,7 +115,7 @@ class ProfilePageBody extends StatelessWidget {
               FadeInLeft(
                 curve: Curves.easeInOut,
                 duration: const Duration(milliseconds: 1250),
-                child: ProfileFormField(
+                child: DefaultFormField(
                   obscureText: true,
                   controller: cubit.newPasswordController,
                   validator: (text) {
@@ -189,11 +186,9 @@ class ProfilePageBody extends StatelessWidget {
         if (state is UpdateProfileFailureState) {
           HelperMethods.showErrorNotificationToast(state.error);
           context.goBack();
-          context.goBack();
         }
         if (state is DeleteProfileFailureState) {
           HelperMethods.showErrorNotificationToast(state.error);
-          context.goBack();
           context.goBack();
         }
 

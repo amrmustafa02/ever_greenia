@@ -18,7 +18,7 @@ class _AddressFormState extends State<AddressForm> {
           children: [
             Expanded(
               child: AddressFormField(
-                labelText: 'Floor No.',
+                labelText: 'Phone',
               ),
             ),
             SizedBox(width: 16),

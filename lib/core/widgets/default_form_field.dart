@@ -2,18 +2,19 @@ import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 
-import '../../../../core/theme/app_colors.dart';
+import '../theme/app_colors.dart';
 
-class ProfileFormField extends StatefulWidget {
-  // final String initialValue;
+class DefaultFormField extends StatefulWidget {
   final String label;
   final bool enabled;
+  final int maxLines;
   final TextEditingController controller;
   final String? Function(String?) validator;
   final String? Function(String?) onChanged;
   final bool obscureText;
+  final TextInputType keyboardType;
 
-  const ProfileFormField({
+  const DefaultFormField({
     super.key,
     required this.controller,
     required this.validator,
@@ -21,13 +22,15 @@ class ProfileFormField extends StatefulWidget {
     this.enabled = true,
     required this.onChanged,
     this.obscureText = false,
+    this.maxLines = 1,
+    this.keyboardType = TextInputType.text,
   });
 
   @override
-  State<ProfileFormField> createState() => _ProfileFormFieldState();
+  State<DefaultFormField> createState() => _DefaultFormFieldState();
 }
 
-class _ProfileFormFieldState extends State<ProfileFormField> {
+class _DefaultFormFieldState extends State<DefaultFormField> {
   late bool showPassword;
 
   @override
@@ -46,7 +49,9 @@ class _ProfileFormFieldState extends State<ProfileFormField> {
         suffixIcon: widget.obscureText
             ? IconButton(
                 icon: Icon(
-                    showPassword ? EneftyIcons.eye_bold : EneftyIcons.eye_slash_bold,
+                    showPassword
+                        ? EneftyIcons.eye_bold
+                        : EneftyIcons.eye_slash_bold,
                     size: 20),
                 color: AppColors.darkGreen,
                 onPressed: () {
@@ -56,19 +61,29 @@ class _ProfileFormFieldState extends State<ProfileFormField> {
                 },
               )
             : null,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8),
-          ),
-        ),
+        // contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+        border: _buildBorder(),
+        enabledBorder: _buildBorder(),
       ),
       onChanged: widget.onChanged,
       validator: widget.validator,
       obscureText: showPassword,
+      maxLines: widget.maxLines,
+      keyboardType: widget.keyboardType,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      // initialValue: widget.initialValue,
       controller: widget.controller,
+    );
+  }
+
+  OutlineInputBorder _buildBorder({Color color = Colors.grey}) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: color,
+        width: 0.5,
+      ),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(15.0),
+      ),
     );
   }
 }

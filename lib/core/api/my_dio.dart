@@ -13,11 +13,6 @@ class MyDio {
       baseUrl: ApiConstants.baseUrl,
     ),
   );
-  final Dio _authDio = Dio(
-    BaseOptions(
-      baseUrl: ApiConstants.baseUrl,
-    ),
-  );
 
   MyDio._privateConstructor() {
     _dio.interceptors.addAll([

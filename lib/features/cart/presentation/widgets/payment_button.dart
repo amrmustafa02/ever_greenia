@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/features/cart/presentation/widgets/arrow_animation.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../../core/cubit/cart/cubit/cart_cubit.dart';
 
 class PaymentButton extends StatefulWidget {
   const PaymentButton({super.key});
@@ -67,8 +70,12 @@ class _PaymentButtonState extends State<PaymentButton> {
                     Future.delayed(
                       const Duration(milliseconds: 350),
                       () {
-                        // ignore: use_build_context_synchronously
-                        context.goToNamed(RoutesName.placeOrder);
+                        if (mounted) {
+                          context.goToNamed(
+                            RoutesName.placeOrder,
+                            arguments: context.read<CartCubit>().totalPrice,
+                          );
+                        }
                         _dragPosition = 0.0;
                         _paymentCompleted = false;
                         setState(() {});

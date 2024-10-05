@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plants_app/core/constants/app_constants.dart';
 import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/widgets/header_bottom_sheet_line.dart';
@@ -46,7 +47,7 @@ class CartInfoSection extends StatelessWidget {
                   children: [
                     ListTile(
                       title: Text(
-                        "Delivery",
+                        "Delivery Fee",
                         style: GoogleFonts.readexPro().copyWith(
                           color: Colors.black,
                           fontSize: 16,
@@ -54,7 +55,7 @@ class CartInfoSection extends StatelessWidget {
                         ),
                       ),
                       trailing: Text(
-                        "\$ 18.00",
+                        "\$ ${AppConstants.deliveryFee}",
                         style: GoogleFonts.readexPro().copyWith(
                           color: Colors.black,
                           fontSize: 16,
@@ -71,7 +72,7 @@ class CartInfoSection extends StatelessWidget {
                     ),
                     ListTile(
                       title: Text(
-                        "Total",
+                        "Items Total price",
                         style: GoogleFonts.readexPro().copyWith(
                           color: Colors.black,
                           fontSize: 16,

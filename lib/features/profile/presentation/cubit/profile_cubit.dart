@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/entities/user_data.dart';
-import 'package:plants_app/features/auth/presentation/pages/register_page.dart';
 import 'package:plants_app/features/profile/domain/entities/profile_data.dart';
 import 'package:regexpattern/regexpattern.dart';
 

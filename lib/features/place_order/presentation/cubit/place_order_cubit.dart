@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:plants_app/core/constants/app_constants.dart';
 
 part 'place_order_state.dart';
 
@@ -16,9 +17,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
   PlaceOrderCubit() : super(PlaceOrderInitial());
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   late LatLng curLocation;
-
   late GoogleMapController googleMapController;
 
   String address = "";
@@ -26,6 +25,18 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
   bool isLocationLoaded = false;
   bool isPlaceOrderEnabled = false;
   bool isLinerProgressEnabled = false;
+
+  num totalPrice = 0;
+  num itemsPrice = 0;
+
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController noteController = TextEditingController();
+
+  void initPrice(num itemsPrice) {
+    this.itemsPrice = itemsPrice;
+
+    totalPrice = itemsPrice + AppConstants.deliveryFee;
+  }
 
   Future<bool> checkLocationServiceEnabled() async {
     var serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -78,7 +89,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
     isLocationLoaded = true;
 
-    isPlaceOrderEnabled = true;
+    checkEnableToPlaceOrder();
 
     log("current location: $curLocation");
 
@@ -127,12 +138,13 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
   }
 
   Future<void> placeOrder() async {
-    HapticFeedback.vibrate();
+    HapticFeedback.heavyImpact();
     isLinerProgressEnabled = true;
     isPlaceOrderEnabled = false;
 
     emit(UpdatePlaceOrderState());
     emit(UpdateLinerProgressState());
+
     await Future.delayed(const Duration(seconds: 2));
 
     isLinerProgressEnabled = false;
@@ -141,5 +153,15 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     emit(UpdatePlaceOrderState());
     emit(UpdateLinerProgressState());
     emit(SuccessOrderState());
+  }
+
+  void checkEnableToPlaceOrder() {
+    var newEnablePlaceOrder =
+        isLocationLoaded && phoneController.text.isNotEmpty;
+    if (newEnablePlaceOrder != isPlaceOrderEnabled) {
+      isPlaceOrderEnabled = newEnablePlaceOrder;
+
+      emit(UpdatePlaceOrderState());
+    }
   }
 }

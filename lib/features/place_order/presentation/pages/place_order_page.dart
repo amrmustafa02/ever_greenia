@@ -7,19 +7,25 @@ import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/core/widgets/default_button.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
+import 'package:plants_app/features/place_order/presentation/widgets/address_form.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/maps_section.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/payment_details_section.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/payment_methods_section.dart';
 import '../../../../core/routing/app_router.dart';
 import '../cubit/place_order_cubit.dart';
+import '../widgets/contact_info_form.dart';
 
 class PlaceOrderPage extends StatelessWidget {
-  const PlaceOrderPage({super.key});
+  final num totalPrice;
+
+  const PlaceOrderPage({super.key, required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<PlaceOrderCubit>()..getCurrentLocation(),
+      create: (context) => getIt<PlaceOrderCubit>()
+        ..initPrice(totalPrice)
+        ..getCurrentLocation(),
       child: const _PlaceOrderPageBody(),
     );
   }
@@ -49,6 +55,13 @@ class _PlaceOrderPageBody extends StatelessWidget {
                   const SizedBox(height: 16),
                   Divider(color: Colors.grey.withOpacity(0.2), thickness: 7),
                   const SizedBox(height: 16),
+                  Text("Contact Info", style: AppFontStyles.readexPro600_16)
+                      .setHorizontalPadding(),
+                  const SizedBox(height: 16),
+                  const ContactInfoForm().setHorizontalPadding(),
+                  const SizedBox(height: 16),
+                  Divider(color: Colors.grey.withOpacity(0.2), thickness: 7),
+                  const SizedBox(height: 16),
                   const PaymentDetailsSection().setHorizontalPadding()
                 ],
               ),
@@ -72,7 +85,8 @@ class _PlaceOrderPageBody extends StatelessWidget {
               var enableButton =
                   context.read<PlaceOrderCubit>().isPlaceOrderEnabled;
               return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16,vertical: 32),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 child: DefaultButton(
                   enableButton: enableButton,
                   onTap: context.read<PlaceOrderCubit>().placeOrder,

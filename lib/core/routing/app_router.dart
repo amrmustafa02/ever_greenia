@@ -103,8 +103,11 @@ class AppRouter {
           settings: settings, // Add settings here
         );
       case RoutesName.placeOrder:
+        var args = settings.arguments as num;
         return PageTransition(
-          child: const PlaceOrderPage(),
+          child: PlaceOrderPage(
+            totalPrice: args,
+          ),
           type: PageTransitionType.leftToRight,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
