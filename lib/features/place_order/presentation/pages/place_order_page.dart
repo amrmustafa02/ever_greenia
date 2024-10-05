@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
-import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:plants_app/core/widgets/default_button.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/maps_section.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/payment_details_section.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/payment_methods_section.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/routing/app_router.dart';
 import '../cubit/place_order_cubit.dart';
 
@@ -74,29 +72,11 @@ class _PlaceOrderPageBody extends StatelessWidget {
               var enableButton =
                   context.read<PlaceOrderCubit>().isPlaceOrderEnabled;
               return Container(
-                margin: const EdgeInsets.all(16),
-                padding: const EdgeInsets.all(8),
-                width: 100.w,
-                height: 8.h,
-                child: Bounceable(
-                  onTap: enableButton
-                      ? context.read<PlaceOrderCubit>().placeOrder
-                      : null,
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: enableButton
-                          ? AppColors.darkGreen
-                          : AppColors.darkGreen.withOpacity(0.3),
-                    ),
-                    child: Text(
-                      "Place Order",
-                      style: AppFontStyles.readexPro600_16.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                margin: const EdgeInsets.symmetric(horizontal: 16,vertical: 32),
+                child: DefaultButton(
+                  enableButton: enableButton,
+                  onTap: context.read<PlaceOrderCubit>().placeOrder,
+                  label: 'Place Order',
                 ),
               );
             },

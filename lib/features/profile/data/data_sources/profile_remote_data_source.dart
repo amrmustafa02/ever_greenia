@@ -13,16 +13,52 @@ class ProfileRemoteDataSource {
 
   ProfileRemoteDataSource(this.dio);
 
-  Future<ApiResult<ProfileModel>> getProfile(String token) async {
+  Future<ProfileModel> getProfile(String token) async {
     try {
       final response = await dio.get(
         Endpoints.profile,
       );
-      return ApiResult.success(
-        data: ProfileModel.fromJson(response.data),
-      );
+      return ProfileModel.fromJson(response.data);
     } on DioException catch (e) {
-      return ApiResult.failure(error: RestApiErrorHandler.handleError(e));
+      throw FailedRequest(
+        exception: RestApiErrorHandler.handleError(e),
+      );
+    }
+  }
+
+  Future<bool> updateProfile({
+    required String token,
+    String? name,
+    String? oldPassword,
+    String? newPassword,
+  }) async {
+    try {
+      await dio.put(
+        Endpoints.profile,
+        data: {
+          if (name != null) "name": name,
+          if (oldPassword != null) "old_password": oldPassword,
+          if (newPassword != null) "new_password": newPassword,
+        },
+      );
+      return true;
+    } on DioException catch (e) {
+      throw FailedRequest(
+        exception: RestApiErrorHandler.handleError(e),
+      );
+    }
+  }
+
+  Future<bool> deleteProfile(String token) async {
+    try {
+      final response = await dio.delete(
+        Endpoints.profile,
+      );
+      return true;
+    } on DioException catch (e) {
+      throw FailedRequest(
+        exception: RestApiErrorHandler.handleError(e),
+      );
     }
   }
 }

@@ -8,7 +8,6 @@ sealed class ApiResult<T> {
   factory ApiResult.failure({required RestApiErrorHandler error}) =>
       FailedRequest(exception: error);
 
-  const ApiResult._();
 }
 
 class SuccessRequest<T> extends ApiResult<T> {

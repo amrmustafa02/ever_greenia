@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
+import 'package:plants_app/core/entities/cart_data.dart';
 import 'package:plants_app/core/repos/cart_repo.dart';
 
 import '../../../entities/cart_product_data.dart';
@@ -12,6 +13,8 @@ part 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   final CartRepo _cartRepo;
   List<CartProductData> products = [];
+  num totalPrice = 0;
+  num productQuantity = 0;
   bool isLoading = false;
 
   CartCubit(this._cartRepo) : super(CartInitial());
@@ -22,8 +25,10 @@ class CartCubit extends Cubit<CartState> {
     try {
       final result = await _cartRepo.getCart();
       switch (result) {
-        case SuccessRequest<List<CartProductData>>():
-          products = result.data;
+        case SuccessRequest<CartData>():
+          products = result.data.products;
+          totalPrice = result.data.totalPrice;
+          productQuantity = result.data.quantity;
           isLoading = false;
           emit(CartLoaded());
           break;

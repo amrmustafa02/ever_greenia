@@ -8,6 +8,7 @@ import 'package:plants_app/core/errors/rest_api_error_handler.dart';
 @lazySingleton
 class AuthRemoteDataSource {
   final MyDio _dio;
+
   AuthRemoteDataSource(this._dio);
 
   Future<Map> login(String email, String password) async {
@@ -60,7 +61,23 @@ class AuthRemoteDataSource {
     }
   }
 
-  Future<ApiResult<void>> sendPasswordResetEmail(String email) {
+  Future<dynamic> sendPasswordResetEmail(String email) {
     return Future.delayed(const Duration(seconds: 2));
+  }
+
+  Future<dynamic> resendCode(String email) async {
+    try {
+      var response = await _dio.patch(
+        path: Endpoints.resendCode,
+        data: {
+          "email": email,
+        },
+      );
+      return response.data;
+    } on DioException catch (e) {
+      throw FailedRequest(
+        exception: RestApiErrorHandler.handleError(e),
+      );
+    }
   }
 }

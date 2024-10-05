@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/core/data_sources/cart_remote_data_source.dart';
+import 'package:plants_app/core/entities/cart_data.dart';
 import 'package:plants_app/core/entities/cart_product_data.dart';
 import 'package:plants_app/core/repos/cart_repo.dart';
 
@@ -31,17 +32,11 @@ class CartRepoImpl extends CartRepo {
   }
 
   @override
-  Future<ApiResult<List<CartProductData>>> getCart() async {
+  Future<ApiResult<CartData>> getCart() async {
     try {
       var response = await _cartRemoteDataSource.getCart();
 
-      return SuccessRequest<List<CartProductData>>(
-        data: response.products
-            .map(
-              (e) => e.toEntity(),
-            )
-            .toList(),
-      );
+      return ApiResult.success(data: response.toEntity());
     } on FailedRequest catch (e) {
       return FailedRequest(exception: e.exception);
     }

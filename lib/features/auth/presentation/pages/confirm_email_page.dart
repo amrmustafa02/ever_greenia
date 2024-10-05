@@ -26,14 +26,24 @@ class ConfirmEmailPage extends StatelessWidget {
               log(state.error);
               Navigator.pop(context);
               HelperMethods.showErrorNotificationToast(state.error);
-            } else if (state is AuthLoading) {
+            }
+            if (state is AuthLoading) {
               HelperMethods.showLoadingDliaog(context);
-            } else if (state is ConfirmEmailSuccessState) {
+            }
+            if (state is ConfirmEmailSuccessState) {
               Navigator.pop(context);
               HelperMethods.showSuccessNotificationToast(
                 "Confirm Email Success",
               );
               context.removeAllAndPush(RoutesName.login);
+            }
+            if (state is ResendCodeSuccessState) {
+              HelperMethods.showSuccessNotificationToast(
+                "Resend Code Success",
+              );
+            }
+            if (state is ResendCodeFailedState) {
+              HelperMethods.showErrorNotificationToast(state.error);
             }
           },
           child: Column(

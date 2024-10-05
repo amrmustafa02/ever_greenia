@@ -9,6 +9,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsAudioGen {
+  const $AssetsAudioGen();
+
+  /// File path: assets/audio/Flora Bot.wav
+  String get floraBot => 'assets/audio/Flora Bot.wav';
+
+  /// List of all assets
+  List<String> get values => [floraBot];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -131,11 +141,14 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/arrow.json
   String get arrow => 'assets/lottie/arrow.json';
 
+  /// File path: assets/lottie/bot1.json
+  String get bot1 => 'assets/lottie/bot1.json';
+
+  /// File path: assets/lottie/bot2.json
+  String get bot2 => 'assets/lottie/bot2.json';
+
   /// File path: assets/lottie/error.json
   String get error => 'assets/lottie/error.json';
-
-  /// File path: assets/lottie/p4.glb
-  String get p4 => 'assets/lottie/p4.glb';
 
   /// File path: assets/lottie/plant_grow.json
   String get plantGrow => 'assets/lottie/plant_grow.json';
@@ -143,8 +156,12 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/plants_loading.json
   String get plantsLoading => 'assets/lottie/plants_loading.json';
 
+  /// File path: assets/lottie/success.json
+  String get success => 'assets/lottie/success.json';
+
   /// List of all assets
-  List<String> get values => [arrow, error, p4, plantGrow, plantsLoading];
+  List<String> get values =>
+      [arrow, bot1, bot2, error, plantGrow, plantsLoading, success];
 }
 
 class $AssetsTranslationsGen {
@@ -163,6 +180,7 @@ class $AssetsTranslationsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottieGen lottie = $AssetsLottieGen();

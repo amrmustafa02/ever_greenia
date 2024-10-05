@@ -9,4 +9,6 @@ abstract class AuthRepo {
   Future<ApiResult<bool>> confirmEmail(String email, String code);
 
   Future<ApiResult<bool>> sendPasswordResetEmail(String email);
+
+  Future<ApiResult<bool>> resendCode(String email);
 }

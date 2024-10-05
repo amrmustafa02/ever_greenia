@@ -9,12 +9,14 @@ import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/entities/user_data.dart';
 import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:regexpattern/regexpattern.dart';
+
 part 'auth_state.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepo authRepo;
   final FlutterSecureStorage secureStorage;
+
   AuthCubit(this.authRepo, this.secureStorage) : super(AuthInitial());
 
   // TextEditingControllers
@@ -103,7 +105,10 @@ class AuthCubit extends Cubit<AuthState> {
       case FailedRequest():
         emit(AuthLoadedFailure(result.exception.errorMessage));
         var statusCode = result.exception.statusCode;
-        if (statusCode == 409) emit(EmailNorConfirmedState());
+        if (statusCode == 409) {
+          emit(EmailNorConfirmedState());
+          resendCode();
+        }
     }
   }
 
@@ -136,6 +141,19 @@ class AuthCubit extends Cubit<AuthState> {
         break;
       case FailedRequest():
         emit(ConfirmFailedState(result.exception.errorMessage));
+    }
+  }
+
+  Future<void> resendCode() async {
+
+    var result = await authRepo.resendCode(emailController.text);
+
+    switch (result) {
+      case SuccessRequest():
+        emit(ResendCodeSuccessState());
+        break;
+      case FailedRequest():
+        emit(ResendCodeFailedState(result.exception.errorMessage));
     }
   }
 }

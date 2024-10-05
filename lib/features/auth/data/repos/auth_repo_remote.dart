@@ -47,5 +47,14 @@ class AuthRepoRemote extends AuthRepo {
   Future<ApiResult<bool>> sendPasswordResetEmail(String email) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<ApiResult<bool>> resendCode(String email) async {
+    try {
+      await _authRemoteDataSource.resendCode(email);
+      return ApiResult.success(data: true);
+    } on FailedRequest catch (e) {
+      return ApiResult.failure(error: e.exception);
+    }
+  }
 }
- 

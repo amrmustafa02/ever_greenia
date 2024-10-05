@@ -38,6 +38,14 @@ import 'package:plants_app/features/place_order/presentation/cubit/place_order_c
     as _i302;
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart'
     as _i229;
+import 'package:plants_app/features/profile/data/data_sources/profile_remote_data_source.dart'
+    as _i842;
+import 'package:plants_app/features/profile/data/repos/profile_repo_impl.dart'
+    as _i872;
+import 'package:plants_app/features/profile/domain/repos/profile_repo.dart'
+    as _i96;
+import 'package:plants_app/features/profile/presentation/cubit/profile_cubit.dart'
+    as _i369;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -58,12 +66,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => registerModule.secureStorage);
     gh.lazySingleton<_i874.CartRemoteDataSource>(
         () => _i874.CartRemoteDataSource(gh<_i682.MyDio>()));
+    gh.lazySingleton<_i842.ProfileRemoteDataSource>(
+        () => _i842.ProfileRemoteDataSource(gh<_i682.MyDio>()));
     gh.lazySingleton<_i385.AuthRemoteDataSource>(
         () => _i385.AuthRemoteDataSource(gh<_i682.MyDio>()));
     gh.singleton<_i94.HomeRemoteDataSource>(
         () => _i94.HomeRemoteDataSource(gh<_i682.MyDio>()));
     gh.lazySingleton<_i424.CartRepo>(
         () => _i1056.CartRepoImpl(gh<_i874.CartRemoteDataSource>()));
+    gh.lazySingleton<_i96.ProfileRepo>(
+        () => _i872.ProfileRepoImpl(gh<_i842.ProfileRemoteDataSource>()));
     gh.singleton<_i634.MainCubit>(
         () => _i634.MainCubit(gh<_i558.FlutterSecureStorage>()));
     gh.singleton<_i548.CartCubit>(() => _i548.CartCubit(gh<_i424.CartRepo>()));
@@ -77,6 +89,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.singleton<_i140.HomeRepo>(
         () => _i1010.HomeRepoImpl(gh<_i94.HomeRemoteDataSource>()));
+    gh.factory<_i369.ProfileCubit>(
+        () => _i369.ProfileCubit(gh<_i96.ProfileRepo>()));
     gh.factory<_i1062.HomeCubit>(() => _i1062.HomeCubit(gh<_i140.HomeRepo>()));
     return this;
   }

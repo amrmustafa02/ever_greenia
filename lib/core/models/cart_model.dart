@@ -1,35 +1,35 @@
+import 'package:plants_app/core/entities/cart_data.dart';
 import 'package:plants_app/core/models/product_model.dart';
 
 import '../entities/cart_product_data.dart';
 
 class CartModel {
   CartModel({
-    required this.id,
-    required this.userId,
     required this.products,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
+    required this.totalPrice,
+    required this.totalQuantity,
   });
 
-  final String? id;
-  final String? userId;
   final List<CartProductModel> products;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final num? v;
+  final num? totalPrice;
+  final num? totalQuantity;
 
   factory CartModel.fromJson(Map<String, dynamic> json) {
     return CartModel(
-      id: json["_id"],
-      userId: json["userId"],
-      products: json["products"] == null
+      products: json["cart"]["products"] == null
           ? []
           : List<CartProductModel>.from(
-              json["products"]!.map((x) => CartProductModel.fromJson(x))),
-      createdAt: DateTime.tryParse(json["createdAt"] ?? ""),
-      updatedAt: DateTime.tryParse(json["updatedAt"] ?? ""),
-      v: json["__v"],
+              json["cart"]["products"]!.map((x) => CartProductModel.fromJson(x))),
+      totalPrice: json["totalPrice"],
+      totalQuantity: json["totalProducts"],
+    );
+  }
+
+  CartData toEntity() {
+    return CartData(
+      products: products.map((e) => e.toEntity()).toList(),
+      totalPrice: totalPrice ?? 0,
+      quantity: totalQuantity ?? 0,
     );
   }
 }

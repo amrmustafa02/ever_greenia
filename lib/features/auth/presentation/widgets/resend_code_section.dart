@@ -2,8 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plants_app/core/cubit/app_bloc_observer.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
+
+import '../cubit/auth_cubit.dart';
 
 class ResendCodeSection extends StatefulWidget {
   const ResendCodeSection({super.key});
@@ -16,6 +20,7 @@ class _ResendCodeSectionState extends State<ResendCodeSection> {
   late Timer timer;
   int curTime = 60;
   bool enabledResend = false;
+
   @override
   void initState() {
     super.initState();
@@ -40,7 +45,6 @@ class _ResendCodeSectionState extends State<ResendCodeSection> {
         });
         return;
       }
-      log("curTime: $curTime");
       curTime--;
       setState(() {});
     });
@@ -67,6 +71,7 @@ class _ResendCodeSectionState extends State<ResendCodeSection> {
             GestureDetector(
               onTap: enabledResend
                   ? () {
+                      context.read<AuthCubit>().resendCode();
                       startTime();
                     }
                   : null,

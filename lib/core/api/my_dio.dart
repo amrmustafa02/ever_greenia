@@ -13,33 +13,37 @@ class MyDio {
       baseUrl: ApiConstants.baseUrl,
     ),
   );
+  final Dio _authDio = Dio(
+    BaseOptions(
+      baseUrl: ApiConstants.baseUrl,
+    ),
+  );
 
   MyDio._privateConstructor() {
     _dio.interceptors.addAll([
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          if (options.path.contains("cart")) {
+          if (options.path.contains("cart") || options.path.contains("user")) {
             log("in cart");
             options.headers['auth'] = getIt<UserData>().token;
+          } else if (options.path.contains("auth")) {
+            options.headers = {};
+            _dio.options.baseUrl = ApiConstants.authBaseUrl;
           } else {
             options.headers['get_key'] = 'AARS';
           }
           log("------------------ Api request -----------------------");
-          log(
-            'send request to url: (${options.baseUrl}) and  path: (${options.path})',
-          );
+          log('send request to url: (${options.baseUrl}) and  path: (${options.path})');
           log('Headers: ${options.headers}');
           log('Query parameters: ${options.queryParameters}');
           log('data: ${options.data}');
-          log("------------------ Api request -----------------------");
           return handler.next(options);
         },
         onResponse: (response, handler) {
           log("------------------ Api response  -----------------------");
           log("response from: ${response.realUri.host}${response.realUri.path}");
           log("status code: ${response.statusCode}");
-          // log("data: ${response.data.toString()}");
-          log("------------------ Api response  -----------------------");
+          log("data: ${response.data.toString()}");
 
           return handler.next(response); // continue
         },
@@ -98,7 +102,7 @@ class MyDio {
     return await _dio.delete(path);
   }
 
-  Future<Response> patch(String path, dynamic data) async {
+  Future<Response> patch({required String path, required Map data}) async {
     return await _dio.patch(path, data: data);
   }
 

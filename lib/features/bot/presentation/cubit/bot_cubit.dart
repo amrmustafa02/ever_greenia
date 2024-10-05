@@ -4,7 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import "package:flutter_chat_types/flutter_chat_types.dart" as types;
 
 part 'bot_state.dart';
 
@@ -24,7 +24,7 @@ class BotCubit extends Cubit<BotState> {
   );
 
   bool isPlaying = false;
- static List<types.TextMessage> messages = [];
+  static List<types.TextMessage> messages = [];
 
   void load() async {
     await Future.wait([
@@ -60,9 +60,9 @@ class BotCubit extends Cubit<BotState> {
       log("first message");
       prompt =
           "Hi gemini i want to check this message { $message }\n and act like your name is flora bot and your model is train to answer question about plants only and please use chat history i provide you";
-    }
-    else{
-      prompt = "check this message { $message }\n and answer if question about plants only and please use chat history i provide you";
+    } else {
+      prompt =
+          "check this message { $message }\n and answer if question about plants only and please use chat history i provide you";
     }
 
     var chat = model.startChat(

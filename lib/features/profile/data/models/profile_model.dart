@@ -1,3 +1,5 @@
+import 'package:plants_app/features/profile/domain/entities/profile_data.dart';
+
 class ProfileModel {
   ProfileModel({
     required this.message,
@@ -11,6 +13,13 @@ class ProfileModel {
     return ProfileModel(
       message: json["message"],
       data: json["data"] == null ? null : Data.fromJson(json["data"]),
+    );
+  }
+
+  ProfileData toEntity() {
+    return ProfileData(
+      name: data?.name ?? "",
+      email: data?.email ?? "",
     );
   }
 }

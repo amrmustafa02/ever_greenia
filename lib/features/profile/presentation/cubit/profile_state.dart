@@ -14,3 +14,25 @@ final class ProfileLoadedFailure extends ProfileState {
 
   ProfileLoadedFailure(this.error);
 }
+
+final class UpdateSaveButtonState extends ProfileState {}
+
+final class UpdateProfileLoadingState extends ProfileState {}
+
+final class UpdateProfileFailureState extends ProfileState {
+  final String error;
+
+  UpdateProfileFailureState(this.error);
+}
+
+final class UpdateProfileSuccessState extends ProfileState {}
+
+final class DeleteProfileLoadingState extends ProfileState {}
+
+final class DeleteProfileFailureState extends ProfileState {
+  final String error;
+
+  DeleteProfileFailureState(this.error);
+}
+
+final class DeleteProfileSuccessState extends ProfileState {}

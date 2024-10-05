@@ -102,7 +102,7 @@ class _CartSectionState extends State<CartSection> {
                                     radius: 25,
                                     backgroundColor: Colors.black,
                                     child: Text(
-                                      cubit.products.length.toString(),
+                                      "${context.read<CartCubit>().productQuantity}",
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 22,

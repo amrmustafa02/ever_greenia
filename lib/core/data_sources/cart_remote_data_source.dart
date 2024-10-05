@@ -17,7 +17,7 @@ class CartRemoteDataSource {
       final response = await _myDio.get(
         Endpoints.cart,
       );
-      return CartModel.fromJson(response.data["cart"]);
+      return CartModel.fromJson(response.data);
     } on DioException catch (e) {
       throw FailedRequest(
         exception: RestApiErrorHandler.handleError(e),

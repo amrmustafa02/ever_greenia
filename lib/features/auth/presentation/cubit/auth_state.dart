@@ -32,3 +32,11 @@ final class ConfirmFailedState extends AuthState {
 final class AuthButtonChangeState extends AuthState {}
 
 final class EmailNorConfirmedState extends AuthState {}
+
+final class ResendCodeSuccessState extends AuthState {}
+
+final class ResendCodeFailedState extends AuthState {
+  final String error;
+
+  ResendCodeFailedState(this.error);
+}
