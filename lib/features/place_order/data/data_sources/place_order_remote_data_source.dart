@@ -9,7 +9,7 @@ import '../../../../core/api/my_dio.dart';
 
 @lazySingleton
 class PlaceOrderRemoteDataSource {
-  MyDio _dio;
+  final MyDio _dio;
 
   PlaceOrderRemoteDataSource(this._dio);
 
@@ -22,7 +22,7 @@ class PlaceOrderRemoteDataSource {
     required String paymentMethod,
   }) async {
     try {
-      final response = await _dio.post(
+      await _dio.post(
         Endpoints.order,
         data: {
           "lat": curLocation.latitude,

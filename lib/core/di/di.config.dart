@@ -34,6 +34,14 @@ import 'package:plants_app/features/home/data/repos/home_repo_impl.dart'
 import 'package:plants_app/features/home/domain/repos/home_repo.dart' as _i140;
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart'
     as _i1062;
+import 'package:plants_app/features/orders/data/data_source/orders_remote_data_source.dart'
+    as _i506;
+import 'package:plants_app/features/orders/data/repo/orders_repo_impl.dart'
+    as _i749;
+import 'package:plants_app/features/orders/domain/repo/orders_repo.dart'
+    as _i974;
+import 'package:plants_app/features/orders/presentation/cubit/orders_cubit.dart'
+    as _i344;
 import 'package:plants_app/features/place_order/data/data_sources/place_order_remote_data_source.dart'
     as _i572;
 import 'package:plants_app/features/place_order/data/repo/place_order_repo_impl.dart'
@@ -75,6 +83,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i842.ProfileRemoteDataSource(gh<_i682.MyDio>()));
     gh.lazySingleton<_i385.AuthRemoteDataSource>(
         () => _i385.AuthRemoteDataSource(gh<_i682.MyDio>()));
+    gh.lazySingleton<_i506.OrdersRemoteDataSource>(
+        () => _i506.OrdersRemoteDataSource(gh<_i682.MyDio>()));
     gh.lazySingleton<_i572.PlaceOrderRemoteDataSource>(
         () => _i572.PlaceOrderRemoteDataSource(gh<_i682.MyDio>()));
     gh.singleton<_i94.HomeRemoteDataSource>(
@@ -90,6 +100,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i229.ProductDetailsCubit(gh<_i424.CartRepo>()));
     gh.lazySingleton<_i652.AuthRepo>(
         () => _i11.AuthRepoRemote(gh<_i385.AuthRemoteDataSource>()));
+    gh.lazySingleton<_i974.OrdersRepo>(
+        () => _i749.OrderRepoImpl(gh<_i506.OrdersRemoteDataSource>()));
     gh.factory<_i378.AuthCubit>(() => _i378.AuthCubit(
           gh<_i652.AuthRepo>(),
           gh<_i558.FlutterSecureStorage>(),
@@ -103,6 +115,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1062.HomeCubit>(() => _i1062.HomeCubit(gh<_i140.HomeRepo>()));
     gh.factory<_i302.PlaceOrderCubit>(
         () => _i302.PlaceOrderCubit(gh<_i545.PlaceOrderRepo>()));
+    gh.lazySingleton<_i344.OrdersCubit>(
+        () => _i344.OrdersCubit(gh<_i974.OrdersRepo>()));
     return this;
   }
 }

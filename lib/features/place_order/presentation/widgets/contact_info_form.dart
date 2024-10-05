@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plants_app/core/cubit/app_bloc_observer.dart';
 import 'package:plants_app/core/utils/regex_utils.dart';
 import 'package:plants_app/core/widgets/default_form_field.dart';
 import 'package:plants_app/features/place_order/presentation/cubit/place_order_cubit.dart';

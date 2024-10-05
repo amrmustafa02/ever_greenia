@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lottie/lottie.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

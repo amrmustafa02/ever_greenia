@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
-import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_info_section.dart';
-import 'package:plants_app/features/cart/presentation/widgets/cart_header.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_product.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../widgets/cart_empty_widget.dart';
+import '../widgets/cart_header.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -47,7 +46,7 @@ class CartPage extends StatelessWidget {
                       height: context.height * 0.11,
                       child: const SafeArea(
                         bottom: false,
-                        child: DefaultHeader(title: "Cart"),
+                        child: CartHeader(),
                       ),
                     ),
                   ),

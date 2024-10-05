@@ -6,7 +6,6 @@ import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_font_styles.dart';
 
 class CartEmptyWidget extends StatelessWidget {
@@ -31,6 +30,7 @@ class CartEmptyWidget extends StatelessWidget {
                   SizedBox(height: 3.h),
                   SizedBox(
                     width: 50.w,
+                    height: 5.h,
                     child: DefaultButton(
                       onTap: () => context.goBack(),
                       label: "Continue Shopping",

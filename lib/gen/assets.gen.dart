@@ -152,6 +152,9 @@ class $AssetsLottieGen {
   /// File path: assets/lottie/bot2.json
   String get bot2 => 'assets/lottie/bot2.json';
 
+  /// File path: assets/lottie/cart_empty.json
+  String get cartEmpty => 'assets/lottie/cart_empty.json';
+
   /// File path: assets/lottie/error.json
   String get error => 'assets/lottie/error.json';
 
@@ -166,7 +169,7 @@ class $AssetsLottieGen {
 
   /// List of all assets
   List<String> get values =>
-      [arrow, bot1, bot2, error, plantGrow, plantsLoading, success];
+      [arrow, bot1, bot2, cartEmpty, error, plantGrow, plantsLoading, success];
 }
 
 class $AssetsTranslationsGen {

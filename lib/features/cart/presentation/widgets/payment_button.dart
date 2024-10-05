@@ -71,8 +71,10 @@ class _PaymentButtonState extends State<PaymentButton> {
                       const Duration(milliseconds: 350),
                       () {
                         if (mounted) {
+                          // ignore: use_build_context_synchronously
                           context.goToNamed(
                             RoutesName.placeOrder,
+                            // ignore: use_build_context_synchronously
                             arguments: context.read<CartCubit>().totalPrice,
                           );
                         }

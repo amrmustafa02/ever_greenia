@@ -1,19 +1,13 @@
 import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
-import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bounceable/flutter_bounceable.dart';
-import 'package:lottie/lottie.dart';
 import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
-import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
-import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:plants_app/features/home/domain/entities/category_data.dart';
 import 'package:plants_app/core/entities/product_data.dart';
@@ -24,7 +18,6 @@ import 'package:plants_app/features/home/presentation/widgets/product_item.dart'
 import 'package:plants_app/features/home/presentation/widgets/tab_bar_section.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../auth/presentation/pages/login_page.dart';
 import 'cart_empty.dart';
 import 'drawer_body.dart';
 

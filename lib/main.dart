@@ -15,6 +15,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 //   Bloc.observer = AppBlocObserver();
 //   runApp(const PlantsApp());
 // }
+
 Future<void> main() async {
   configureDependencies();
   Bloc.observer = AppBlocObserver();

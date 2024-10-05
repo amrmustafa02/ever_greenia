@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:plants_app/core/api/api_constants.dart';
+import 'package:plants_app/core/api/endpoints.dart';
 import 'package:plants_app/core/di/di.dart';
 import 'package:plants_app/core/entities/user_data.dart';
 
@@ -18,10 +19,7 @@ class MyDio {
     _dio.interceptors.addAll([
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          if (options.path.contains("cart") ||
-              options.path.contains("user") ||
-              options.path.contains("order")) {
-            log("in cart");
+          if (_isAuthPath(options.path)) {
             options.headers['auth'] = getIt<UserData>().token;
           } else if (options.path.contains("auth")) {
             options.headers = {};
@@ -29,29 +27,15 @@ class MyDio {
           } else {
             options.headers['get_key'] = 'AARS';
           }
-          log("------------------ Api request -----------------------");
-          log('send request to url: (${options.baseUrl}) and  path: (${options.path})');
-          log('Headers: ${options.headers}');
-          log('Query parameters: ${options.queryParameters}');
-          log('data: ${options.data}');
+          _printRequestLog(options);
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          log("------------------ Api response  -----------------------");
-          log("response from: ${response.realUri.host}${response.realUri.path}");
-          log("status code: ${response.statusCode}");
-          log("data: ${response.data.toString()}");
-
+          _printResponseLog(response);
           return handler.next(response); // continue
         },
         onError: (DioException e, handler) {
-          log('statusCode: ${e.response?.statusCode}');
-          log('path: ${e.requestOptions.path}');
-          log('response: ${e.response}');
-          log('data: ${e.response?.data}');
-          log("error ${e.error}");
-          log("message ${e.message}");
-          log("type ${e.type}");
+          _printErrorLog(e);
           return handler.next(e);
         },
       ),
@@ -61,6 +45,41 @@ class MyDio {
   factory MyDio.getInstance() {
     _myDio ??= MyDio._privateConstructor();
     return _myDio!;
+  }
+
+ bool  _isAuthPath(String path) {
+    List<String> authPaths = [
+      Endpoints.cart,
+      Endpoints.profile,
+      Endpoints.order,
+    ];
+
+    return authPaths.contains(path);
+  }
+
+  void _printRequestLog(RequestOptions options) {
+    log("------------------ Api request -----------------------");
+    log('send request to url: (${options.baseUrl}) and  path: (${options.path})');
+    log('Headers: ${options.headers}');
+    log('Query parameters: ${options.queryParameters}');
+    log('data: ${options.data}');
+  }
+
+  void _printResponseLog(Response response) {
+    log("------------------ Api response  -----------------------");
+    log("response from: ${response.realUri.host}${response.realUri.path}");
+    log("status code: ${response.statusCode}");
+    log("data: ${response.data.toString()}");
+  }
+
+ void  _printErrorLog(DioException e) {
+    log('statusCode: ${e.response?.statusCode}');
+    log('path: ${e.requestOptions.path}');
+    log('response: ${e.response}');
+    log('data: ${e.response?.data}');
+    log("error ${e.error}");
+    log("message ${e.message}");
+    log("type ${e.type}");
   }
 
   Future<Response> get(

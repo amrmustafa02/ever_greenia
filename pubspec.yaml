@@ -75,6 +75,7 @@ dependencies:
   image_picker:
   google_generative_ai:
   panara_dialogs:
+  flutter_chat_types:
 
 
   flutter:
