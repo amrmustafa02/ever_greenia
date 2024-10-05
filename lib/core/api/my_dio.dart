@@ -18,7 +18,9 @@ class MyDio {
     _dio.interceptors.addAll([
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          if (options.path.contains("cart") || options.path.contains("user")) {
+          if (options.path.contains("cart") ||
+              options.path.contains("user") ||
+              options.path.contains("order")) {
             log("in cart");
             options.headers['auth'] = getIt<UserData>().token;
           } else if (options.path.contains("auth")) {

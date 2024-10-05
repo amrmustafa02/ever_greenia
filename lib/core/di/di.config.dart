@@ -34,6 +34,12 @@ import 'package:plants_app/features/home/data/repos/home_repo_impl.dart'
 import 'package:plants_app/features/home/domain/repos/home_repo.dart' as _i140;
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart'
     as _i1062;
+import 'package:plants_app/features/place_order/data/data_sources/place_order_remote_data_source.dart'
+    as _i572;
+import 'package:plants_app/features/place_order/data/repo/place_order_repo_impl.dart'
+    as _i683;
+import 'package:plants_app/features/place_order/domain/repo/place_order_repo.dart'
+    as _i545;
 import 'package:plants_app/features/place_order/presentation/cubit/place_order_cubit.dart'
     as _i302;
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart'
@@ -59,7 +65,6 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final registerModule = _$RegisterModule();
-    gh.factory<_i302.PlaceOrderCubit>(() => _i302.PlaceOrderCubit());
     gh.singleton<_i1068.UserData>(() => _i1068.UserData());
     gh.lazySingleton<_i682.MyDio>(() => registerModule.myDio);
     gh.lazySingleton<_i558.FlutterSecureStorage>(
@@ -70,6 +75,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i842.ProfileRemoteDataSource(gh<_i682.MyDio>()));
     gh.lazySingleton<_i385.AuthRemoteDataSource>(
         () => _i385.AuthRemoteDataSource(gh<_i682.MyDio>()));
+    gh.lazySingleton<_i572.PlaceOrderRemoteDataSource>(
+        () => _i572.PlaceOrderRemoteDataSource(gh<_i682.MyDio>()));
     gh.singleton<_i94.HomeRemoteDataSource>(
         () => _i94.HomeRemoteDataSource(gh<_i682.MyDio>()));
     gh.lazySingleton<_i424.CartRepo>(
@@ -91,7 +98,11 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1010.HomeRepoImpl(gh<_i94.HomeRemoteDataSource>()));
     gh.factory<_i369.ProfileCubit>(
         () => _i369.ProfileCubit(gh<_i96.ProfileRepo>()));
+    gh.lazySingleton<_i545.PlaceOrderRepo>(
+        () => _i683.PlaceOrderRepoImpl(gh<_i572.PlaceOrderRemoteDataSource>()));
     gh.factory<_i1062.HomeCubit>(() => _i1062.HomeCubit(gh<_i140.HomeRepo>()));
+    gh.factory<_i302.PlaceOrderCubit>(
+        () => _i302.PlaceOrderCubit(gh<_i545.PlaceOrderRepo>()));
     return this;
   }
 }

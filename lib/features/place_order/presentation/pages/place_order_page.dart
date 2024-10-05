@@ -7,11 +7,12 @@ import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/core/widgets/default_button.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
-import 'package:plants_app/features/place_order/presentation/widgets/address_form.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/maps_section.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/payment_details_section.dart';
 import 'package:plants_app/features/place_order/presentation/widgets/payment_methods_section.dart';
+import '../../../../core/cubit/cart/cubit/cart_cubit.dart';
 import '../../../../core/routing/app_router.dart';
+import '../../../../core/utils/herlper_methods.dart';
 import '../cubit/place_order_cubit.dart';
 import '../widgets/contact_info_form.dart';
 
@@ -89,7 +90,9 @@ class _PlaceOrderPageBody extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 child: DefaultButton(
                   enableButton: enableButton,
-                  onTap: context.read<PlaceOrderCubit>().placeOrder,
+                  onTap: () => context
+                      .read<PlaceOrderCubit>()
+                      .placeOrder(context.read<CartCubit>()),
                   label: 'Place Order',
                 ),
               );
@@ -100,6 +103,9 @@ class _PlaceOrderPageBody extends StatelessWidget {
                   RoutesName.successOrder,
                   RoutesName.home,
                 );
+              }
+              if (state is FailedOrderState) {
+                HelperMethods.showErrorNotificationToast(state.error);
               }
             },
           )

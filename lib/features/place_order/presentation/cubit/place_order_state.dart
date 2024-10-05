@@ -24,3 +24,9 @@ final class UpdatePlaceOrderState extends PlaceOrderState {}
 final class UpdateLinerProgressState extends PlaceOrderState {}
 
 final class SuccessOrderState extends PlaceOrderState {}
+
+final class FailedOrderState extends PlaceOrderState {
+  final String error;
+
+  FailedOrderState(this.error);
+}

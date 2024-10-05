@@ -109,6 +109,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/s_logo.png
   AssetGenImage get sLogo => const AssetGenImage('assets/images/s_logo.png');
 
+  /// File path: assets/images/sad_face.png
+  AssetGenImage get sadFace =>
+      const AssetGenImage('assets/images/sad_face.png');
+
   /// List of all assets
   List<dynamic> get values => [
         andLogo,
@@ -131,7 +135,8 @@ class $AssetsImagesGen {
         plant,
         rLogo,
         rectancle,
-        sLogo
+        sLogo,
+        sadFace
       ];
 }
 

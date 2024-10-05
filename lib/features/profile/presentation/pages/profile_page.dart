@@ -11,6 +11,7 @@ import 'package:plants_app/core/widgets/default_button.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:regexpattern/regexpattern.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_font_styles.dart';
 import '../../../../core/utils/herlper_methods.dart';
@@ -53,7 +54,36 @@ class ProfilePageBody extends StatelessWidget {
         var cubit = context.read<ProfileCubit>();
 
         if (state is ProfileInitial) {
-          return const Center(child: CircularProgressIndicator());
+          return Skeletonizer(
+            containersColor: Colors.grey,
+            child: Column(
+              children: [
+                FadeInLeft(
+                  curve: Curves.easeInOut,
+                  duration: const Duration(milliseconds: 500),
+                  child: DefaultFormField(
+                    enabled: false,
+                    validator: (_) => null,
+                    controller: TextEditingController(text: "amr mustafa"),
+                    label: "Email",
+                    onChanged: (p0) => null,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                FadeInLeft(
+                  curve: Curves.easeInOut,
+                  duration: const Duration(milliseconds: 500),
+                  child: DefaultFormField(
+                    enabled: false,
+                    validator: (_) => null,
+                    controller: TextEditingController(text: "amr mustafa"),
+                    label: "Email",
+                    onChanged: (p0) => null,
+                  ),
+                ),
+              ],
+            ).setHorizontalPadding(),
+          );
         }
         if (state is ProfileLoadedSuccess) {
           return Column(

@@ -8,15 +8,23 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:plants_app/core/api/api_result.dart';
 import 'package:plants_app/core/constants/app_constants.dart';
+import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
+import 'package:plants_app/core/entities/user_data.dart';
+import 'package:plants_app/features/place_order/domain/repo/place_order_repo.dart';
+
+import '../../../../core/di/di.dart';
+import '../../../../core/utils/regex_utils.dart';
 
 part 'place_order_state.dart';
 
 @injectable
 class PlaceOrderCubit extends Cubit<PlaceOrderState> {
-  PlaceOrderCubit() : super(PlaceOrderInitial());
+  PlaceOrderCubit(this._orderRepo) : super(PlaceOrderInitial());
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final PlaceOrderRepo _orderRepo;
+
   late LatLng curLocation;
   late GoogleMapController googleMapController;
 
@@ -34,7 +42,6 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
   void initPrice(num itemsPrice) {
     this.itemsPrice = itemsPrice;
-
     totalPrice = itemsPrice + AppConstants.deliveryFee;
   }
 
@@ -137,7 +144,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     emit(LocationLoadedSuccess());
   }
 
-  Future<void> placeOrder() async {
+  Future<void> placeOrder(CartCubit cartCubit) async {
     HapticFeedback.heavyImpact();
     isLinerProgressEnabled = true;
     isPlaceOrderEnabled = false;
@@ -145,19 +152,37 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
     emit(UpdatePlaceOrderState());
     emit(UpdateLinerProgressState());
 
-    await Future.delayed(const Duration(seconds: 2));
+    var result = await _orderRepo.placeOrder(
+      curLocation: curLocation,
+      address: address,
+      phone: phoneController.text,
+      token: getIt<UserData>().token,
+      note: noteController.text,
+      paymentMethod: "cash",
+    );
 
-    isLinerProgressEnabled = false;
-    isPlaceOrderEnabled = true;
+    switch (result) {
+      case SuccessRequest<bool>():
+        isLinerProgressEnabled = false;
+        isPlaceOrderEnabled = true;
+        cartCubit.getCart();
 
+        emit(SuccessOrderState());
+        break;
+      case FailedRequest<bool>():
+        isLinerProgressEnabled = false;
+        isPlaceOrderEnabled = true;
+        emit(FailedOrderState(result.exception.errorMessage));
+        break;
+    }
     emit(UpdatePlaceOrderState());
     emit(UpdateLinerProgressState());
-    emit(SuccessOrderState());
   }
 
   void checkEnableToPlaceOrder() {
-    var newEnablePlaceOrder =
-        isLocationLoaded && phoneController.text.isNotEmpty;
+    var newEnablePlaceOrder = isLocationLoaded &&
+        phoneController.text.isNotEmpty &&
+        RegexUtils.checkPhone(phoneController.text);
     if (newEnablePlaceOrder != isPlaceOrderEnabled) {
       isPlaceOrderEnabled = newEnablePlaceOrder;
 

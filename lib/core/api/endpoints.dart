@@ -18,4 +18,7 @@ class Endpoints {
 
   // profile end points
   static const String profile = "user";
+
+  // order end points
+  static const String order = "order/";
 }

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
+import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_info_section.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_header.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_product.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../widgets/cart_empty_widget.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -16,6 +18,9 @@ class CartPage extends StatelessWidget {
     return BlocConsumer<CartCubit, CartState>(
       builder: (context, state) {
         var cubit = context.read<CartCubit>();
+        if(cubit.products.isEmpty) {
+          return const CartEmptyWidget();
+        }
         return IgnorePointer(
           ignoring: cubit.isLoading,
           child: Container(
@@ -42,7 +47,7 @@ class CartPage extends StatelessWidget {
                       height: context.height * 0.11,
                       child: const SafeArea(
                         bottom: false,
-                        child: CartHeader(),
+                        child: DefaultHeader(title: "Cart"),
                       ),
                     ),
                   ),
