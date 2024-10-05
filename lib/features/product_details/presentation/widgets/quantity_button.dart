@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 
-class CounterButton extends StatefulWidget {
+class QuantityButton extends StatefulWidget {
   final bool isRight;
   final void Function() onPressed;
 
-  const CounterButton(
+  const QuantityButton(
       {super.key, required this.isRight, required this.onPressed});
 
   @override
-  State<CounterButton> createState() => _CounterButtonState();
+  State<QuantityButton> createState() => _QuantityButtonState();
 }
 
-class _CounterButtonState extends State<CounterButton> {
+class _QuantityButtonState extends State<QuantityButton> {
   late double _width; // Initial width of the widget
   late double _minWidth; // Initial width of the widget
   late double _maxWidth; // Initial width of the widget

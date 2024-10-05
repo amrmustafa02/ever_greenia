@@ -32,22 +32,12 @@ class CartEmpty extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Lottie.asset(
-                  "assets/lottie/plant_grow.json",
-                  height: 8.h,
-                  repeat: false,
-                ),
                 Text(
-                  "Your cart is empty",
-                  style: AppFontStyles.readexPro700_16,
-                ),
-                Transform.flip(
-                  flipX: true,
-                  child: Lottie.asset("assets/lottie/plant_grow.json",
-                      height: 8.h, repeat: false),
+                  "Please login first",
+                  style: AppFontStyles.nunito500_18,
                 ),
               ],
             ),

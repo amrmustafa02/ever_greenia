@@ -38,7 +38,7 @@ class HelperMethods {
     _baseNotificationToast(
       message,
       seconds,
-      AppColors.darkGreen,
+      Colors.blue,
       ToastificationType.info,
     );
   }

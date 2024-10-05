@@ -7,7 +7,7 @@ import 'package:plants_app/core/extensions/widget_ext.dart';
 import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/prodcut_image_section.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/add_to_cart_section.dart';
-import 'package:plants_app/features/product_details/presentation/widgets/counter_section.dart';
+import 'package:plants_app/features/product_details/presentation/widgets/quantity_section.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/product_details_header.dart';
 
 import '../../../../core/di/di.dart';
@@ -89,7 +89,7 @@ class _ProductDetailsPageBody extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            const CounterSection(),
+            const QuantitySection(),
             const Spacer(),
             const AddToCartSection(),
             const SizedBox(height: 16),

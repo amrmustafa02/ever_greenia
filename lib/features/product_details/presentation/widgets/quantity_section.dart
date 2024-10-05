@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
-import 'package:plants_app/features/product_details/presentation/widgets/counter_button.dart';
+import 'package:plants_app/features/product_details/presentation/widgets/quantity_button.dart';
 
-class CounterSection extends StatelessWidget {
-  const CounterSection({super.key});
+class QuantitySection extends StatelessWidget {
+  const QuantitySection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CounterSection extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topLeft,
-              child: CounterButton(
+              child: QuantityButton(
                 isRight: false,
                 onPressed: cubit.decreaseQuantity,
               ),
@@ -41,7 +41,7 @@ class CounterSection extends StatelessWidget {
                   ),
             Align(
               alignment: Alignment.topRight,
-              child: CounterButton(
+              child: QuantityButton(
                 isRight: true,
                 onPressed: cubit.increaseQuantity,
               ),

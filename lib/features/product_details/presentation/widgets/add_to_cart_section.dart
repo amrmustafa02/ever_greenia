@@ -4,8 +4,11 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
+import 'package:plants_app/core/entities/user_data.dart';
+import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
+import '../../../../core/di/di.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class AddToCartSection extends StatelessWidget {
@@ -17,6 +20,11 @@ class AddToCartSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounceable(
       onTap: () {
+        if (!getIt<UserData>().isLogin) {
+          HelperMethods.showInfoNotificationToast("Please login first");
+          return;
+        }
+
         context
             .read<ProductDetailsCubit>()
             .addProductToCart(context.read<CartCubit>());

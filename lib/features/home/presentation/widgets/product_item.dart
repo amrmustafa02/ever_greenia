@@ -4,13 +4,17 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
+import 'package:plants_app/core/entities/user_data.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/string_ext.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
+import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/core/widgets/my_default_image.dart';
 import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../../core/di/di.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductData product;
@@ -83,10 +87,13 @@ class ProductItem extends StatelessWidget {
                 Skeleton.shade(
                   child: Bounceable(
                     onTap: () {
+                      if (!getIt<UserData>().isLogin) {
+                        HelperMethods.showInfoNotificationToast(
+                            "Please login first");
+                        return;
+                      }
                       context.read<HomeCubit>().addProductToCart(
-                            product.id,
-                            context.read<CartCubit>(),
-                          );
+                          product.id, context.read<CartCubit>());
                     },
                     child: Container(
                       padding: const EdgeInsets.all(16),
