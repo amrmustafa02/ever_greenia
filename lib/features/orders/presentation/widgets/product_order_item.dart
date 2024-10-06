@@ -19,8 +19,11 @@ class ProductOrderItem extends StatelessWidget {
       ),
       leading: SizedBox(
         width: 10.w,
-        child: MyDefaultImage(
-          url: product.productId!.image,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: MyDefaultImage(
+            url: product.productId!.image,
+          ),
         ),
       ),
       title: Text(

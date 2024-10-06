@@ -71,6 +71,11 @@ class _OrdersPageBody extends StatelessWidget {
 
                     if (state is OrdersInitial) {
                       return Skeletonizer(
+                        effect: const ShimmerEffect(
+                          duration: Duration(milliseconds: 850),
+                          // from: Colors.white,
+                          // to: Colors.grey.shade200,
+                        ),
                         child: ListView.builder(
                           itemCount: 2,
                           itemBuilder: (context, index) {

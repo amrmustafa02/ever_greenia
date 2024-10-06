@@ -21,7 +21,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   Future<void> getOrders() async {
     final result = await ordersRepo.getOrders();
-    Future.delayed(const Duration(milliseconds: 1500));
+    await Future.delayed(const Duration(milliseconds: 1250));
 
     switch (result) {
       case SuccessRequest<GetOrdersData>():
@@ -47,7 +47,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   Future<void> cancelOrder(String orderId) async {
     emit(CancelOrderLoading(orderId: orderId));
-    Future.delayed(const Duration(milliseconds: 2000));
+    await Future.delayed(const Duration(milliseconds: 2000));
     var result = await ordersRepo.cancelOrder(orderId);
     switch (result) {
       case SuccessRequest():
