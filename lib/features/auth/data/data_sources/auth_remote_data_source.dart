@@ -80,4 +80,18 @@ class AuthRemoteDataSource {
       );
     }
   }
+
+  Future<dynamic> resetPassword(
+      String email, String code, String password) async {
+    try {
+      var response = await _dio.put(Endpoints.resetPassword,
+          data: {"email": email, "code": code, "password": password});
+
+      return response.data;
+    } on DioException catch (e) {
+      throw FailedRequest(
+        exception: RestApiErrorHandler.handleError(e),
+      );
+    }
+  }
 }

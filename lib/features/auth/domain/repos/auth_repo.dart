@@ -11,4 +11,7 @@ abstract class AuthRepo {
   Future<ApiResult<bool>> sendPasswordResetEmail(String email);
 
   Future<ApiResult<bool>> resendCode(String email);
+
+  Future<ApiResult<bool>> resetPassword(
+      String email, String code, String password);
 }

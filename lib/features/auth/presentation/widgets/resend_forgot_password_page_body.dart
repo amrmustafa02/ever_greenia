@@ -11,7 +11,6 @@ import '../../../../core/widgets/default_form_field.dart';
 import '../widgets/circle_page_header.dart';
 
 class ResendForgotPasswordPageBody extends StatelessWidget {
-
   const ResendForgotPasswordPageBody({super.key});
 
   @override
@@ -50,7 +49,7 @@ class ResendForgotPasswordPageBody extends StatelessWidget {
                   },
                   label: 'Email',
                   onChanged: (text) {
-                    context.read<AuthCubit>().onResetPasswordFormChanged();
+                    context.read<AuthCubit>().onResendCodeFormChanged();
                     return null;
                   },
                 ),

@@ -22,7 +22,7 @@ class ResendForgotPasswordCodePage extends StatelessWidget {
               HelperMethods.showSuccessNotificationToast(
                 "Code Resend Successful",
               );
-              context.goToNamed(
+              context.goToNamedReplace(
                 RoutesName.resetPassword,
                 arguments: context.read<AuthCubit>().emailController.text,
               );

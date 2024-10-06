@@ -23,4 +23,17 @@ class OrdersRemoteDataSource {
       throw FailedRequest(exception: RestApiErrorHandler.handleError(e));
     }
   }
+
+  Future<void> cancelOrder(String orderId) async {
+    try {
+      await _dio.patch(
+        data: {
+          "status": "cancelled",
+        },
+        path: Endpoints.order + orderId,
+      );
+    } on DioException catch (e) {
+      throw FailedRequest(exception: RestApiErrorHandler.handleError(e));
+    }
+  }
 }

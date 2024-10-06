@@ -113,6 +113,23 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<void> resetPassword() async {
+    emit(AuthLoading());
+    var email = emailController.text;
+    var code = confirmCode;
+    var password = passwordController.text;
+
+    var result = await authRepo.resetPassword(email, code, password);
+
+    switch (result) {
+      case SuccessRequest():
+        emit(ResetPasswordSuccessState());
+        break;
+      case FailedRequest():
+        emit(ResetPasswordFailedState(result.exception.errorMessage));
+    }
+  }
+
   void onLoginFormChanged() {
     var isVaildEmail = emailController.text.isEmail();
 
@@ -157,8 +174,39 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void onResetPasswordFormChanged() {
+  void onResendCodeFormChanged() {
     var newResetPasswordButtonEnabled = emailController.text.isEmail();
+
+    if (isResetPasswordButtonEnabled != newResetPasswordButtonEnabled) {
+      isResetPasswordButtonEnabled = newResetPasswordButtonEnabled;
+      emit(AuthButtonChangeState());
+    }
+  }
+
+  void onNewPasswordFormChanged() {
+    var isValidPassword = passwordController.text.isPasswordHardWithspace();
+    var isEmptyField = passwordController.text.isEmpty;
+
+    var newResetPasswordButtonEnabled =
+        isValidPassword && !isEmptyField && confirmCode.length == 4;
+
+    if (isResetPasswordButtonEnabled != newResetPasswordButtonEnabled) {
+      isResetPasswordButtonEnabled = newResetPasswordButtonEnabled;
+      emit(AuthButtonChangeState());
+    }
+  }
+
+  void onResetPasswordCodeFormChanged(String code) {
+    confirmCode = code;
+    var isValidCode = code.isNumeric();
+    var isEmptyField = code.isEmpty;
+
+    var newResetPasswordButtonEnabled =
+        passwordController.text.isPasswordHardWithspace();
+
+    newResetPasswordButtonEnabled =
+        (isValidCode && !isEmptyField && confirmCode.length == 4) &&
+            newResetPasswordButtonEnabled;
 
     if (isResetPasswordButtonEnabled != newResetPasswordButtonEnabled) {
       isResetPasswordButtonEnabled = newResetPasswordButtonEnabled;

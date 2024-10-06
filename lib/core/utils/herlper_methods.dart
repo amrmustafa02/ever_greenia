@@ -86,6 +86,7 @@ class HelperMethods {
     required String title,
     required String message,
     required String confirmText,
+    String cancelText = "Cancel",
     required Function() onTapConfirm,
   }) {
     PanaraConfirmDialog.show(
@@ -96,7 +97,7 @@ class HelperMethods {
       imagePath: "assets/images/sad_face.png",
       barrierDismissible: true,
       confirmButtonText: confirmText,
-      cancelButtonText: 'Cancel',
+      cancelButtonText: cancelText,
       onTapConfirm: onTapConfirm,
       color: Colors.red,
       onTapCancel: () {

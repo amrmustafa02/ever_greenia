@@ -2,10 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
-import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:plants_app/core/utils/herlper_methods.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
@@ -14,6 +12,7 @@ import 'package:plants_app/features/auth/presentation/widgets/resend_code_sectio
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../widgets/circle_page_header.dart';
+import '../widgets/otp_section.dart';
 
 class ConfirmEmailPage extends StatelessWidget {
   const ConfirmEmailPage({super.key});
@@ -76,37 +75,12 @@ class ConfirmEmailPage extends StatelessWidget {
                         style: AppFontStyles.nunitoBold_16,
                       ),
                       SizedBox(height: 2.h),
-                      OtpTextField(
-                        numberOfFields: 4,
-                        borderRadius: BorderRadius.circular(15),
-                        borderColor: AppColors.darkGreen,
-                        disabledBorderColor: AppColors.darkGreen,
-                        enabledBorderColor: const Color(0XFFDDDDDD),
-                        focusedBorderColor: AppColors.darkGreen,
-                        borderWidth: 1,
-                        keyboardType: TextInputType.number,
-                        alignment: Alignment.center,
-                        fieldHeight: 60,
-                        fieldWidth: context.width * 0.125,
-                        showFieldAsBox: true,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: AppColors.tertiaryColor,
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                        ),
-                        onCodeChanged: (String code) {
-                          log("code: $code");
+                      OtpSection(
+                        onCodeChanged: (code) {
                           context.read<AuthCubit>().onConfirmFormChanged(code);
                         },
-                        onSubmit: (String verificationCode) {
-                          log("verificationCode: $verificationCode");
-                          context
-                              .read<AuthCubit>()
-                              .onConfirmFormChanged(verificationCode);
+                        onSubmit: (code) {
+                          context.read<AuthCubit>().onConfirmFormChanged(code);
                         },
                       ),
                       SizedBox(height: 2.h),

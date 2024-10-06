@@ -7,7 +7,8 @@ class Endpoints {
   static const String register = "$_authBaseRoute/register";
   static const String confirmEmail = "$_authBaseRoute/confirmEmail";
   static const String sendPasswordResetEmail = "$_authBaseRoute/restPassword";
-  static var resendCode = "auth";
+  static const String resendCode = "auth";
+  static const String resetPassword = "$_authBaseRoute/restPassword";
 
   // app data end points
   static const String getCategories = "category";

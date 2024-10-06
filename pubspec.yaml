@@ -78,6 +78,7 @@ dependencies:
   flutter_chat_types:
   sliver_tools:
   intl:
+  loading_animation_widget:
 
   flutter:
     sdk: flutter

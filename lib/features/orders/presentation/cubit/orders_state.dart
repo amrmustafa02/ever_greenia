@@ -14,3 +14,17 @@ final class OrdersLoadedFailure extends OrdersState {
 
   OrdersLoadedFailure(this.error);
 }
+
+final class CancelOrderLoading extends OrdersState {
+  final String orderId;
+
+  CancelOrderLoading({required this.orderId});
+}
+
+final class CancelOrderSuccess extends OrdersState {}
+
+final class CancelOrderFailure extends OrdersState {
+  final String error;
+
+  CancelOrderFailure(this.error);
+}

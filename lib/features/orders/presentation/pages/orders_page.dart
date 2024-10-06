@@ -1,5 +1,4 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
@@ -14,7 +13,6 @@ import '../../../../core/theme/app_font_styles.dart';
 import '../cubit/orders_cubit.dart';
 import '../widgets/order_empty.dart';
 import '../widgets/order_item.dart';
-
 
 class OrdersPage extends StatelessWidget {
   const OrdersPage({super.key});
@@ -114,8 +112,8 @@ class _OrdersPageBody extends StatelessWidget {
     );
   }
 
-  // String _formatDate(String date) {
-  //   DateFormat formatter = DateFormat('yyyy-MM-dd');
-  //   return formatter.format(DateTime.parse(date));
-  // }
+// String _formatDate(String date) {
+//   DateFormat formatter = DateFormat('yyyy-MM-dd');
+//   return formatter.format(DateTime.parse(date));
+// }
 }

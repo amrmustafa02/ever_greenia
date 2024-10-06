@@ -57,4 +57,15 @@ class AuthRepoRemote extends AuthRepo {
       return ApiResult.failure(error: e.exception);
     }
   }
+
+  @override
+  Future<ApiResult<bool>> resetPassword(
+      String email, String code, String password) async {
+    try {
+      await _authRemoteDataSource.resetPassword(email, code, password);
+      return ApiResult.success(data: true);
+    } on FailedRequest catch (e) {
+      return ApiResult.failure(error: e.exception);
+    }
+  }
 }
