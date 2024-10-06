@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
-import 'package:plants_app/core/utils/herlper_methods.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_info_section.dart';
 import 'package:plants_app/features/cart/presentation/widgets/cart_product.dart';
 

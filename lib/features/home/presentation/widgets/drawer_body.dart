@@ -9,7 +9,7 @@ import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
-import 'package:plants_app/core/utils/herlper_methods.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 
 import '../../../../core/routing/app_router.dart';
 import '../../../auth/presentation/pages/login_page.dart';

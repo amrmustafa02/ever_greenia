@@ -8,7 +8,7 @@ import 'package:plants_app/core/entities/user_data.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/extensions/string_ext.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
-import 'package:plants_app/core/utils/herlper_methods.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 import 'package:plants_app/core/widgets/my_default_image.dart';
 import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';

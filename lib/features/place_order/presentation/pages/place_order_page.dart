@@ -12,7 +12,7 @@ import 'package:plants_app/features/place_order/presentation/widgets/payment_det
 import 'package:plants_app/features/place_order/presentation/widgets/payment_methods_section.dart';
 import '../../../../core/cubit/cart/cubit/cart_cubit.dart';
 import '../../../../core/routing/app_router.dart';
-import '../../../../core/utils/herlper_methods.dart';
+import '../../../../core/utils/helper_methods.dart';
 import '../cubit/place_order_cubit.dart';
 import '../widgets/contact_info_form.dart';
 

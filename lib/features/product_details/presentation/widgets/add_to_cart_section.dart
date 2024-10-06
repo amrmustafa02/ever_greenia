@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/cubit/cart/cubit/cart_cubit.dart';
 import 'package:plants_app/core/entities/user_data.dart';
-import 'package:plants_app/core/utils/herlper_methods.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 import 'package:plants_app/features/product_details/presentation/cubit/product_details_cubit.dart';
 
 import '../../../../core/di/di.dart';

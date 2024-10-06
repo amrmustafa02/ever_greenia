@@ -5,7 +5,7 @@ import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
-import 'package:plants_app/core/utils/herlper_methods.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 import 'package:plants_app/features/orders/domain/entities/order_data.dart';
 import 'package:plants_app/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:plants_app/features/orders/presentation/widgets/product_order_item.dart';

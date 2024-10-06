@@ -14,7 +14,7 @@ import 'package:regexpattern/regexpattern.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_font_styles.dart';
-import '../../../../core/utils/herlper_methods.dart';
+import '../../../../core/utils/helper_methods.dart';
 import '../cubit/profile_cubit.dart';
 import '../../../../core/widgets/default_form_field.dart';
 

@@ -5,7 +5,7 @@ import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 
 import '../../../../core/di/di.dart';
-import '../../../../core/utils/herlper_methods.dart';
+import '../../../../core/utils/helper_methods.dart';
 import '../widgets/resend_forgot_password_page_body.dart';
 
 class ResendForgotPasswordCodePage extends StatelessWidget {

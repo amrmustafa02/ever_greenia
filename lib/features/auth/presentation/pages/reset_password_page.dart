@@ -5,7 +5,7 @@ import 'package:plants_app/features/auth/presentation/widgets/reset_password_pag
 
 import '../../../../core/di/di.dart';
 import '../../../../core/routing/app_router.dart';
-import '../../../../core/utils/herlper_methods.dart';
+import '../../../../core/utils/helper_methods.dart';
 import '../cubit/auth_cubit.dart';
 
 class ResetPasswordPage extends StatelessWidget {

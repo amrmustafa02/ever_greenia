@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/di/di.dart';
-import 'package:plants_app/core/utils/herlper_methods.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_page_body.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_page_error.dart';
 import '../cubit/home_cubit.dart';

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/entities/product_data.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
-import 'package:plants_app/core/utils/herlper_methods.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/prodcut_image_section.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/add_to_cart_section.dart';
 import 'package:plants_app/features/product_details/presentation/widgets/quantity_section.dart';
