@@ -27,50 +27,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   bool isAuthButtonEnabled = false;
   bool isConfirmButtonEnabled = false;
-
-  void onLoginFormChanged() {
-    var isVaildEmail = emailController.text.isEmail();
-
-    var isEmptyField =
-        emailController.text.isEmpty || passwordController.text.isEmpty;
-    var newLoginButtonEnabled = isVaildEmail && !isEmptyField;
-
-    if (isAuthButtonEnabled != newLoginButtonEnabled) {
-      isAuthButtonEnabled = newLoginButtonEnabled;
-      emit(AuthButtonChangeState());
-    }
-  }
-
-  void onRegisterFormChanged() {
-    var isVaildEmail = emailController.text.isEmail();
-    var isVaildPassword = passwordController.text.isPasswordHardWithspace();
-
-    var isEmptyField =
-        emailController.text.isEmpty || passwordController.text.isEmpty;
-
-    var newRegisterButtonEnabled =
-        isVaildEmail && isVaildPassword && !isEmptyField;
-
-    if (isAuthButtonEnabled != newRegisterButtonEnabled) {
-      isAuthButtonEnabled = newRegisterButtonEnabled;
-      log(" isRegisterButtonEnabled: $isAuthButtonEnabled");
-      emit(AuthButtonChangeState());
-    }
-  }
-
-  void onConfirmFormChanged(String code) {
-    confirmCode = code;
-    var isVaildCode = code.isNumeric();
-    var isEmptyField = code.isEmpty;
-
-    var newConfirmButtonEnabled =
-        isVaildCode && !isEmptyField && confirmCode.length == 4;
-
-    if (isConfirmButtonEnabled != newConfirmButtonEnabled) {
-      isConfirmButtonEnabled = newConfirmButtonEnabled;
-      emit(AuthButtonChangeState());
-    }
-  }
+  bool isResetPasswordButtonEnabled = false;
 
   void initEmail(String email) {
     emailController.text = email;
@@ -145,7 +102,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> resendCode() async {
-
     var result = await authRepo.resendCode(emailController.text);
 
     switch (result) {
@@ -154,6 +110,59 @@ class AuthCubit extends Cubit<AuthState> {
         break;
       case FailedRequest():
         emit(ResendCodeFailedState(result.exception.errorMessage));
+    }
+  }
+
+  void onLoginFormChanged() {
+    var isVaildEmail = emailController.text.isEmail();
+
+    var isEmptyField =
+        emailController.text.isEmpty || passwordController.text.isEmpty;
+    var newLoginButtonEnabled = isVaildEmail && !isEmptyField;
+
+    if (isAuthButtonEnabled != newLoginButtonEnabled) {
+      isAuthButtonEnabled = newLoginButtonEnabled;
+      emit(AuthButtonChangeState());
+    }
+  }
+
+  void onRegisterFormChanged() {
+    var isValidEmail = emailController.text.isEmail();
+    var isValidPassword = passwordController.text.isPasswordHardWithspace();
+
+    var isEmptyField =
+        emailController.text.isEmpty || passwordController.text.isEmpty;
+
+    var newRegisterButtonEnabled =
+        isValidEmail && isValidPassword && !isEmptyField;
+
+    if (isAuthButtonEnabled != newRegisterButtonEnabled) {
+      isAuthButtonEnabled = newRegisterButtonEnabled;
+      log(" isRegisterButtonEnabled: $isAuthButtonEnabled");
+      emit(AuthButtonChangeState());
+    }
+  }
+
+  void onConfirmFormChanged(String code) {
+    confirmCode = code;
+    var isValidCode = code.isNumeric();
+    var isEmptyField = code.isEmpty;
+
+    var newConfirmButtonEnabled =
+        isValidCode && !isEmptyField && confirmCode.length == 4;
+
+    if (isConfirmButtonEnabled != newConfirmButtonEnabled) {
+      isConfirmButtonEnabled = newConfirmButtonEnabled;
+      emit(AuthButtonChangeState());
+    }
+  }
+
+  void onResetPasswordFormChanged() {
+    var newResetPasswordButtonEnabled = emailController.text.isEmail();
+
+    if (isResetPasswordButtonEnabled != newResetPasswordButtonEnabled) {
+      isResetPasswordButtonEnabled = newResetPasswordButtonEnabled;
+      emit(AuthButtonChangeState());
     }
   }
 }

@@ -33,6 +33,28 @@ class OrderData {
     required this.updatedAt,
     required this.v,
   });
+
+  factory OrderData.fromFakeData() {
+    return OrderData(
+      id: "id",
+      userId: "userId",
+      products: [
+        OrderProductData.fromFakeData(),
+        OrderProductData.fromFakeData(),
+      ],
+      lat: 0,
+      lng: 0,
+      address: "address",
+      paymentMethod: "paymentMethod",
+      amount: 0,
+      totalPrice: 0,
+      phone: "phone",
+      status: "status",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      v: 0,
+    );
+  }
 }
 
 class OrderProductData {
@@ -45,6 +67,14 @@ class OrderProductData {
     required this.quantity,
     required this.id,
   });
+
+  factory OrderProductData.fromFakeData() {
+    return OrderProductData(
+      productId: ProductData.fakeDate("test"),
+      quantity: 0,
+      id: "id",
+    );
+  }
 }
 
 // get_orders_entity.dart

@@ -30,7 +30,9 @@ class ProductData {
     this.updatedAt,
     this.heroId = "",
   });
+
   String get name => originalName.toTitleCase();
+
   factory ProductData.fakeDate(String id) {
     return ProductData(
       id: id,

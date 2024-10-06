@@ -115,7 +115,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1062.HomeCubit>(() => _i1062.HomeCubit(gh<_i140.HomeRepo>()));
     gh.factory<_i302.PlaceOrderCubit>(
         () => _i302.PlaceOrderCubit(gh<_i545.PlaceOrderRepo>()));
-    gh.lazySingleton<_i344.OrdersCubit>(
+    gh.factory<_i344.OrdersCubit>(
         () => _i344.OrdersCubit(gh<_i974.OrdersRepo>()));
     return this;
   }

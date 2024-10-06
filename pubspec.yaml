@@ -76,7 +76,8 @@ dependencies:
   google_generative_ai:
   panara_dialogs:
   flutter_chat_types:
-
+  sliver_tools:
+  intl:
 
   flutter:
     sdk: flutter

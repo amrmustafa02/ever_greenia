@@ -1,7 +1,5 @@
 
-
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/cubit/app_bloc_observer.dart';
@@ -19,6 +17,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 Future<void> main() async {
   configureDependencies();
   Bloc.observer = AppBlocObserver();
+
   await SentryFlutter.init(
     (options) {
       options.dsn =
@@ -31,4 +30,5 @@ Future<void> main() async {
     },
     appRunner: () => runApp(const PlantsApp()),
   );
+
 }

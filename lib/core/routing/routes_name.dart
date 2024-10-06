@@ -16,4 +16,6 @@ class RoutesName {
   static const String successOrder = "/success_order";
   static const String bot = "/bot";
   static const String profile = "/profile";
+  static const String resendCode = "/resend_code";
+  static const String resetPassword = "/reset_password";
 }

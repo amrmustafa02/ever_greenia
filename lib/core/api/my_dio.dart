@@ -22,7 +22,6 @@ class MyDio {
           if (_isAuthPath(options.path)) {
             options.headers['auth'] = getIt<UserData>().token;
           } else if (options.path.contains("auth")) {
-            options.headers = {};
             _dio.options.baseUrl = ApiConstants.authBaseUrl;
           } else {
             options.headers['get_key'] = 'AARS';
@@ -47,14 +46,14 @@ class MyDio {
     return _myDio!;
   }
 
- bool  _isAuthPath(String path) {
+  bool _isAuthPath(String path) {
     List<String> authPaths = [
       Endpoints.cart,
       Endpoints.profile,
       Endpoints.order,
     ];
 
-    return authPaths.contains(path);
+    return authPaths.where((e) => path.contains(e)).isNotEmpty;
   }
 
   void _printRequestLog(RequestOptions options) {
@@ -72,7 +71,7 @@ class MyDio {
     log("data: ${response.data.toString()}");
   }
 
- void  _printErrorLog(DioException e) {
+  void _printErrorLog(DioException e) {
     log('statusCode: ${e.response?.statusCode}');
     log('path: ${e.requestOptions.path}');
     log('response: ${e.response}');

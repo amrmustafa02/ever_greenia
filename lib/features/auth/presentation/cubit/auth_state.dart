@@ -40,3 +40,13 @@ final class ResendCodeFailedState extends AuthState {
 
   ResendCodeFailedState(this.error);
 }
+
+final class ResetPasswordLoadingState extends AuthState {}
+
+final class ResetPasswordSuccessState extends AuthState {}
+
+final class ResetPasswordFailedState extends AuthState {
+  final String error;
+
+  ResetPasswordFailedState(this.error);
+}

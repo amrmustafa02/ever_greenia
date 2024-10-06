@@ -4,7 +4,6 @@ import 'package:lottie/lottie.dart';
 
 class MyDefaultImage extends StatelessWidget {
   final String url;
-
   const MyDefaultImage({
     super.key,
     required this.url,

@@ -8,6 +8,8 @@ import 'package:plants_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:plants_app/features/auth/presentation/pages/confirm_email_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/login_page.dart';
 import 'package:plants_app/features/auth/presentation/pages/register_page.dart';
+import 'package:plants_app/features/auth/presentation/pages/resend_forgot_password_code_page.dart';
+import 'package:plants_app/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:plants_app/features/bot/presentation/pages/bot_page.dart';
 import 'package:plants_app/features/cart/presentation/pages/cart_page.dart';
 import 'package:plants_app/core/entities/product_data.dart';
@@ -141,6 +143,23 @@ class AppRouter {
         return PageTransition(
           child: const ProfilePage(),
           type: PageTransitionType.rightToLeft,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 500),
+          settings: settings, // Add settings here
+        );
+      case RoutesName.resendCode:
+        return PageTransition(
+          child: const ResendForgotPasswordCodePage(),
+          type: PageTransitionType.bottomToTop,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 500),
+          settings: settings, // Add settings here
+        );
+      case RoutesName.resetPassword:
+        var email = settings.arguments as String;
+        return PageTransition(
+          child: ResetPasswordPage(email: email),
+          type: PageTransitionType.bottomToTop,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 500),
           settings: settings, // Add settings here

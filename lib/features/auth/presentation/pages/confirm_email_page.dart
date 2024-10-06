@@ -13,6 +13,8 @@ import 'package:plants_app/features/auth/presentation/widgets/login_button.dart'
 import 'package:plants_app/features/auth/presentation/widgets/resend_code_section.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../widgets/circle_page_header.dart';
+
 class ConfirmEmailPage extends StatelessWidget {
   const ConfirmEmailPage({super.key});
 
@@ -50,47 +52,8 @@ class ConfirmEmailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Image.asset(
-                      "assets/images/circle_1.png",
-                      height: 25.h,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Image.asset(
-                      "assets/images/circle_2.png",
-                      width: 100.w,
-                      fit: BoxFit.fill,
-                      height: 30.h,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.h),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Image.asset(
-                        "assets/images/confirm_page_image.png",
-                        width: 60.w,
-                      ),
-                    ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        onPressed: () {
-                          context.goBack();
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_new),
-                      ),
-                    ),
-                  ),
-                ],
+              const CirclePageHeader(
+                imageUrl: "assets/images/confirm_page_image.png",
               ),
               Expanded(
                 child: SingleChildScrollView(

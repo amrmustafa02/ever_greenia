@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../../core/routing/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_font_styles.dart';
 
@@ -84,6 +85,7 @@ class SuccessOrderPage extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
+                        context.goToNamedReplace(RoutesName.orders);
                       },
                       child: Text(
                         'Go to Orders',
