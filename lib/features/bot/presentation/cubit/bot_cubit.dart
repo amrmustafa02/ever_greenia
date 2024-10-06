@@ -28,16 +28,14 @@ class BotCubit extends Cubit<BotState> {
 
   void load() async {
     await Future.wait([
-      player.setSourceAsset(
-        "audio/Flora Bot.wav",
-      ),
+      player.setSourceAsset("audio/Flora Bot.wav"),
       Future.delayed(const Duration(seconds: 1))
     ]);
 
-    player.play(AssetSource("audio/Flora Bot.wav")).then(
-          (value) {},
-        );
+    if (messages.isEmpty) player.play(AssetSource("audio/Flora Bot.wav"));
+
     isPlaying = true;
+
     emit(BotLoadedSuccess());
   }
 
