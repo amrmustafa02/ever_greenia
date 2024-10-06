@@ -8,9 +8,11 @@ class HomeHeader extends StatelessWidget {
   const HomeHeader({
     super.key,
     required this.onTap,
+    this.showDrawer = true,
   });
 
   final Function() onTap;
+  final bool showDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +52,14 @@ class HomeHeader extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            FadeInRight(
-              child: IconButton(
-                onPressed: onTap,
-                icon: const Icon(
-                  Icons.menu,
+            Visibility(
+              visible: showDrawer,
+              child: FadeInRight(
+                child: IconButton(
+                  onPressed: onTap,
+                  icon: const Icon(
+                    Icons.menu,
+                  ),
                 ),
               ),
             )

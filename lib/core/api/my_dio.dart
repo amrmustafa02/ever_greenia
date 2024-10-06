@@ -19,10 +19,15 @@ class MyDio {
     _dio.interceptors.addAll([
       InterceptorsWrapper(
         onRequest: (options, handler) {
+          options.baseUrl = ApiConstants.baseUrl;
+
           if (_isAuthPath(options.path)) {
             options.headers['auth'] = getIt<UserData>().token;
-          } else if (options.path.contains("auth")) {
-            _dio.options.baseUrl = ApiConstants.authBaseUrl;
+          }
+          if (options.path.contains("auth")) {
+            log("auth url: ${options.path}");
+            options.baseUrl = ApiConstants.authBaseUrl;
+            log("base url: ${options.baseUrl}");
           } else {
             options.headers['get_key'] = 'AARS';
           }

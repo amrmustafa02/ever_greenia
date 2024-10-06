@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,6 +40,9 @@ class _CartSectionState extends State<CartSection> {
           current is CartLoaded || current is CartInitial,
       builder: (context, state) {
         var cubit = context.read<CartCubit>();
+        if (state is CartError) {
+          return const SizedBox.shrink();
+        }
         return Skeletonizer(
           enabled: cubit.isLoading,
           child: GestureDetector(
@@ -52,9 +53,6 @@ class _CartSectionState extends State<CartSection> {
               context.goToNamed(RoutesName.cart);
             },
             onVerticalDragUpdate: (c) {
-              log("headerHeight: $headerHeight");
-              log("delta: ${c.delta.dy}");
-
               setState(() {
                 headerHeight = headerHeight - c.delta.dy;
                 if (headerHeight > _maxHeight) {

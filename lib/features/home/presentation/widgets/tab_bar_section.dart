@@ -6,6 +6,7 @@ import 'package:plants_app/features/home/presentation/widgets/tab_item.dart';
 
 class TabBarSection extends StatelessWidget {
   final List<CategoryData> categories;
+
   const TabBarSection({super.key, required this.categories});
 
   @override

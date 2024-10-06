@@ -9,6 +9,7 @@ import '../cubit/onboarding_cubit.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -31,6 +32,7 @@ class _OnboardingPageBody extends StatefulWidget {
 
 class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
   late AssetImage _image;
+
   @override
   void initState() {
     super.initState();
@@ -62,7 +64,7 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
               children: [
                 const Spacer(),
                 Text(
-                  'GrowGreen',
+                  'EverGreenia',
                   style: AppFontStyles.readexPro600_12.copyWith(
                     color: Colors.white,
                     fontSize: 32.sp,
@@ -116,7 +118,7 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
                       context.goToNamedReplace(RoutesName.home);
                     },
                     child: Text(
-                      'Get Started',
+                      'Explore The App',
                       style: AppFontStyles.nunito600_16,
                     ),
                   ),

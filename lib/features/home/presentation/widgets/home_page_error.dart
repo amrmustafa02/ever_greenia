@@ -16,6 +16,7 @@ class HomePageError extends StatelessWidget {
           children: [
             HomeHeader(
               onTap: () {},
+              showDrawer: false,
             ),
             LottieBuilder.asset("assets/lottie/error.json", width: 90.h),
             SizedBox(height: 5.h),

@@ -1,5 +1,5 @@
 class AppConstants {
   AppConstants._();
 
-  static num deliveryFee = 18;
+  static num deliveryFee = 0;
 }

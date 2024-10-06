@@ -111,7 +111,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                 const Spacer(),
                 Visibility(
                   visible: context.read<MainCubit>().isUserLogged,
-                  replacement: const CartEmpty(),
+                  replacement: const CartNotLoggedUser(),
                   child: const Skeleton.keep(child: CartSection()),
                 ),
               ],

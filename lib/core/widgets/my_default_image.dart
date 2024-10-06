@@ -3,7 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:lottie/lottie.dart';
 
 class MyDefaultImage extends StatelessWidget {
-  final String url;
+  final String? url;
+
   const MyDefaultImage({
     super.key,
     required this.url,
@@ -11,8 +12,8 @@ class MyDefaultImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: url,
+    return url == null ? const SizedBox() : CachedNetworkImage(
+      imageUrl: url!,
       progressIndicatorBuilder: (context, url, progress) {
         return Center(
           child: LottieBuilder.asset(

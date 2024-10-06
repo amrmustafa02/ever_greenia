@@ -55,6 +55,7 @@ class _OrdersPageBody extends StatelessWidget {
                   onTap: (value) {
                     context.read<OrdersCubit>().onTabBarPressed(value);
                   },
+                  overlayColor: WidgetStateProperty.all(Colors.transparent),
                   tabs: const [
                     Tab(text: 'Pending'),
                     Tab(text: 'In Progress'),

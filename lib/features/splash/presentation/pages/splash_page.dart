@@ -60,7 +60,7 @@ class _SplashPageState extends State<SplashPage> {
               ZoomIn(
                 duration: const Duration(milliseconds: 3000),
                 child: Text(
-                  'GrowGreen',
+                  'EverGreenia',
                   style: AppFontStyles.readexPro500_20.copyWith(
                     color: AppColors.darkGreen,
                   ),

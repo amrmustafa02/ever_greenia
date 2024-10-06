@@ -5,6 +5,7 @@ import 'package:plants_app/core/theme/app_colors.dart';
 class TabItem extends StatelessWidget {
   final String text;
   final bool isActive;
+
   const TabItem({
     super.key,
     required this.isActive,
@@ -22,11 +23,12 @@ class TabItem extends StatelessWidget {
             horizontal: 2,
           ),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: Colors.white,
-              border: Border.all(
-                color: AppColors.darkGreen,
-              )),
+            borderRadius: BorderRadius.circular(25),
+            color: Colors.white,
+            border: Border.all(
+              color: AppColors.darkGreen,
+            ),
+          ),
           child: Container(
             padding: const EdgeInsets.symmetric(
               vertical: 8,

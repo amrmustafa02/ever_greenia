@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:plants_app/core/api/api_result.dart';
+import 'package:plants_app/core/constants/app_constants.dart';
 import 'package:plants_app/core/entities/cart_data.dart';
 import 'package:plants_app/core/repos/cart_repo.dart';
 
@@ -30,13 +31,16 @@ class CartCubit extends Cubit<CartState> {
           totalPrice = result.data.totalPrice;
           productQuantity = result.data.quantity;
           isLoading = false;
+          AppConstants.deliveryFee = result.data.deliveryFees;
           emit(CartLoaded());
           break;
         case FailedRequest():
           isLoading = false;
+          emit(CartLoaded());
           emit(CartError(result.exception.errorMessage));
       }
     } catch (e) {
+      isLoading = false;
       emit(CartError(e.toString()));
     }
   }
@@ -86,9 +90,11 @@ class CartCubit extends Cubit<CartState> {
           getCart();
           break;
         case FailedRequest():
+          isLoading = false;
           emit(CartError(result.exception.errorMessage));
       }
     } catch (e) {
+      isLoading = false;
       emit(CartError(e.toString()));
     }
   }

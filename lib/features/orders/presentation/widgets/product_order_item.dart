@@ -22,18 +22,18 @@ class ProductOrderItem extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: MyDefaultImage(
-            url: product.productId!.image,
+            url: product.productId?.image,
           ),
         ),
       ),
       title: Text(
-        product.productId!.name,
+        product.productId?.name.toString() ?? "",
         style: AppFontStyles.readexPro400_14.copyWith(
           color: AppColors.darkBlueColor,
         ),
       ),
       subtitle: Text(
-        "\$${product.productId!.price}",
+        "\$${product.productId?.price}",
         style: AppFontStyles.readexPro400_14.copyWith(
           color: AppColors.darkGreen,
         ),

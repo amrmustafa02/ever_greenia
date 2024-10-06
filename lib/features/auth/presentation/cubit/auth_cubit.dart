@@ -10,6 +10,8 @@ import 'package:plants_app/core/entities/user_data.dart';
 import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:regexpattern/regexpattern.dart';
 
+import '../../data/models/login_response_model/login_response_model.dart';
+
 part 'auth_state.dart';
 
 @injectable
@@ -38,9 +40,14 @@ class AuthCubit extends Cubit<AuthState> {
 
     var email = emailController.text;
     var password = passwordController.text;
+    late ApiResult<LoginResponseModel> result;
 
-    var result = await authRepo.login(email, password);
-
+    try {
+      result = await authRepo.login(email, password);
+    } catch (e) {
+      emit(AuthLoadedFailure(e.toString()));
+      return;
+    }
     switch (result) {
       case SuccessRequest():
         await Future.wait(

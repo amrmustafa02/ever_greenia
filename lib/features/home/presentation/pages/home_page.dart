@@ -50,8 +50,7 @@ class HomePage extends StatelessWidget {
           if (state is AddToCartSuccessState) {
             Navigator.pop(context);
             HelperMethods.showSuccessNotificationToast(
-              "Added to cart successfully",
-            );
+                "Added to cart successfully");
           }
           if (state is AddToCartFailureState) {
             Navigator.pop(context);

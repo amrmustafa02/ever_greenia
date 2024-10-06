@@ -72,6 +72,9 @@ class _DefaultFormFieldState extends State<DefaultFormField> {
       keyboardType: widget.keyboardType,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: widget.controller,
+      onTapOutside: (_) {
+        FocusScope.of(context).unfocus();
+      }
     );
   }
 
