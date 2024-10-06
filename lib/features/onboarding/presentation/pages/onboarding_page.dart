@@ -67,7 +67,7 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
                   'EverGreenia',
                   style: AppFontStyles.readexPro600_12.copyWith(
                     color: Colors.white,
-                    fontSize: 32.sp,
+                    fontSize: 28.sp,
                   ),
                 ),
                 Text(
@@ -118,7 +118,7 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
                       context.goToNamedReplace(RoutesName.home);
                     },
                     child: Text(
-                      'Explore The App',
+                      'Explore Our App',
                       style: AppFontStyles.nunito600_16,
                     ),
                   ),
