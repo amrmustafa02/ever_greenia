@@ -23,7 +23,7 @@ class OrderRepoImpl extends OrdersRepo {
   @override
   Future<ApiResult<bool>> cancelOrder(String orderId) async {
     try {
-      var response = await _dataSource.cancelOrder(orderId);
+       await _dataSource.cancelOrder(orderId);
       return ApiResult.success(data: true);
     } on FailedRequest catch (e) {
       return ApiResult.failure(error: e.exception);

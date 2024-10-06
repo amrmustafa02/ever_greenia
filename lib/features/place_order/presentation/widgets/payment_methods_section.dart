@@ -13,29 +13,29 @@ class PaymentMethodsSection extends StatefulWidget {
 }
 
 class _PaymentMethodsSectionState extends State<PaymentMethodsSection> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Bounceable(
-          onTap: () {
-            if (selectedIndex == 0) return;
-
-            setState(() {
-              HapticFeedback.heavyImpact();
-              selectedIndex = 0;
-            });
-          },
-          child: PaymentMethodItem(
-            isSelected: selectedIndex == 0,
-            label: 'Credit Card',
-            icon: EneftyIcons.cards_bold,
-          ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
+        // Bounceable(
+        //   onTap: () {
+        //     if (selectedIndex == 0) return;
+        //
+        //     setState(() {
+        //       HapticFeedback.heavyImpact();
+        //       selectedIndex = 0;
+        //     });
+        //   },
+        //   child: PaymentMethodItem(
+        //     isSelected: selectedIndex == 0,
+        //     label: 'Credit Card',
+        //     icon: EneftyIcons.cards_bold,
+        //   ),
+        // ),
+        // const SizedBox(
+        //   height: 16,
+        // ),
         Bounceable(
           onTap: () {
             if (selectedIndex == 1) return;
