@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
@@ -56,66 +55,59 @@ class _HomePageBodyState extends State<HomePageBody> {
       ),
       child: MyScaffold(
         child: Center(
-          child: DefaultTabController(
-            length: widget.categories.length,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                HomeHeader(
-                  key: const ValueKey("HomeHeader"),
-                  onTap: () {
-                    _advancedDrawerController.showDrawer();
-                  },
-                ),
-                Skeletonizer(
-                  enabled: context.read<HomeCubit>().isLoading,
-                  child: Skeleton.shade(
-                    // :context.read<HomeCubit>().isLoading,
-                    child: TabBarSection(
-                      categories: widget.categories,
-                    ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              HomeHeader(
+                onTap: () {
+                  _advancedDrawerController.showDrawer();
+                },
+              ),
+              Skeletonizer(
+                enabled: context.read<HomeCubit>().isLoading,
+                child: Skeleton.shade(
+                  child: TabBarSection(
+                    categories: widget.categories,
                   ),
                 ),
-                const SizedBox(height: 32),
-                const Spacer(),
-                Skeletonizer(
-                  enabled: context.read<HomeCubit>().isLoading,
-                  child: SizedBox(
-                    height: context.height * 0.50,
-                    width: context.width * 0.85,
-                    child: AppinioSwiper(
-                      initialIndex: 0,
-                      loop: false,
-                      onEnd: context.read<HomeCubit>().refreshItems,
-                      key: context.read<HomeCubit>().listKey,
-                      allowUnlimitedUnSwipe: true,
-                      backgroundCardScale: 0.95,
-                      backgroundCardCount: 2,
-                      duration: const Duration(milliseconds: 500),
-                      // invertAngleOnBottomDrag: true,
-                      backgroundCardOffset: const Offset(00, -40),
-                      cardBuilder: (BuildContext context, int index) {
-                        log("index: $index");
-                        return ZoomIn(
-                          duration: Duration(milliseconds: 500 * index),
-                          child: ProductItem(
-                            product: widget.curProducts[index],
-                          ),
-                        );
-                      },
-                      cardCount: widget.curProducts.length,
-                    ),
+              ),
+              const SizedBox(height: 16),
+              const Spacer(),
+              Skeletonizer(
+                enabled: context.read<HomeCubit>().isLoading,
+                child: SizedBox(
+                  height: context.height * 0.50,
+                  width: context.width * 0.85,
+                  child: AppinioSwiper(
+                    initialIndex: 0,
+                    loop: false,
+                    onEnd: context.read<HomeCubit>().refreshItems,
+                    key: context.read<HomeCubit>().listKey,
+                    allowUnlimitedUnSwipe: true,
+                    backgroundCardScale: 0.95,
+                    backgroundCardCount: 2,
+                    duration: const Duration(milliseconds: 500),
+                    backgroundCardOffset: const Offset(00, -40),
+                    cardBuilder: (BuildContext context, int index) {
+                      return ZoomIn(
+                        duration: Duration(milliseconds: 500 * index),
+                        child: ProductItem(
+                          product: widget.curProducts[index],
+                        ),
+                      );
+                    },
+                    cardCount: widget.curProducts.length,
                   ),
                 ),
-                const Spacer(),
-                Visibility(
-                  visible: context.read<MainCubit>().isUserLogged,
-                  replacement: const CartNotLoggedUser(),
-                  child: const Skeleton.keep(child: CartSection()),
-                ),
-              ],
-            ),
+              ),
+              const Spacer(),
+              Visibility(
+                visible: context.read<MainCubit>().isUserLogged,
+                replacement: const CartNotLoggedUser(),
+                child: const Skeleton.keep(child: CartSection()),
+              ),
+            ],
           ),
         ),
       ),

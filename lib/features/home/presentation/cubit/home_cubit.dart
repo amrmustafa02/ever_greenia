@@ -116,7 +116,7 @@ class HomeCubit extends Cubit<HomeState> {
     if (result) {
       emit(AddToCartSuccessState());
     } else {
-      emit(AddToCartFailureState("Failed to add product to cart"));
+      emit(AddToCartFailureState("Quantity not available"));
     }
   }
 }

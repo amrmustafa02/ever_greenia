@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TabItem extends StatelessWidget {
   final String text;
@@ -15,7 +16,7 @@ class TabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55,
+      height: 7.h,
       child: Tab(
         icon: Container(
           padding: const EdgeInsets.symmetric(

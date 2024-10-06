@@ -2,9 +2,11 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/extensions/widget_ext.dart';
+import 'package:plants_app/core/utils/helper_methods.dart';
 import 'package:plants_app/core/widgets/default_header.dart';
 import 'package:plants_app/core/widgets/my_scaffold.dart';
 import 'package:plants_app/features/orders/domain/entities/order_data.dart';
+import 'package:plants_app/features/orders/presentation/widgets/orders_error.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/di/di.dart';
@@ -66,7 +68,7 @@ class _OrdersPageBody extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Expanded(
-                child: BlocBuilder<OrdersCubit, OrdersState>(
+                child: BlocConsumer<OrdersCubit, OrdersState>(
                   builder: (context, state) {
                     var cubit = context.read<OrdersCubit>();
 
@@ -84,6 +86,15 @@ class _OrdersPageBody extends StatelessWidget {
                             return OrderItem(order: order);
                           },
                         ),
+                      ).setHorizontalPadding();
+                    }
+
+                    if(state is OrdersLoadedFailure) {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          context.read<OrdersCubit>().refresh();
+                        },
+                        child: const OrdersErrorWidget(),
                       ).setHorizontalPadding();
                     }
 
@@ -108,6 +119,11 @@ class _OrdersPageBody extends StatelessWidget {
                         ),
                       ).setHorizontalPadding(),
                     );
+                  },
+                  listener: (BuildContext context, OrdersState state) {
+                    if (state is CancelOrderFailure) {
+                      HelperMethods.showErrorNotificationToast(state.error);
+                    }
                   },
                 ),
               )
