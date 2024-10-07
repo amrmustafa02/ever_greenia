@@ -20,14 +20,15 @@ class MyDio {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           options.baseUrl = ApiConstants.baseUrl;
-
           if (_isAuthPath(options.path)) {
             options.headers['auth'] = getIt<UserData>().token;
           }
-          if (options.path.contains("auth")) {
-            log("auth url: ${options.path}");
+          if (options.path.contains("login") ||
+              options.path.contains("restPassword") ||
+              options.path.contains("confirmEmail")) {
+            options.baseUrl = ApiConstants.baseUrl;
+          } else if (options.path.contains("auth")) {
             options.baseUrl = ApiConstants.authBaseUrl;
-            log("base url: ${options.baseUrl}");
           } else {
             options.headers['get_key'] = 'AARS';
           }

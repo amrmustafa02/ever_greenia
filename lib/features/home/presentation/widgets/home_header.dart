@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plants_app/features/home/presentation/widgets/search_bar.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -16,7 +19,6 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("HomeHeader: build: $key");
     return SafeArea(
       bottom: false,
       child: Padding(
@@ -25,7 +27,7 @@ class HomeHeader extends StatelessWidget {
           vertical: 8.0,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FadeInLeft(
               key: const ValueKey("HomeHeader"),
@@ -52,6 +54,12 @@ class HomeHeader extends StatelessWidget {
               ),
             ),
             const Spacer(),
+            // AnimSearchBar(
+            //   width: 80.w,
+            //   textController: TextEditingController(),
+            //   onSuffixTap: null,
+            //   onSubmitted: (value) {},
+            // ),
             Visibility(
               visible: showDrawer,
               child: FadeInRight(
@@ -67,5 +75,11 @@ class HomeHeader extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  startTimer() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      log("timer");
+    });
   }
 }
