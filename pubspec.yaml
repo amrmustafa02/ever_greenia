@@ -32,7 +32,6 @@ dependencies:
   easy_localization:
   flutter_svg:
   fluttertoast:
-  shared_preferences:
   injectable:
   get_it:
   page_transition:
@@ -41,19 +40,12 @@ dependencies:
   cached_network_image:
   toastification:
   google_fonts:
-  draggable_carousel_slider:
   flutter_advanced_drawer:
   blur:
-  flutter_native_splash:
-  overlapped_carousel:
-  flutter_custom_carousel:
-  flutter_animate:
-  talker_flutter:
   animated_switcher_plus:
   flutter_bounceable:
   lottie:
   model_viewer_plus:
-  rename:
   enefty_icons:
   responsive_sizer:
   flutter_secure_storage: ^8.1.0
@@ -63,8 +55,6 @@ dependencies:
   flutter_otp_text_field:
   toggle_switch:
   appinio_swiper:
-  flutter_swipe_button:
-  fluentui_system_icons:
   google_maps_flutter:
   permission_handler:
   sentry_flutter:
@@ -72,21 +62,14 @@ dependencies:
   geocoding:
   audioplayers:
   flutter_chat_ui:
-  image_picker:
   google_generative_ai:
   panara_dialogs:
   flutter_chat_types:
-  sliver_tools:
-  intl:
   loading_animation_widget:
   awesome_dialog:
 
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
 
 
 dev_dependencies:
@@ -94,6 +77,12 @@ dev_dependencies:
   injectable_generator:
   flutter_gen_runner:
   flutter_launcher_icons:
+  delete_un_used_assets:
+  dependency_validator:
+  flutter_native_splash:
+  rename:
+
+
 
   flutter_test:
     sdk: flutter
