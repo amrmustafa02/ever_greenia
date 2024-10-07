@@ -8,8 +8,8 @@ import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:toastification/toastification.dart';
 
-class PlantsApp extends StatelessWidget {
-  const PlantsApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
