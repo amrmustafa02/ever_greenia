@@ -66,6 +66,7 @@ class OrderModel {
     required this.createdAt,
     required this.updatedAt,
     required this.v,
+    required this.note,
   });
 
   final String? id;
@@ -81,6 +82,7 @@ class OrderModel {
   final String? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final String? note;
   final num? v;
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -102,6 +104,7 @@ class OrderModel {
       createdAt: DateTime.tryParse(json["createdAt"] ?? ""),
       updatedAt: DateTime.tryParse(json["updatedAt"] ?? ""),
       v: json["__v"],
+      note: json["note"],
     );
   }
 
@@ -121,6 +124,7 @@ class OrderModel {
       createdAt: createdAt ?? DateTime.now(),
       updatedAt: updatedAt ?? DateTime.now(),
       v: v ?? 0,
+      note: note ?? "",
     );
   }
 }

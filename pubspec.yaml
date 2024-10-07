@@ -79,6 +79,7 @@ dependencies:
   sliver_tools:
   intl:
   loading_animation_widget:
+  awesome_dialog:
 
   flutter:
     sdk: flutter

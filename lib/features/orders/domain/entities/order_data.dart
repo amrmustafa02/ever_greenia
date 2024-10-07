@@ -2,20 +2,22 @@
 import 'package:plants_app/core/entities/product_data.dart';
 
 class OrderData {
-  final String? id;
-  final String? userId;
+  final String id;
+  final String userId;
   final List<OrderProductData> products;
-  final num? lat;
-  final num? lng;
-  final String? address;
-  final String? paymentMethod;
-  final num? amount;
-  final num? totalPrice;
-  final String? phone;
-  final String? status;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final num? v;
+  final num lat;
+  final num lng;
+  final String address;
+  final String paymentMethod;
+  final num amount;
+  final num totalPrice;
+  final String phone;
+  final String status;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final num v;
+  final String note;
+
 
   OrderData({
     required this.id,
@@ -32,6 +34,7 @@ class OrderData {
     required this.createdAt,
     required this.updatedAt,
     required this.v,
+    required this.note,
   });
 
   factory OrderData.fromFakeData() {
@@ -53,6 +56,7 @@ class OrderData {
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
       v: 0,
+      note: 'note',
     );
   }
 }
@@ -66,6 +70,7 @@ class OrderProductData {
     required this.productId,
     required this.quantity,
     required this.id,
+
   });
 
   factory OrderProductData.fromFakeData() {
