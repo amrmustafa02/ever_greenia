@@ -133,10 +133,10 @@ class HomeCubit extends Cubit<HomeState> {
     var result = await homeRepo.search(controllerSearch.text);
     switch (result) {
       case SuccessRequest<List<ProductData>>():
-        // if (result.data.isEmpty) {
-        //   emit(SearchEmptyState());
-        //   return;
-        // }
+        if (result.data.isEmpty) {
+          emit(SearchEmptyState());
+          return;
+        }
         emit(SearchLoadedState(result.data));
       case FailedRequest():
         emit((SearchFailureState()));

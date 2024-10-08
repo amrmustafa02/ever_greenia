@@ -17,13 +17,17 @@ class SearchListItem extends StatelessWidget {
       onTap: () {
         context.goToProductDetails(
           product: product,
-          categoryName: context.read<HomeCubit>().getCategoryName(product.categoryId),
+          categoryName:
+              context.read<HomeCubit>().getCategoryName(product.categoryId),
         );
         // context.read<HomeCubit>().onCloseSearch();
       },
       child: ListTile(
-        leading: MyDefaultImage(
-          url: product.image,
+        leading: SizedBox(
+          width: 50,
+          child: MyDefaultImage(
+            url: product.image,
+          ),
         ),
         title: Text(product.name),
         subtitle: Text(product.description,

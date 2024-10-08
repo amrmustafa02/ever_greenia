@@ -119,7 +119,7 @@ class _SearchBodyState extends State<SearchBody> with TickerProviderStateMixin {
                   padding: const EdgeInsets.all(0),
                   itemBuilder: (context, index) {
                     var product = products[index];
-                    return ZoomIn(child: SearchListItem(product: product));
+                    return SearchListItem(product: product);
                   },
                   separatorBuilder: (context, index) {
                     return const Divider().setHorizontalPadding();
