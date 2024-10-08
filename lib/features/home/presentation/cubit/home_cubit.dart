@@ -13,6 +13,8 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
 
+  late AnimationController controller;
+
   HomeRepo homeRepo;
 
   List<CategoryData> categories = List.generate(
@@ -32,6 +34,8 @@ class HomeCubit extends Cubit<HomeState> {
   String curCategoryName = "";
 
   bool isLoading = true;
+  TextEditingController controllerSearch = TextEditingController();
+  ValueNotifier<bool> isSearchOpen = ValueNotifier(false);
 
   void loadProductsAndCategories() async {
     await Future.delayed(const Duration(seconds: 2));
@@ -88,7 +92,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  changeTab(int index) {
+  void changeTab(int index) {
     if (index == curTabIndex) return;
 
     curTabIndex = index;
@@ -99,14 +103,53 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoadedSuccess());
   }
 
-  refreshItems() {
+  void changeCardsKey() {
     listKey = UniqueKey();
     emit(HomeLoadedSuccess());
   }
 
-  refresh() {
+  void refresh() {
     emit(HomeInitial());
     loadProductsAndCategories();
+  }
+
+  void onSearchOpen() {
+    isSearchOpen.value = true;
+    controller.forward();
+    emit(SearchEmptyState());
+  }
+
+  void onCloseSearch() async {
+    await controller.reverse();
+    controllerSearch.clear();
+    isSearchOpen.value = false;
+
+    emit(SearchEmptyState());
+  }
+
+  Future<void> search() async {
+    emit(SearchLoadingState());
+
+    var result = await homeRepo.search(controllerSearch.text);
+    switch (result) {
+      case SuccessRequest<List<ProductData>>():
+        // if (result.data.isEmpty) {
+        //   emit(SearchEmptyState());
+        //   return;
+        // }
+        emit(SearchLoadedState(result.data));
+      case FailedRequest():
+        emit((SearchFailureState()));
+    }
+  }
+
+  String getCategoryName(String categoryId) {
+    for (var category in categories) {
+      if (category.id == categoryId) {
+        return category.name;
+      }
+    }
+    return "";
   }
 
   Future<void> addProductToCart(String productId, CartCubit cartCubit) async {

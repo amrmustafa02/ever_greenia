@@ -24,3 +24,15 @@ final class AddToCartFailureState extends HomeState {
 
   AddToCartFailureState(this.error);
 }
+
+final class SearchEmptyState extends HomeState {}
+
+final class SearchLoadingState extends HomeState {}
+
+final class SearchLoadedState extends HomeState {
+  final List<ProductData> products;
+
+  SearchLoadedState(this.products);
+}
+
+final class SearchFailureState extends HomeState {}

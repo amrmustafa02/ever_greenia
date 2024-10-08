@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
@@ -14,7 +15,9 @@ import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:plants_app/features/home/presentation/widgets/cart_section.dart';
 import 'package:plants_app/features/home/presentation/widgets/home_header.dart';
 import 'package:plants_app/features/home/presentation/widgets/product_item.dart';
+import 'package:plants_app/features/home/presentation/widgets/search_body.dart';
 import 'package:plants_app/features/home/presentation/widgets/tab_bar_section.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import 'cart_empty.dart';
@@ -41,6 +44,7 @@ class _HomePageBodyState extends State<HomePageBody> {
 
   @override
   Widget build(BuildContext context) {
+    log(100.h.toString());
     return AdvancedDrawer(
       backdrop: _drawerBackgroundColor(),
       controller: _advancedDrawerController,
@@ -55,57 +59,66 @@ class _HomePageBodyState extends State<HomePageBody> {
       ),
       child: MyScaffold(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              HomeHeader(
-                onTap: () {
-                  _advancedDrawerController.showDrawer();
-                },
-              ),
-              Skeletonizer(
-                enabled: context.read<HomeCubit>().isLoading,
-                child: Skeleton.shade(
-                  child: TabBarSection(
-                    categories: widget.categories,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Spacer(),
-              Skeletonizer(
-                enabled: context.read<HomeCubit>().isLoading,
-                child: SizedBox(
-                  height: context.height * 0.50,
-                  width: context.width * 0.85,
-                  child: AppinioSwiper(
-                    initialIndex: 0,
-                    loop: false,
-                    onEnd: context.read<HomeCubit>().refreshItems,
-                    key: context.read<HomeCubit>().listKey,
-                    allowUnlimitedUnSwipe: true,
-                    backgroundCardScale: 0.95,
-                    backgroundCardCount: 2,
-                    duration: const Duration(milliseconds: 500),
-                    backgroundCardOffset: const Offset(00, -40),
-                    cardBuilder: (BuildContext context, int index) {
-                      return ZoomIn(
-                        duration: Duration(milliseconds: 500 * index),
-                        child: ProductItem(
-                          product: widget.curProducts[index],
-                        ),
-                      );
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  HomeHeader(
+                    onTap: () {
+                      _advancedDrawerController.showDrawer();
                     },
-                    cardCount: widget.curProducts.length,
                   ),
-                ),
+                  Skeletonizer(
+                    enabled: context.read<HomeCubit>().isLoading,
+                    child: Skeleton.shade(
+                      child: TabBarSection(
+                        categories: widget.categories,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Spacer(),
+                  Skeletonizer(
+                    enabled: context.read<HomeCubit>().isLoading,
+                    child: SizedBox(
+                      height: context.height * 0.50,
+                      width: context.width * 0.85,
+                      child: AppinioSwiper(
+                        initialIndex: 0,
+                        loop: false,
+                        onEnd: context.read<HomeCubit>().changeCardsKey,
+                        key: context.read<HomeCubit>().listKey,
+                        allowUnlimitedUnSwipe: true,
+                        backgroundCardScale: 0.95,
+                        backgroundCardCount: 2,
+                        duration: const Duration(milliseconds: 500),
+                        backgroundCardOffset: const Offset(00, -40),
+                        cardBuilder: (BuildContext context, int index) {
+                          return ZoomIn(
+                            duration: Duration(milliseconds: 500 * index),
+                            child: ProductItem(
+                              product: widget.curProducts[index],
+                            ),
+                          );
+                        },
+                        cardCount: widget.curProducts.length,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Visibility(
+                    visible: context.read<MainCubit>().isUserLogged,
+                    replacement: const CartNotLoggedUser(),
+                    child: const Skeleton.keep(child: CartSection()),
+                  ),
+                ],
               ),
-              const Spacer(),
-              Visibility(
-                visible: context.read<MainCubit>().isUserLogged,
-                replacement: const CartNotLoggedUser(),
-                child: const Skeleton.keep(child: CartSection()),
+              Positioned(
+                top: 16.h,
+                child: const SearchBody(),
               ),
             ],
           ),

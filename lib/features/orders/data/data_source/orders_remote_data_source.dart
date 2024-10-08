@@ -15,9 +15,7 @@ class OrdersRemoteDataSource {
 
   Future<GetOrdersModel> getOrders() async {
     try {
-      final response = await _dio.get(
-        Endpoints.order,
-      );
+      final response = await _dio.get(Endpoints.order);
       return GetOrdersModel.fromJson(response.data);
     } on DioException catch (e) {
       throw FailedRequest(exception: RestApiErrorHandler.handleError(e));

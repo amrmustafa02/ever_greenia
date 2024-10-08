@@ -26,12 +26,13 @@ class HomePage extends StatelessWidget {
             current is AddToCartSuccessState ||
             current is AddToCartFailureState,
         builder: (context, state) {
+          log("build home page");
           var cub = context.read<HomeCubit>();
 
           if (state is HomeLoadedFailure) {
             return RefreshIndicator(
               onRefresh: () async {
-                await context.read<HomeCubit>().refresh();
+                context.read<HomeCubit>().refresh();
               },
               child: const HomePageError(),
             );

@@ -22,4 +22,6 @@ class Endpoints {
 
   // order end points
   static const String order = "order/";
+
+  static String search = "$getProducts/search";
 }

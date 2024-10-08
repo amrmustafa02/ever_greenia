@@ -41,4 +41,20 @@ class HomeRepoImpl extends HomeRepo {
       return FailedRequest(exception: e.exception);
     }
   }
+
+  @override
+  Future<ApiResult<List<ProductData>>> search(String query) async {
+    try {
+      var response = await homeRemoteDataSource.search(query);
+      return SuccessRequest<List<ProductData>>(
+        data: response.products
+            .map(
+              (e) => e.toEntity(),
+            )
+            .toList(),
+      );
+    } on FailedRequest catch (e) {
+      return FailedRequest(exception: e.exception);
+    }
+  }
 }
