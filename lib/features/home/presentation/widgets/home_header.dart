@@ -66,21 +66,23 @@ class _HomeHeaderState extends State<HomeHeader> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  AnimSearchBar(
-                    width: 80.w,
-                    helpText: "Search",
-                    animationDurationInMilli: 2000,
-                    textController: context.read<HomeCubit>().controllerSearch,
-                    onCloseTap: context.read<HomeCubit>().onCloseSearch,
-                    onSubmitted: (value) {
-                      context.read<HomeCubit>().onCloseSearch();
-                    },
-                    onOpen: () {
-                      context.read<HomeCubit>().onSearchOpen();
-                    },
-                    onChange: () {
-                      context.read<HomeCubit>().search();
-                    },
+                  Expanded(
+                    child: AnimSearchBar(
+                      width: 80.w,
+                      helpText: "Search",
+                      animationDurationInMilli: 2500,
+                      textController: context.read<HomeCubit>().controllerSearch,
+                      onCloseTap: context.read<HomeCubit>().onCloseSearch,
+                      onSubmitted: (value) {
+                        context.read<HomeCubit>().onCloseSearch();
+                      },
+                      onOpen: () {
+                        context.read<HomeCubit>().onSearchOpen();
+                      },
+                      onChange: () {
+                        context.read<HomeCubit>().search();
+                      },
+                    ),
                   ),
                   Visibility(
                     visible: widget.showDrawer,
@@ -93,7 +95,6 @@ class _HomeHeaderState extends State<HomeHeader> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),

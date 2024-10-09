@@ -35,7 +35,7 @@ class _SearchBodyState extends State<SearchBody> with TickerProviderStateMixin {
     _heightAnimation = Tween<double>(begin: 0, end: 300).animate(
       CurvedAnimation(
         parent: context.read<HomeCubit>().controllerSearchAnimation,
-        curve: Curves.easeInOut,
+        curve: Curves.linear,
       ),
     );
   }
@@ -61,7 +61,7 @@ class _SearchBodyState extends State<SearchBody> with TickerProviderStateMixin {
           alignment: Alignment.topCenter,
           decoration: _buildBoxDecoration(),
           height: _heightAnimation.value,
-          width: context.width * 0.9,
+          width: context.width * 0.95,
           duration: const Duration(milliseconds: 700),
           curve: Curves.easeInOut,
           child: BlocBuilder<HomeCubit, HomeState>(

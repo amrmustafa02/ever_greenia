@@ -22,7 +22,7 @@ class _FadeInLeftTextState extends State<FadeInLeftText>
     super.initState();
     context.read<HomeCubit>().textFadeLeftAnimationController =
         AnimationController(
-          duration: const Duration(milliseconds: 2500),
+          duration: const Duration(milliseconds: 2000),
           vsync: this,
         );
 

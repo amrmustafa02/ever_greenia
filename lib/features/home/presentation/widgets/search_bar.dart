@@ -100,7 +100,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
     return Container(
       height: 10.h,
       alignment:
-          widget.rtl ? Alignment.centerRight : const Alignment(-1.0, 0.0),
+          Alignment.centerRight,
       child: AnimatedContainer(
         duration: Duration(milliseconds: widget.animationDurationInMilli),
         height: 48.0,
@@ -167,7 +167,6 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                     keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.search,
                     focusNode: focusNode,
-
                     cursorRadius: const Radius.circular(10.0),
                     cursorWidth: 2.0,
                     onSubmitted: (value) {
