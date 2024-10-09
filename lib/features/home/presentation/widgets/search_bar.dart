@@ -87,6 +87,13 @@ class _AnimSearchBarState extends State<AnimSearchBar>
     }
   }
 
+  focusKeyboard() {
+    final FocusScopeNode currentScope = FocusScope.of(context);
+    if (!currentScope.hasPrimaryFocus) {
+      FocusManager.instance.primaryFocus?.requestFocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     dev.log("Build search bar");
@@ -158,16 +165,15 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                     controller: widget.textController,
                     inputFormatters: widget.inputFormatters,
                     keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.search,
                     focusNode: focusNode,
+
                     cursorRadius: const Radius.circular(10.0),
                     cursorWidth: 2.0,
                     onSubmitted: (value) {
-                      widget.onSubmitted(value);
-                      unFocusKeyboard();
-                      setState(() {
-                        toggle = 0;
-                      });
-                      widget.textController.clear();
+                      // dont close keyboard
+                      focusKeyboard();
+                      widget.onChange();
                     },
                     style: widget.style ?? const TextStyle(color: Colors.black),
                     cursorColor: Colors.black,

@@ -15,6 +15,7 @@ class SearchListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Bounceable(
       onTap: () {
+        FocusScope.of(context).unfocus();
         context.goToProductDetails(
           product: product,
           categoryName:

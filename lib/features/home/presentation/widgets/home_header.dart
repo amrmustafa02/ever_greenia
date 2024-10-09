@@ -2,9 +2,9 @@ import 'dart:developer';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:plants_app/features/home/presentation/widgets/search_bar.dart';
+import 'package:plants_app/features/home/presentation/widgets/text_fade_in_left.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class HomeHeader extends StatefulWidget {
@@ -52,79 +52,50 @@ class _HomeHeaderState extends State<HomeHeader> {
           horizontal: 16.0,
           vertical: 8.0,
         ),
-        child: Column(
+        child: Stack(
+          key: _headerKey, // Attach the GlobalKey to this Row
           children: [
-            Row(
-              key: _headerKey, // Attach the GlobalKey to this Row
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ValueListenableBuilder(
-                  valueListenable: context.read<HomeCubit>().isSearchOpen,
-                  builder: (context, value, child) {
-                    if (value == true) return const SizedBox.shrink();
-                    return Expanded(
-                      child: Row(
-                        children: [
-                          FadeInLeft(
-                            delay: const Duration(milliseconds: 450),
-                            duration: const Duration(milliseconds: 500),
-                            key: const ValueKey("HomeHeader"),
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "Let's, Make Our\nlives ",
-                                    style: GoogleFonts.readexPro().copyWith(
-                                      color: Colors.black,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: "Greener",
-                                    style: GoogleFonts.readexPro().copyWith(
-                                      color: Colors.black,
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const Spacer(),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-                AnimSearchBar(
-                  width: 80.w,
-                  helpText: "Search",
-                  textController: context.read<HomeCubit>().controllerSearch,
-                  onCloseTap: context.read<HomeCubit>().onCloseSearch,
-                  onSubmitted: (value) {
-                    // context.read<HomeCubit>().();
-                    context.read<HomeCubit>().onCloseSearch();
-                  },
-                  onOpen: () {
-                    context.read<HomeCubit>().onSearchOpen();
-                  },
-                  onChange: () {
-                    context.read<HomeCubit>().search();
-                  },
-                ),
-                Visibility(
-                  visible: widget.showDrawer,
-                  child: FadeInRight(
-                    child: IconButton(
-                      onPressed: widget.onTap,
-                      icon: const Icon(
-                        Icons.menu,
+            ValueListenableBuilder(
+              valueListenable: context.read<HomeCubit>().isSearchOpen,
+              builder: (context, value, child) {
+                return const FadeInLeftText();
+              },
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  AnimSearchBar(
+                    width: 80.w,
+                    helpText: "Search",
+                    animationDurationInMilli: 2000,
+                    textController: context.read<HomeCubit>().controllerSearch,
+                    onCloseTap: context.read<HomeCubit>().onCloseSearch,
+                    onSubmitted: (value) {
+                      context.read<HomeCubit>().onCloseSearch();
+                    },
+                    onOpen: () {
+                      context.read<HomeCubit>().onSearchOpen();
+                    },
+                    onChange: () {
+                      context.read<HomeCubit>().search();
+                    },
+                  ),
+                  Visibility(
+                    visible: widget.showDrawer,
+                    child: FadeInRight(
+                      child: IconButton(
+                        onPressed: widget.onTap,
+                        icon: const Icon(
+                          Icons.menu,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+
+                ],
+              ),
             ),
           ],
         ),
@@ -132,3 +103,4 @@ class _HomeHeaderState extends State<HomeHeader> {
     );
   }
 }
+

@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -28,16 +27,14 @@ class _SearchBodyState extends State<SearchBody> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    context.read<HomeCubit>().controller = AnimationController(
+    context.read<HomeCubit>().controllerSearchAnimation = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 250),
-    )..addListener(() {
-        setState(() {});
-      });
+      duration: const Duration(milliseconds: 500),
+    );
 
     _heightAnimation = Tween<double>(begin: 0, end: 300).animate(
       CurvedAnimation(
-        parent: context.read<HomeCubit>().controller,
+        parent: context.read<HomeCubit>().controllerSearchAnimation,
         curve: Curves.easeInOut,
       ),
     );
@@ -50,22 +47,23 @@ class _SearchBodyState extends State<SearchBody> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    context.read<HomeCubit>().controller.dispose();
+    context.read<HomeCubit>().controllerSearchAnimation.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    log("build body");
     return AnimatedBuilder(
-      animation: context.read<HomeCubit>().controller,
+      animation: context.read<HomeCubit>().controllerSearchAnimation,
       builder: (context, child) {
         return AnimatedContainer(
           alignment: Alignment.topCenter,
           decoration: _buildBoxDecoration(),
           height: _heightAnimation.value,
           width: context.width * 0.9,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.linear,
+          duration: const Duration(milliseconds: 700),
+          curve: Curves.easeInOut,
           child: BlocBuilder<HomeCubit, HomeState>(
             buildWhen: (previous, current) {
               var buildWhen = current is SearchEmptyState ||
@@ -76,7 +74,9 @@ class _SearchBodyState extends State<SearchBody> with TickerProviderStateMixin {
               return buildWhen;
             },
             builder: (context, state) {
-              if (state is SearchEmptyState) {
+              if (state is SearchEmptyState ||
+                  state is HomeInitial ||
+                  state is HomeLoading) {
                 return Center(
                   child: SingleChildScrollView(
                     child: Column(

@@ -13,7 +13,8 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
 
-  late AnimationController controller;
+  late AnimationController controllerSearchAnimation;
+  late AnimationController textFadeLeftAnimationController;
 
   HomeRepo homeRepo;
 
@@ -115,16 +116,19 @@ class HomeCubit extends Cubit<HomeState> {
 
   void onSearchOpen() {
     isSearchOpen.value = true;
-    controller.forward();
+    controllerSearchAnimation.forward();
+    textFadeLeftAnimationController.reverse();
+    controllerSearch.text = "";
     emit(SearchEmptyState());
   }
 
   void onCloseSearch() async {
-    await controller.reverse();
-    controllerSearch.clear();
+
+    await controllerSearchAnimation.reverse();
+    // await Future.delayed(const Duration(milliseconds: 300));
+    textFadeLeftAnimationController.forward();
     isSearchOpen.value = false;
 
-    emit(SearchEmptyState());
   }
 
   Future<void> search() async {

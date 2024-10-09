@@ -117,7 +117,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                 ],
               ),
               Positioned(
-                top: 16.h,
+                top: 17.h,
                 child: const SearchBody(),
               ),
             ],
