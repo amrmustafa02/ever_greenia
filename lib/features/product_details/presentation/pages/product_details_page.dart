@@ -58,6 +58,7 @@ class _ProductDetailsPageBody extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0.0),
         child: Column(

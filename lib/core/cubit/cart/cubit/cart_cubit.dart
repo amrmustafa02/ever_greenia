@@ -36,7 +36,6 @@ class CartCubit extends Cubit<CartState> {
           break;
         case FailedRequest():
           isLoading = false;
-          emit(CartLoaded());
           emit(CartError(result.exception.errorMessage));
       }
     } catch (e) {

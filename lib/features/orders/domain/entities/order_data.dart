@@ -1,4 +1,3 @@
-// order_entity.dart
 import 'package:plants_app/core/entities/product_data.dart';
 
 class OrderData {
@@ -17,7 +16,6 @@ class OrderData {
   final DateTime updatedAt;
   final num v;
   final String note;
-
 
   OrderData({
     required this.id,
@@ -70,7 +68,6 @@ class OrderProductData {
     required this.productId,
     required this.quantity,
     required this.id,
-
   });
 
   factory OrderProductData.fromFakeData() {

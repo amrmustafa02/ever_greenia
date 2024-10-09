@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location when open.</string>
+	<string>we need access to your location to deliver your order</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs access to images</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

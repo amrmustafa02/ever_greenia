@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +20,7 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   Future<void> getOrders() async {
     final result = await ordersRepo.getOrders();
+
     await Future.delayed(const Duration(milliseconds: 1250));
 
     switch (result) {
@@ -36,7 +36,6 @@ class OrdersCubit extends Cubit<OrdersState> {
   void onTabBarPressed(int index) {
     curTab = index;
     assignCurrentOrders();
-    log("len of orders: ${orders.length}");
     emit(OrdersLoadedSuccess());
   }
 
@@ -59,7 +58,7 @@ class OrdersCubit extends Cubit<OrdersState> {
     }
   }
 
-  assignCurrentOrders() {
+  void assignCurrentOrders() {
     switch (curTab) {
       case 0:
         orders = getOrdersData.pendingOrders;

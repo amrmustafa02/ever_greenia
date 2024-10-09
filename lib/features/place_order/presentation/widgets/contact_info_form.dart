@@ -23,6 +23,7 @@ class ContactInfoForm extends StatelessWidget {
             return null;
           },
           label: "Phone",
+          keyboardType: TextInputType.phone,
           onChanged: (_) {
             context.read<PlaceOrderCubit>().checkEnableToPlaceOrder();
             return null;

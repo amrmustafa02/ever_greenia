@@ -6,7 +6,6 @@ class RestApiErrorHandler {
 
   RestApiErrorHandler._(this.errorMessage, this.statusCode);
 
-  // Named constructor to handle DioError
   factory RestApiErrorHandler.handleError(DioException dioError) {
     String errorMessage;
     int? statusCode;

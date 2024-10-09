@@ -27,6 +27,8 @@ class LoginFormField extends StatefulWidget {
 
 class _LoginFormFieldState extends State<LoginFormField> {
   bool _obscureText = true;
+  final _focusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -41,8 +43,13 @@ class _LoginFormFieldState extends State<LoginFormField> {
       ),
       controller: widget.controller,
       obscureText: _obscureText,
+      focusNode: _focusNode,
       validator: (text) => widget.validator(text),
       onChanged: widget.onChanged,
+      textInputAction: TextInputAction.done,
+      // onTapOutside: (_) {
+      //   FocusScope.of(context).unfocus();
+      // },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textAlign: TextAlign.start,
       decoration: InputDecoration(

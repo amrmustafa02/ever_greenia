@@ -6,4 +6,6 @@ abstract class HomeRepo {
   Future<ApiResult<List<CategoryData>>> getCategories();
 
   Future<ApiResult<List<ProductData>>> getProducts();
+
+  Future<ApiResult<List<ProductData>>> search(String query);
 }
