@@ -2,13 +2,13 @@ import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plants_app/core/constants/app_constants.dart';
 import 'package:plants_app/core/cubit/main_cubit/main_cubit.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-// for rotation
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -23,6 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     context.read<MainCubit>().checkUserLogged();
   }
+
   @override
   Widget build(BuildContext context) {
     var imageSize = 50.w;
@@ -60,7 +61,7 @@ class _SplashPageState extends State<SplashPage> {
               ZoomIn(
                 duration: const Duration(milliseconds: 3000),
                 child: Text(
-                  'EverGreenia',
+                  AppConstants.appName,
                   style: AppFontStyles.readexPro500_20.copyWith(
                     color: AppColors.darkGreen,
                   ),

@@ -1,4 +1,4 @@
-import 'user.dart';
+import 'user_model.dart';
 
 class LoginResponseModel {
   User? user;

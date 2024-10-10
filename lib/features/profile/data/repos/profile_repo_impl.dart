@@ -16,7 +16,7 @@ class ProfileRepoImpl extends ProfileRepo {
       var result = await _remoteDataSource.getProfile(token);
 
       return ApiResult.success(data: result.toEntity());
-    } on FailedRequest catch (e) {
+    } on FailureRequest catch (e) {
       return ApiResult.failure(error: e.exception);
     }
   }
@@ -37,7 +37,7 @@ class ProfileRepoImpl extends ProfileRepo {
       );
 
       return ApiResult.success(data: true);
-    } on FailedRequest catch (e) {
+    } on FailureRequest catch (e) {
       return ApiResult.failure(error: e.exception);
     }
   }
@@ -47,7 +47,7 @@ class ProfileRepoImpl extends ProfileRepo {
     try {
       await _remoteDataSource.deleteProfile(token);
       return ApiResult.success(data: true);
-    } on FailedRequest catch (e) {
+    } on FailureRequest catch (e) {
       return ApiResult.failure(error: e.exception);
     }
   }

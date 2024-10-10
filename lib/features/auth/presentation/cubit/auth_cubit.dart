@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -10,7 +8,7 @@ import 'package:plants_app/core/entities/user_data.dart';
 import 'package:plants_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:regexpattern/regexpattern.dart';
 
-import '../../data/models/login_response_model/login_response_model.dart';
+import '../../data/models/login_response_model.dart';
 
 part 'auth_state.dart';
 
@@ -38,9 +36,10 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login() async {
     emit(AuthLoading());
 
+    late ApiResult<LoginResponseModel> result;
+
     var email = emailController.text;
     var password = passwordController.text;
-    late ApiResult<LoginResponseModel> result;
 
     try {
       result = await authRepo.login(email, password);
@@ -48,6 +47,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthLoadedFailure(e.toString()));
       return;
     }
+
     switch (result) {
       case SuccessRequest():
         await Future.wait(
@@ -57,7 +57,6 @@ class AuthCubit extends Cubit<AuthState> {
             secureStorage.write(key: 'email', value: result.data.user?.email),
           ],
         );
-
         getIt<UserData>().init(
           name: result.data.user?.name,
           email: result.data.user?.email,
@@ -66,9 +65,11 @@ class AuthCubit extends Cubit<AuthState> {
 
         emit(LoginSuccessState());
         break;
-      case FailedRequest():
+      case FailureRequest():
         emit(AuthLoadedFailure(result.exception.errorMessage));
+
         var statusCode = result.exception.statusCode;
+
         if (statusCode == 409) {
           emit(EmailNorConfirmedState());
           resendCode();
@@ -89,8 +90,9 @@ class AuthCubit extends Cubit<AuthState> {
       case SuccessRequest():
         emit(RegisterSuccessState());
         break;
-      case FailedRequest():
+      case FailureRequest():
         emit(AuthLoadedFailure(result.exception.errorMessage));
+        break;
     }
   }
 
@@ -103,7 +105,7 @@ class AuthCubit extends Cubit<AuthState> {
       case SuccessRequest():
         emit(ConfirmEmailSuccessState());
         break;
-      case FailedRequest():
+      case FailureRequest():
         emit(ConfirmFailedState(result.exception.errorMessage));
     }
   }
@@ -115,13 +117,14 @@ class AuthCubit extends Cubit<AuthState> {
       case SuccessRequest():
         emit(ResendCodeSuccessState());
         break;
-      case FailedRequest():
+      case FailureRequest():
         emit(ResendCodeFailedState(result.exception.errorMessage));
     }
   }
 
   Future<void> resetPassword() async {
     emit(AuthLoading());
+
     var email = emailController.text;
     var code = confirmCode;
     var password = passwordController.text;
@@ -132,17 +135,18 @@ class AuthCubit extends Cubit<AuthState> {
       case SuccessRequest():
         emit(ResetPasswordSuccessState());
         break;
-      case FailedRequest():
+      case FailureRequest():
         emit(ResetPasswordFailedState(result.exception.errorMessage));
     }
   }
 
   void onLoginFormChanged() {
-    var isVaildEmail = emailController.text.isEmail();
+    var isValidEmail = emailController.text.isEmail();
 
     var isEmptyField =
         emailController.text.isEmpty || passwordController.text.isEmpty;
-    var newLoginButtonEnabled = isVaildEmail && !isEmptyField;
+
+    var newLoginButtonEnabled = isValidEmail && !isEmptyField;
 
     if (isAuthButtonEnabled != newLoginButtonEnabled) {
       isAuthButtonEnabled = newLoginButtonEnabled;
@@ -162,13 +166,13 @@ class AuthCubit extends Cubit<AuthState> {
 
     if (isAuthButtonEnabled != newRegisterButtonEnabled) {
       isAuthButtonEnabled = newRegisterButtonEnabled;
-      log(" isRegisterButtonEnabled: $isAuthButtonEnabled");
       emit(AuthButtonChangeState());
     }
   }
 
   void onConfirmFormChanged(String code) {
     confirmCode = code;
+
     var isValidCode = code.isNumeric();
     var isEmptyField = code.isEmpty;
 
@@ -190,7 +194,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  void onNewPasswordFormChanged() {
+  void onNewPasswordFieldChanged() {
     var isValidPassword = passwordController.text.isPasswordHardWithspace();
     var isEmptyField = passwordController.text.isEmpty;
 
@@ -205,6 +209,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void onResetPasswordCodeFormChanged(String code) {
     confirmCode = code;
+
     var isValidCode = code.isNumeric();
     var isEmptyField = code.isEmpty;
 

@@ -18,7 +18,7 @@ class OrdersRemoteDataSource {
       final response = await _dio.get(Endpoints.order);
       return GetOrdersModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw FailedRequest(exception: RestApiErrorHandler.handleError(e));
+      throw FailureRequest(exception: RestApiErrorHandler.handleError(e));
     }
   }
 
@@ -31,7 +31,7 @@ class OrdersRemoteDataSource {
         path: Endpoints.order + orderId,
       );
     } on DioException catch (e) {
-      throw FailedRequest(exception: RestApiErrorHandler.handleError(e));
+      throw FailureRequest(exception: RestApiErrorHandler.handleError(e));
     }
   }
 }

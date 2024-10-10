@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
+import 'package:plants_app/core/theme/app_font_styles.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class DefaultHeader extends StatelessWidget {
   final String title;
@@ -31,9 +32,9 @@ class DefaultHeader extends StatelessWidget {
         ),
         Text(
           title,
-          style: GoogleFonts.readexPro().copyWith(
+          style: AppFontStyles.readexPro400_16.copyWith(
             color: Colors.black,
-            fontSize: 24,
+            fontSize: 20.sp,
           ),
         ),
       ],

@@ -38,27 +38,19 @@ class _LoginFormFieldState extends State<LoginFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: AppFontStyles.readexPro400_16.copyWith(
-        color: AppColors.darkGreen,
-      ),
+      style: AppFontStyles.readexPro400_16.copyWith(color: AppColors.darkGreen),
       controller: widget.controller,
       obscureText: _obscureText,
       focusNode: _focusNode,
       validator: (text) => widget.validator(text),
       onChanged: widget.onChanged,
       textInputAction: TextInputAction.done,
-      // onTapOutside: (_) {
-      //   FocusScope.of(context).unfocus();
-      // },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textAlign: TextAlign.start,
       decoration: InputDecoration(
         suffixIcon: widget.isPassword
             ? GestureDetector(
                 onTap: () {
-                  // context.goBack();
-                  // Navigator.pop(context);
-
                   setState(() {
                     _obscureText = !_obscureText;
                   });
@@ -71,11 +63,7 @@ class _LoginFormFieldState extends State<LoginFormField> {
                 ),
               )
             : null,
-        // suffix: widget.suffixIcon != null ? Icon(widget.suffixIcon) : null,
-        prefixIcon: Icon(
-          widget.prefixIcon,
-          color: AppColors.darkGreen,
-        ),
+        prefixIcon: Icon(widget.prefixIcon, color: AppColors.darkGreen),
         hintText: widget.hintText,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16),
         fillColor: AppColors.darkGreen.withOpacity(0.3),

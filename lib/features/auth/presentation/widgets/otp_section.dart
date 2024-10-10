@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -10,8 +9,11 @@ class OtpSection extends StatelessWidget {
   final Function(String) onCodeChanged;
   final Function(String) onSubmit;
 
-  const OtpSection(
-      {super.key, required this.onCodeChanged, required this.onSubmit});
+  const OtpSection({
+    super.key,
+    required this.onCodeChanged,
+    required this.onSubmit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +39,8 @@ class OtpSection extends StatelessWidget {
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
       ),
-      onCodeChanged: (String code) {
-        log("code: $code");
-        onCodeChanged(code);
-      },
-      onSubmit: (String verificationCode) {
-        log("verificationCode: $verificationCode");
-        onSubmit(verificationCode);
-      },
+      onCodeChanged: onCodeChanged,
+      onSubmit: onSubmit,
     );
   }
 }

@@ -76,12 +76,10 @@ class ConfirmEmailPage extends StatelessWidget {
                       ),
                       SizedBox(height: 2.h),
                       OtpSection(
-                        onCodeChanged: (code) {
-                          context.read<AuthCubit>().onConfirmFormChanged(code);
-                        },
-                        onSubmit: (code) {
-                          context.read<AuthCubit>().onConfirmFormChanged(code);
-                        },
+                        onCodeChanged:
+                            context.read<AuthCubit>().onConfirmFormChanged,
+                        onSubmit:
+                            context.read<AuthCubit>().onConfirmFormChanged,
                       ),
                       SizedBox(height: 2.h),
                       BlocBuilder<AuthCubit, AuthState>(

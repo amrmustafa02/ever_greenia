@@ -13,6 +13,7 @@ class AuthHeader extends StatefulWidget {
 
 class _AuthHeaderState extends State<AuthHeader> {
   late Image headerImage;
+
   @override
   void initState() {
     super.initState();

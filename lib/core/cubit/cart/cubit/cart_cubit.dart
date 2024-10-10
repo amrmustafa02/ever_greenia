@@ -34,7 +34,7 @@ class CartCubit extends Cubit<CartState> {
           AppConstants.deliveryFee = result.data.deliveryFees;
           emit(CartLoaded());
           break;
-        case FailedRequest():
+        case FailureRequest():
           isLoading = false;
           emit(CartError(result.exception.errorMessage));
       }
@@ -51,7 +51,7 @@ class CartCubit extends Cubit<CartState> {
         case SuccessRequest<bool>():
           getCart();
           return true;
-        case FailedRequest():
+        case FailureRequest():
           emit(CartError(result.exception.errorMessage));
       }
     } catch (e) {
@@ -70,7 +70,7 @@ class CartCubit extends Cubit<CartState> {
         case SuccessRequest<bool>():
           getCart();
           break;
-        case FailedRequest():
+        case FailureRequest():
           emit(CartError(result.exception.errorMessage));
       }
     } catch (e) {
@@ -88,7 +88,7 @@ class CartCubit extends Cubit<CartState> {
         case SuccessRequest<bool>():
           getCart();
           break;
-        case FailedRequest():
+        case FailureRequest():
           isLoading = false;
           emit(CartError(result.exception.errorMessage));
       }

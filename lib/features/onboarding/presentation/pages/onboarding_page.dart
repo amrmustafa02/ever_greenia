@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plants_app/core/extensions/context_extension.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../cubit/onboarding_cubit.dart';
+import '../../../../core/constants/app_constants.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => OnboardingCubit(),
-      child: BlocBuilder<OnboardingCubit, OnboardingState>(
-        builder: (context, state) {
-          return const _OnboardingPageBody();
-        },
-      ),
-    );
+    return const _OnboardingPageBody();
   }
 }
 
@@ -64,7 +56,7 @@ class _OnboardingPageBodyState extends State<_OnboardingPageBody> {
               children: [
                 const Spacer(),
                 Text(
-                  'EverGreenia',
+                  AppConstants.appName,
                   style: AppFontStyles.readexPro600_12.copyWith(
                     color: Colors.white,
                     fontSize: 28.sp,

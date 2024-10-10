@@ -19,7 +19,7 @@ class CartRemoteDataSource {
       );
       return CartModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -34,7 +34,7 @@ class CartRemoteDataSource {
         },
       );
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -46,7 +46,7 @@ class CartRemoteDataSource {
         Endpoints.cart + productId,
       );
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -61,7 +61,7 @@ class CartRemoteDataSource {
         },
       );
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }

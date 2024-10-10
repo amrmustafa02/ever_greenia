@@ -42,40 +42,39 @@ class _DefaultFormFieldState extends State<DefaultFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(
-        labelText: widget.label,
-        labelStyle: AppFontStyles.nunito400_16,
-        enabled: widget.enabled,
-        suffixIcon: widget.obscureText
-            ? IconButton(
-                icon: Icon(
+        decoration: InputDecoration(
+          labelText: widget.label,
+          labelStyle: AppFontStyles.nunito400_16,
+          enabled: widget.enabled,
+          suffixIcon: widget.obscureText
+              ? IconButton(
+                  icon: Icon(
                     showPassword
                         ? EneftyIcons.eye_bold
                         : EneftyIcons.eye_slash_bold,
-                    size: 20),
-                color: AppColors.darkGreen,
-                onPressed: () {
-                  setState(() {
-                    showPassword = !showPassword;
-                  });
-                },
-              )
-            : null,
-        // contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-        border: _buildBorder(),
-        enabledBorder: _buildBorder(),
-      ),
-      onChanged: widget.onChanged,
-      validator: widget.validator,
-      obscureText: showPassword,
-      maxLines: widget.maxLines,
-      keyboardType: widget.keyboardType,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      controller: widget.controller,
-      onTapOutside: (_) {
-        FocusScope.of(context).unfocus();
-      }
-    );
+                    size: 20,
+                  ),
+                  color: AppColors.darkGreen,
+                  onPressed: () {
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+                  },
+                )
+              : null,
+          border: _buildBorder(),
+          enabledBorder: _buildBorder(),
+        ),
+        onChanged: widget.onChanged,
+        validator: widget.validator,
+        obscureText: showPassword,
+        maxLines: widget.maxLines,
+        keyboardType: widget.keyboardType,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        controller: widget.controller,
+        onTapOutside: (_) {
+          FocusScope.of(context).unfocus();
+        });
   }
 
   OutlineInputBorder _buildBorder({Color color = Colors.grey}) {

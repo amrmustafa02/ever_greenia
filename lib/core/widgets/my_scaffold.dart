@@ -3,6 +3,7 @@ import 'package:plants_app/core/theme/app_colors.dart';
 
 class MyScaffold extends StatelessWidget {
   final Widget child;
+
   const MyScaffold({
     super.key,
     required this.child,

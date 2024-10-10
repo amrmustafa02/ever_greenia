@@ -41,7 +41,6 @@ class ResendForgotPasswordPageBody extends StatelessWidget {
                     if (text == null || text.isEmpty) {
                       return 'This Field is Required';
                     }
-
                     if (!text.isEmail()) {
                       return 'Please enter a valid email address';
                     }

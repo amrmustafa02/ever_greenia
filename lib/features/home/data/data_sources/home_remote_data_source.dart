@@ -19,7 +19,7 @@ class HomeRemoteDataSource {
       var response = await _dio.get(Endpoints.getCategories);
       return GetCategoriesResponseBody.fromJson(response.data);
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -30,7 +30,7 @@ class HomeRemoteDataSource {
       var response = await _dio.get(Endpoints.getProducts);
       return GetProductsResponseBody.fromJson(response.data);
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -43,7 +43,7 @@ class HomeRemoteDataSource {
       });
       return SearchRequestBody.fromJson(response.data);
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }

@@ -58,7 +58,7 @@ class HomeCubit extends Cubit<HomeState> {
           categories = categoriesResponse.data as List<CategoryData>;
           isLoading = false;
           break;
-        case FailedRequest():
+        case FailureRequest():
           emit(HomeLoadedFailure(categoriesResponse.exception.errorMessage));
           isLoading = false;
           return;
@@ -69,7 +69,7 @@ class HomeCubit extends Cubit<HomeState> {
           isLoading = false;
 
           break;
-        case FailedRequest():
+        case FailureRequest():
           isLoading = false;
 
           emit(HomeLoadedFailure(productsResponse.exception.errorMessage));
@@ -142,7 +142,7 @@ class HomeCubit extends Cubit<HomeState> {
           return;
         }
         emit(SearchLoadedState(result.data));
-      case FailedRequest():
+      case FailureRequest():
         emit((SearchFailureState()));
     }
   }

@@ -36,7 +36,7 @@ class PlaceOrderRemoteDataSource {
 
       return true;
     } on DioException catch (e) {
-      throw FailedRequest(exception: RestApiErrorHandler.handleError(e));
+      throw FailureRequest(exception: RestApiErrorHandler.handleError(e));
     }
   }
 }

@@ -28,7 +28,7 @@ class PlaceOrderRepoImpl extends PlaceOrderRepo {
         paymentMethod: paymentMethod,
       );
       return ApiResult.success(data: true);
-    } on FailedRequest catch (e) {
+    } on FailureRequest catch (e) {
       return ApiResult.failure(error: e.exception);
     }
   }

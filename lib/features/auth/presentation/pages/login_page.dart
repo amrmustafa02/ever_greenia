@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
@@ -38,15 +37,12 @@ class LoginPage extends StatelessWidget {
             context.goToNamedReplace(RoutesName.splash);
           }
           if (state is AuthLoadedFailure) {
-            log(state.error);
             Navigator.pop(context);
             HelperMethods.showErrorNotificationToast(state.error);
           }
-
           if (state is AuthLoading) {
             HelperMethods.showLoadingDliaog(context);
           }
-
           if (state is EmailNorConfirmedState) {
             context.goToNamed(
               RoutesName.confirmEmail,
@@ -108,9 +104,7 @@ class LoginPageBody extends StatelessWidget {
               }
               return null;
             },
-            onChanged: (_) {
-              context.read<AuthCubit>().onLoginFormChanged();
-            },
+            onChanged: (_) => context.read<AuthCubit>().onLoginFormChanged(),
             controller: context.read<AuthCubit>().emailController,
           ).setHorizontalPadding(),
           SizedBox(height: 3.h),
@@ -166,9 +160,7 @@ class LoginPageBody extends StatelessWidget {
             ],
           ),
           TextButton(
-            onPressed: () {
-              context.goToNamed(RoutesName.resendCode);
-            },
+            onPressed: () => context.goToNamed(RoutesName.resendCode),
             child: Text(
               "Forgot Password?",
               style: AppFontStyles.readexPro600_16.copyWith(

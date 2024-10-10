@@ -15,11 +15,14 @@ class AuthRemoteDataSource {
     try {
       var response = await _dio.post(
         Endpoints.login,
-        data: {"email": email, "password": password},
+        data: {
+          "email": email,
+          "password": password,
+        },
       );
       return response.data;
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -37,7 +40,7 @@ class AuthRemoteDataSource {
       );
       return response.data;
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -55,14 +58,10 @@ class AuthRemoteDataSource {
 
       return response.data;
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
-  }
-
-  Future<dynamic> sendPasswordResetEmail(String email) {
-    return Future.delayed(const Duration(seconds: 2));
   }
 
   Future<dynamic> resendCode(String email) async {
@@ -75,7 +74,7 @@ class AuthRemoteDataSource {
       );
       return response.data;
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -84,12 +83,15 @@ class AuthRemoteDataSource {
   Future<dynamic> resetPassword(
       String email, String code, String password) async {
     try {
-      var response = await _dio.put(Endpoints.resetPassword,
-          data: {"email": email, "code": code, "password": password});
+      var response = await _dio.put(Endpoints.resetPassword, data: {
+        "email": email,
+        "code": code,
+        "password": password,
+      });
 
       return response.data;
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }

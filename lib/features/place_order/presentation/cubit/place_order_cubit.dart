@@ -169,7 +169,7 @@ class PlaceOrderCubit extends Cubit<PlaceOrderState> {
 
         emit(SuccessOrderState());
         break;
-      case FailedRequest<bool>():
+      case FailureRequest<bool>():
         isLinerProgressEnabled = false;
         isPlaceOrderEnabled = true;
         emit(FailedOrderState(result.exception.errorMessage));

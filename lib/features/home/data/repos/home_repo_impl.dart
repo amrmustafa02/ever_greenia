@@ -21,7 +21,7 @@ class HomeRepoImpl extends HomeRepo {
           )
           .toList();
       return ApiResult.success(data: data);
-    } on FailedRequest catch (e) {
+    } on FailureRequest catch (e) {
       return ApiResult.failure(error: e.exception);
     }
   }
@@ -37,8 +37,8 @@ class HomeRepoImpl extends HomeRepo {
             )
             .toList(),
       );
-    } on FailedRequest catch (e) {
-      return FailedRequest(exception: e.exception);
+    } on FailureRequest catch (e) {
+      return FailureRequest(exception: e.exception);
     }
   }
 
@@ -53,8 +53,8 @@ class HomeRepoImpl extends HomeRepo {
             )
             .toList(),
       );
-    } on FailedRequest catch (e) {
-      return FailedRequest(exception: e.exception);
+    } on FailureRequest catch (e) {
+      return FailureRequest(exception: e.exception);
     }
   }
 }

@@ -20,7 +20,7 @@ class ProfileRemoteDataSource {
       );
       return ProfileModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -43,7 +43,7 @@ class ProfileRemoteDataSource {
       );
       return true;
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }
@@ -56,7 +56,7 @@ class ProfileRemoteDataSource {
       );
       return true;
     } on DioException catch (e) {
-      throw FailedRequest(
+      throw FailureRequest(
         exception: RestApiErrorHandler.handleError(e),
       );
     }

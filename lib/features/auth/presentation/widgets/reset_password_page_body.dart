@@ -43,16 +43,10 @@ class ResetPasswordPageBody extends StatelessWidget {
                 ),
                 SizedBox(height: 0.5.h),
                 OtpSection(
-                  onCodeChanged: (code) {
-                    context
-                        .read<AuthCubit>()
-                        .onResetPasswordCodeFormChanged(code);
-                  },
-                  onSubmit: (code) {
-                    context
-                        .read<AuthCubit>()
-                        .onResetPasswordCodeFormChanged(code);
-                  },
+                  onCodeChanged:
+                      context.read<AuthCubit>().onResetPasswordCodeFormChanged,
+                  onSubmit:
+                      context.read<AuthCubit>().onResetPasswordCodeFormChanged,
                 ),
                 SizedBox(height: 2.h),
                 DefaultFormField(
@@ -69,7 +63,7 @@ class ResetPasswordPageBody extends StatelessWidget {
                   },
                   label: 'New Password',
                   onChanged: (text) {
-                    context.read<AuthCubit>().onNewPasswordFormChanged();
+                    context.read<AuthCubit>().onNewPasswordFieldChanged();
                     return null;
                   },
                 ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:plants_app/core/theme/app_colors.dart';
 import 'package:plants_app/core/theme/app_font_styles.dart';
@@ -7,6 +6,7 @@ class AuthButton extends StatelessWidget {
   final String buttonText;
   final Function() onTap;
   final bool enabled;
+
   const AuthButton({
     super.key,
     required this.buttonText,
@@ -25,9 +25,7 @@ class AuthButton extends StatelessWidget {
       onPressed: enabled ? onTap : null,
       child: Text(
         buttonText,
-        style: AppFontStyles.readexProBold_16.copyWith(
-          color: Colors.white,
-        ),
+        style: AppFontStyles.readexProBold_16.copyWith(color: Colors.white),
       ),
     );
   }

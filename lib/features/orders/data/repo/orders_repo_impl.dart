@@ -15,7 +15,7 @@ class OrderRepoImpl extends OrdersRepo {
     try {
       var response = await _dataSource.getOrders();
       return ApiResult.success(data: response.toEntity());
-    } on FailedRequest catch (e) {
+    } on FailureRequest catch (e) {
       return ApiResult.failure(error: e.exception);
     }
   }
@@ -25,7 +25,7 @@ class OrderRepoImpl extends OrdersRepo {
     try {
        await _dataSource.cancelOrder(orderId);
       return ApiResult.success(data: true);
-    } on FailedRequest catch (e) {
+    } on FailureRequest catch (e) {
       return ApiResult.failure(error: e.exception);
     }
   }

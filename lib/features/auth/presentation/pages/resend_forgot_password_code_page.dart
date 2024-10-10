@@ -34,6 +34,6 @@ class ResendForgotPasswordCodePage extends StatelessWidget {
           child: const ResendForgotPasswordPageBody(),
         ),
       ),
-    );
+    ); 
   }
 }

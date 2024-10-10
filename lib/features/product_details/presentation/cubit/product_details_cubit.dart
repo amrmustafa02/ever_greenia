@@ -11,15 +11,16 @@ part 'product_details_state.dart';
 
 @injectable
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
+  ProductDetailsCubit(this._cartRepo) : super(ProductDetailsInitial());
+
   late ProductData product;
   late String categoryName;
+
   final CartRepo _cartRepo;
   final switcherKey = const ValueKey<String>("switcher");
 
   int quantity = 1;
   bool curClickIsRight = true;
-
-  ProductDetailsCubit(this._cartRepo) : super(ProductDetailsInitial());
 
   void initProduct(
     ProductData product,
@@ -38,7 +39,7 @@ class ProductDetailsCubit extends Cubit<ProductDetailsState> {
         cartCubit.getCart();
         emit(AddProductToCartSuccess());
         break;
-      case FailedRequest():
+      case FailureRequest():
         emit(AddProductToCartFailure(result.exception.errorMessage));
     }
   }

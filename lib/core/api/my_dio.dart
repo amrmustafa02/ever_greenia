@@ -20,9 +20,11 @@ class MyDio {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           options.baseUrl = ApiConstants.baseUrl;
+
           if (_isAuthPath(options.path)) {
             options.headers['auth'] = getIt<UserData>().token;
           }
+
           if (options.path.contains("login") ||
               options.path.contains("restPassword") ||
               options.path.contains("confirmEmail")) {
@@ -58,7 +60,6 @@ class MyDio {
       Endpoints.profile,
       Endpoints.order,
     ];
-
     return authPaths.where((e) => path.contains(e)).isNotEmpty;
   }
 
@@ -78,6 +79,7 @@ class MyDio {
   }
 
   void _printErrorLog(DioException e) {
+    log("------------------ Api Error  -----------------------");
     log('statusCode: ${e.response?.statusCode}');
     log('path: ${e.requestOptions.path}');
     log('response: ${e.response}');
@@ -125,53 +127,5 @@ class MyDio {
 
   Future<Response> patch({required String path, required Map data}) async {
     return await _dio.patch(path, data: data);
-  }
-
-  Future<Response> head(String path) async {
-    return await _dio.head(path);
-  }
-
-  Future<Response> download(String url, String savePath) async {
-    return await _dio.download(url, savePath);
-  }
-
-  Future<Response> upload(String url, FormData formData) async {
-    return await _dio.post(url, data: formData);
-  }
-
-  Future<Response> uploadFile(String url, String filePath) async {
-    return await _dio.post(url, data: filePath);
-  }
-
-  Future<Response> downloadFile(String url, String savePath) async {
-    return await _dio.download(url, savePath);
-  }
-
-  Future<Response> putFile(String url, String filePath) async {
-    return await _dio.put(url, data: filePath);
-  }
-
-  Future<Response> patchFile(String url, String filePath) async {
-    return await _dio.patch(url, data: filePath);
-  }
-
-  Future<Response> postFile(String url, String filePath) async {
-    return await _dio.post(url, data: filePath);
-  }
-
-  Future<Response> postFormData(String url, FormData formData) async {
-    return await _dio.post(url, data: formData);
-  }
-
-  Future<Response> putFormData(String url, FormData formData) async {
-    return await _dio.put(url, data: formData);
-  }
-
-  Future<Response> patchFormData(String url, FormData formData) async {
-    return await _dio.patch(url, data: formData);
-  }
-
-  Future<Response> deleteFormData(String url, FormData formData) async {
-    return await _dio.delete(url, data: formData);
   }
 }

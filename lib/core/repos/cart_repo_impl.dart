@@ -15,8 +15,8 @@ class CartRepoImpl extends CartRepo {
     try {
       await _cartRemoteDataSource.addProductToCart(productId, quantity);
       return const SuccessRequest<bool>(data: true);
-    } on FailedRequest catch (e) {
-      return FailedRequest(exception: e.exception);
+    } on FailureRequest catch (e) {
+      return FailureRequest(exception: e.exception);
     }
   }
 
@@ -25,8 +25,8 @@ class CartRepoImpl extends CartRepo {
     try {
       await _cartRemoteDataSource.deleteProductFromCart(productId);
       return const SuccessRequest<bool>(data: true);
-    } on FailedRequest catch (e) {
-      return FailedRequest(exception: e.exception);
+    } on FailureRequest catch (e) {
+      return FailureRequest(exception: e.exception);
     }
   }
 
@@ -36,8 +36,8 @@ class CartRepoImpl extends CartRepo {
       var response = await _cartRemoteDataSource.getCart();
 
       return ApiResult.success(data: response.toEntity());
-    } on FailedRequest catch (e) {
-      return FailedRequest(exception: e.exception);
+    } on FailureRequest catch (e) {
+      return FailureRequest(exception: e.exception);
     }
   }
 
@@ -46,8 +46,8 @@ class CartRepoImpl extends CartRepo {
     try {
       await _cartRemoteDataSource.updateQuantity(productId, quantity);
       return const SuccessRequest<bool>(data: true);
-    } on FailedRequest catch (e) {
-      return FailedRequest(exception: e.exception);
+    } on FailureRequest catch (e) {
+      return FailureRequest(exception: e.exception);
     }
   }
 }

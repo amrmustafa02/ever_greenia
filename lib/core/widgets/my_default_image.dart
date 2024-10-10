@@ -12,15 +12,17 @@ class MyDefaultImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return url == null ? const SizedBox() : CachedNetworkImage(
-      imageUrl: url!,
-      progressIndicatorBuilder: (context, url, progress) {
-        return Center(
-          child: LottieBuilder.asset(
-            "assets/lottie/plants_loading.json",
-          ),
-        );
-      },
-    );
+    return url == null
+        ? const SizedBox()
+        : CachedNetworkImage(
+            imageUrl: url!,
+            progressIndicatorBuilder: (context, url, progress) {
+              return Center(
+                child: LottieBuilder.asset(
+                  "assets/lottie/plants_loading.json",
+                ),
+              );
+            },
+          );
   }
 }

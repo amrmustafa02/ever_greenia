@@ -44,7 +44,6 @@ class RestApiErrorHandler {
     }
   }
 
-  // Helper method to handle different DioError types
   static String _handleDioErrorType(DioExceptionType errorType) {
     switch (errorType) {
       case DioExceptionType.cancel:

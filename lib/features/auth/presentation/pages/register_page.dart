@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +33,6 @@ class RegisterPage extends StatelessWidget {
             );
           }
           if (state is AuthLoadedFailure) {
-            log(state.error);
             Navigator.pop(context);
             HelperMethods.showErrorNotificationToast(state.error);
           }
@@ -83,9 +81,7 @@ class _RegisterPageBody extends StatelessWidget {
               }
               return null;
             },
-            onChanged: (_) {
-              cubit.onRegisterFormChanged();
-            },
+            onChanged: (_) => cubit.onRegisterFormChanged(),
             controller: cubit.fullNameController,
           ).setHorizontalPadding(),
           SizedBox(height: 3.h),
@@ -101,9 +97,7 @@ class _RegisterPageBody extends StatelessWidget {
               }
               return null;
             },
-            onChanged: (_) {
-              cubit.onRegisterFormChanged();
-            },
+            onChanged: (_) => cubit.onRegisterFormChanged(),
             controller: context.read<AuthCubit>().emailController,
           ).setHorizontalPadding(),
           SizedBox(height: 3.h),
@@ -120,9 +114,7 @@ class _RegisterPageBody extends StatelessWidget {
               }
               return null;
             },
-            onChanged: (_) {
-              cubit.onRegisterFormChanged();
-            },
+            onChanged: (_) => cubit.onRegisterFormChanged(),
             controller: cubit.passwordController,
           ).setHorizontalPadding(),
           SizedBox(height: 3.h),

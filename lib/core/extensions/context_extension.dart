@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:plants_app/core/routing/app_router.dart';
 import 'package:plants_app/core/entities/product_data.dart';
@@ -45,20 +44,18 @@ extension ContextExtension on BuildContext {
       );
 
   void goBackUntilAndPush(
-
-      String pushRoute,
-      String untilRoute, {
-        Object? arguments,
-      }) {
+    String pushRoute,
+    String untilRoute, {
+    Object? arguments,
+  }) {
     Navigator.of(this).pushNamedAndRemoveUntil(
       pushRoute,
-          (route) {
-            return route.settings.name == untilRoute;
-          },
+      (route) {
+        return route.settings.name == untilRoute;
+      },
       arguments: arguments, // Moved this inside pushNamed
     );
   }
-
 
   void removeAllAndPush(
     String pushRoute, {

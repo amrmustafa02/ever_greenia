@@ -21,12 +21,14 @@ class ResetPasswordPage extends StatelessWidget {
         listener: (BuildContext context, AuthState state) {
           if (state is ResendCodeSuccessState) {
             HelperMethods.showSuccessNotificationToast(
-                "Password Reset Successful");
+              "Password Reset Successful",
+            );
           }
           if (state is ResetPasswordSuccessState) {
             Navigator.pop(context);
             HelperMethods.showSuccessNotificationToast(
-                "Password Reset Successful");
+              "Password Reset Successful",
+            );
             context.removeAllAndPush(
               RoutesName.login,
             );

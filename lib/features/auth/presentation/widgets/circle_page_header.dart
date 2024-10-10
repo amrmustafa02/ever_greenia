@@ -36,7 +36,6 @@ class CirclePageHeader extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Image.asset(
-              // "assets/images/confirm_page_image.png",
               imageUrl,
               width: 60.w,
             ),
@@ -46,12 +45,8 @@ class CirclePageHeader extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: IconButton(
-              onPressed: () {
-                context.goBack();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-              ),
+              onPressed: context.goBack,
+              icon: const Icon(Icons.arrow_back_ios_new),
             ),
           ),
         ),

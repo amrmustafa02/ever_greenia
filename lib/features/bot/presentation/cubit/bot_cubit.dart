@@ -15,12 +15,10 @@ class BotCubit extends Cubit<BotState> {
   final botUser = const types.User(
     id: 'bot',
     firstName: 'Flora Bot',
-    // imageUrl: 'https://avatars.githubusercontent.com/u/10099900?v=4',
   );
   final user = const types.User(
     id: 'user',
     firstName: 'User',
-    // imageUrl: 'https://avatars.githubusercontent.com/u/10099900?v=4',
   );
 
   bool isPlaying = false;
@@ -53,7 +51,9 @@ class BotCubit extends Cubit<BotState> {
       model: 'gemini-1.5-flash-latest',
       apiKey: "AIzaSyCa4KIqdrbpw0tLMeIJLFsEc3m6Etp4LEM",
     );
+
     String prompt = "";
+
     if (messages.length == 1) {
       log("first message");
       prompt =
@@ -68,8 +68,6 @@ class BotCubit extends Cubit<BotState> {
     );
 
     final response = await chat.sendMessage(Content.text(prompt));
-
-    log(response.text ?? "");
 
     messages.add(
       types.TextMessage(

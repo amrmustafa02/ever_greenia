@@ -37,7 +37,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         nameController.text = profileData.name;
         emailController.text = profileData.email;
         emit(ProfileLoadedSuccess());
-      case FailedRequest():
+      case FailureRequest():
         emit(ProfileLoadedFailure(response.exception.errorMessage));
     }
   }
@@ -66,7 +66,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         oldPasswordController.clear();
         emit(UpdateProfileSuccessState());
         emit(UpdateSaveButtonState());
-      case FailedRequest<bool>():
+      case FailureRequest<bool>():
         newPasswordController.clear();
         oldPasswordController.clear();
         emit(UpdateProfileFailureState(result.exception.errorMessage));
@@ -100,7 +100,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     switch (result) {
       case SuccessRequest<bool>():
         emit(DeleteProfileSuccessState());
-      case FailedRequest<bool>():
+      case FailureRequest<bool>():
         emit(DeleteProfileFailureState(result.exception.errorMessage));
     }
   }

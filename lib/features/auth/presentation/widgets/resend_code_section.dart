@@ -26,9 +26,43 @@ class _ResendCodeSectionState extends State<ResendCodeSection> {
   }
 
   @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          "00:${curTime < 10 ? "0$curTime" : "$curTime"}",
+          style: AppFontStyles.readexPro400_14.copyWith(color: Colors.grey),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Didn't get code? ",
+              style: AppFontStyles.readexPro400_14.copyWith(color: Colors.grey),
+            ),
+            GestureDetector(
+              onTap: enabledResend ? _clickOnResendCode() : null,
+              child: Text(
+                "Resend code",
+                style: AppFontStyles.readexPro400_14.copyWith(
+                  color: enabledResend
+                      ? AppColors.darkGreen
+                      : AppColors.darkGreen.withOpacity(0.5),
+                ),
+              ),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  _clickOnResendCode() {
+    context.read<AuthCubit>().resendCode();
+    startTime();
   }
 
   startTime() {
@@ -49,42 +83,8 @@ class _ResendCodeSectionState extends State<ResendCodeSection> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          "00:${curTime < 10 ? "0$curTime" : "$curTime"}",
-          style: AppFontStyles.readexPro400_14.copyWith(color: Colors.grey),
-        ),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Didn't get code? ",
-              style: AppFontStyles.readexPro400_14.copyWith(color: Colors.grey),
-            ),
-            GestureDetector(
-              onTap: enabledResend
-                  ? () {
-                      context.read<AuthCubit>().resendCode();
-                      startTime();
-                    }
-                  : null,
-              child: Text(
-                "Resend code",
-                style: AppFontStyles.readexPro400_14.copyWith(
-                  color: enabledResend
-                      ? AppColors.darkGreen
-                      : AppColors.darkGreen.withOpacity(0.5),
-                ),
-              ),
-            )
-          ],
-        ),
-      ],
-    );
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 }

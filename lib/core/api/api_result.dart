@@ -6,7 +6,7 @@ sealed class ApiResult<T> {
   factory ApiResult.success({required T data}) => SuccessRequest(data: data);
 
   factory ApiResult.failure({required RestApiErrorHandler error}) =>
-      FailedRequest(exception: error);
+      FailureRequest(exception: error);
 }
 
 class SuccessRequest<T> extends ApiResult<T> {
@@ -15,8 +15,8 @@ class SuccessRequest<T> extends ApiResult<T> {
   const SuccessRequest({required this.data});
 }
 
-class FailedRequest<T> extends ApiResult<T> {
+class FailureRequest<T> extends ApiResult<T> {
   final RestApiErrorHandler exception;
 
-  const FailedRequest({required this.exception});
+  const FailureRequest({required this.exception});
 }

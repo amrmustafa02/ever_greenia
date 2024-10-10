@@ -28,7 +28,7 @@ class OrdersCubit extends Cubit<OrdersState> {
         getOrdersData = result.data;
         assignCurrentOrders();
         emit(OrdersLoadedSuccess());
-      case FailedRequest():
+      case FailureRequest():
         emit(OrdersLoadedFailure(result.exception.errorMessage));
     }
   }
@@ -52,7 +52,7 @@ class OrdersCubit extends Cubit<OrdersState> {
       case SuccessRequest():
         refresh();
         break;
-      case FailedRequest():
+      case FailureRequest():
         emit(CancelOrderFailure(result.exception.errorMessage));
         break;
     }
